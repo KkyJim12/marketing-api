@@ -21,5 +21,8 @@ db.sequelize = sequelize;
 
 db.user = require("./user.js")(sequelize, Sequelize);
 db.product = require("./product.js")(sequelize, Sequelize);
+db.page = require("./page.js")(sequelize, Sequelize);
+
+db.page.hasMany(db.page, { as: "Subpages" });
 
 module.exports = db;

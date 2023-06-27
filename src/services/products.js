@@ -1,8 +1,6 @@
 const db = require("../models/index");
 const Product = db.product;
 
-const saltRounds = 10;
-
 exports.getProducts = async () => {
   const products = await Product.findAll();
   return products;
