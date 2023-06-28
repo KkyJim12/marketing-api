@@ -1,19 +1,17 @@
 const {
-  getProducts,
-  createProduct,
-  getProduct,
-  updateProduct,
-  deleteProduct,
-} = require("../services/products");
+  getUsers,
+  createUser,
+  getUser,
+  updateUser,
+  deleteUser,
+} = require("../../services/admin/users");
 
 exports.index = async (req, res) => {
   try {
-    const products = await getProducts();
-    res.status(200).send({
-      status: "success",
-      data: products,
-      message: "Get products success.",
-    });
+    const users = await getUsers();
+    res
+      .status(200)
+      .send({ status: "success", data: users, message: "Get users success." });
   } catch (error) {
     res
       .status(500)
@@ -23,11 +21,11 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   try {
-    const product = await createProduct(req);
+    const users = await createUser(req);
     res.status(201).send({
       status: "success",
-      data: product,
-      message: "Create product success.",
+      data: users,
+      message: "Create user success.",
     });
   } catch (error) {
     res
@@ -38,12 +36,10 @@ exports.store = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const product = await getProduct(req);
-    res.status(200).send({
-      status: "success",
-      data: product,
-      message: "Get product success",
-    });
+    const user = await getUser(req);
+    res
+      .status(200)
+      .send({ status: "success", data: user, message: "Get user success" });
   } catch (error) {
     res
       .status(500)
@@ -53,12 +49,10 @@ exports.edit = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const product = await updateProduct(req);
-    res.status(200).send({
-      status: "success",
-      data: product,
-      message: "Update user success",
-    });
+    const user = await updateUser(req);
+    res
+      .status(200)
+      .send({ status: "success", data: user, message: "Update user success" });
   } catch (error) {
     res
       .status(500)
@@ -68,7 +62,7 @@ exports.update = async (req, res) => {
 
 exports.destroy = async (req, res) => {
   try {
-    await deleteProduct(req);
+    await deleteUser(req);
     res.status(204);
   } catch (error) {
     res

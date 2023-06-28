@@ -1,17 +1,19 @@
 const {
-  getUsers,
-  createUser,
-  getUser,
-  updateUser,
-  deleteUser,
-} = require("../services/users");
+  getPages,
+  createPage,
+  getPage,
+  updatePage,
+  deletePage,
+} = require("../../services/admin/pages");
 
 exports.index = async (req, res) => {
   try {
-    const users = await getUsers();
-    res
-      .status(200)
-      .send({ status: "success", data: users, message: "Get users success." });
+    const pages = await getPages();
+    res.status(200).send({
+      status: "success",
+      data: pages,
+      message: "Get pages success.",
+    });
   } catch (error) {
     res
       .status(500)
@@ -21,11 +23,11 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   try {
-    const users = await createUser(req);
+    const page = await createPage(req);
     res.status(201).send({
       status: "success",
-      data: users,
-      message: "Create user success.",
+      data: page,
+      message: "Create page success.",
     });
   } catch (error) {
     res
@@ -36,10 +38,12 @@ exports.store = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const user = await getUser(req);
-    res
-      .status(200)
-      .send({ status: "success", data: user, message: "Get user success" });
+    const page = await getPage(req);
+    res.status(200).send({
+      status: "success",
+      data: page,
+      message: "Get page success",
+    });
   } catch (error) {
     res
       .status(500)
@@ -49,10 +53,12 @@ exports.edit = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const user = await updateUser(req);
-    res
-      .status(200)
-      .send({ status: "success", data: user, message: "Update user success" });
+    const page = await updatePage(req);
+    res.status(200).send({
+      status: "success",
+      data: page,
+      message: "Update page success",
+    });
   } catch (error) {
     res
       .status(500)
@@ -62,7 +68,7 @@ exports.update = async (req, res) => {
 
 exports.destroy = async (req, res) => {
   try {
-    await deleteUser(req);
+    await deletePage(req);
     res.status(204);
   } catch (error) {
     res

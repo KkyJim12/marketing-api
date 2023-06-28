@@ -1,18 +1,18 @@
 const {
-  getPages,
-  createPage,
-  getPage,
-  updatePage,
-  deletePage,
-} = require("../services/pages");
+  getProducts,
+  createProduct,
+  getProduct,
+  updateProduct,
+  deleteProduct,
+} = require("../../services/admin/products");
 
 exports.index = async (req, res) => {
   try {
-    const pages = await getPages();
+    const products = await getProducts();
     res.status(200).send({
       status: "success",
-      data: pages,
-      message: "Get pages success.",
+      data: products,
+      message: "Get products success.",
     });
   } catch (error) {
     res
@@ -23,11 +23,11 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   try {
-    const page = await createPage(req);
+    const product = await createProduct(req);
     res.status(201).send({
       status: "success",
-      data: page,
-      message: "Create page success.",
+      data: product,
+      message: "Create product success.",
     });
   } catch (error) {
     res
@@ -38,11 +38,11 @@ exports.store = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const page = await getPage(req);
+    const product = await getProduct(req);
     res.status(200).send({
       status: "success",
-      data: page,
-      message: "Get page success",
+      data: product,
+      message: "Get product success",
     });
   } catch (error) {
     res
@@ -53,11 +53,11 @@ exports.edit = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const page = await updatePage(req);
+    const product = await updateProduct(req);
     res.status(200).send({
       status: "success",
-      data: page,
-      message: "Update page success",
+      data: product,
+      message: "Update user success",
     });
   } catch (error) {
     res
@@ -68,7 +68,7 @@ exports.update = async (req, res) => {
 
 exports.destroy = async (req, res) => {
   try {
-    await deletePage(req);
+    await deleteProduct(req);
     res.status(204);
   } catch (error) {
     res

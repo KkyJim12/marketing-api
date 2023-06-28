@@ -5,5 +5,5 @@ module.exports = (app) => {
   // Routes
   router.get("/", pageController.index);
 
-  app.use("/api/v1/pages", router);
+  app.use("/api/v1/admin/pages", router);
 };

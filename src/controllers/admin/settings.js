@@ -1,4 +1,7 @@
-const { getLatestSetting, createSetting } = require("../services/settings");
+const {
+  getLatestSetting,
+  createSetting,
+} = require("../../services/admin/settings");
 
 exports.index = async (req, res) => {
   try {

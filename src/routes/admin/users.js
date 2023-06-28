@@ -9,5 +9,5 @@ module.exports = (app) => {
   router.put("/:id", userController.update);
   router.delete("/:delete", userController.destroy);
 
-  app.use("/api/v1/users", router);
+  app.use("/api/v1/admin/users", router);
 };

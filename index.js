@@ -13,7 +13,11 @@ db.sequelize.sync({ force: false }).then(() => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-require("./src/routes/users")(app);
+require("./src/routes/admin/images")(app);
+require("./src/routes/admin/pages")(app);
+require("./src/routes/admin/products")(app);
+require("./src/routes/admin/settings")(app);
+require("./src/routes/admin/users")(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

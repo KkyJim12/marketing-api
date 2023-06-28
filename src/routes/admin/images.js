@@ -5,5 +5,5 @@ module.exports = (app) => {
   // Routes
   router.get("/", imageController.upload);
 
-  app.use("/api/v1/images", router);
+  app.use("/api/v1/admin/images", router);
 };
