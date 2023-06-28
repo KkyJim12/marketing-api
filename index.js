@@ -13,6 +13,10 @@ db.sequelize.sync({ force: false }).then(() => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Guest Routes
+require("./src/routes/guest/auths")(app);
+
+// Admin Routes
 require("./src/routes/admin/images")(app);
 require("./src/routes/admin/pages")(app);
 require("./src/routes/admin/products")(app);

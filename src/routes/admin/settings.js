@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const router = require("express").Router();
-  const settingController = require("../controllers/settings.js");
+  const settingController = require("../../controllers/admin/settings.js");
 
   // Routes
   router.get("/", settingController.index);

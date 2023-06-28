@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const router = require("express").Router();
-  const imageController = require("../controllers/images.js");
+  const imageController = require("../../controllers/admin/images.js");
 
   // Routes
   router.get("/", imageController.upload);
