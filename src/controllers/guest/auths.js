@@ -23,8 +23,8 @@ exports.adminLogin = async (req, res) => {
     });
   } catch (error) {
     res
-      .status(500)
-      .send({ status: "fail", data: null, message: "Something went wrong." });
+      .status(401)
+      .send({ status: "fail", message: "Email or Password is wrong." });
   }
 };
 

@@ -7,15 +7,15 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
     eCommercePage: {
-      type: Sequelize.Text("long"),
+      type: Sequelize.TEXT("long"),
       allowNull: true,
     },
     myProductPage: {
-      type: Sequelize.Text("long"),
+      type: Sequelize.TEXT("long"),
       allowNull: true,
     },
     orderHistoryPage: {
-      type: Sequelize.Text("long"),
+      type: Sequelize.TEXT("long"),
       allowNull: true,
     },
   });

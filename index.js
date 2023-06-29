@@ -6,6 +6,8 @@ const port = process.env.PORT || 5000;
 const db = require("./src/models/index");
 const cors = require("cors");
 
+app.use(cors());
+
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and re-sync db.");
 });

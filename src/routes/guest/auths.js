@@ -7,7 +7,6 @@ module.exports = (app) => {
   // Routes
   router.post("/admin-login", authController.adminLogin);
   router.post("/login", authController.login);
-  router.post("/refresh", isCorrectJWT, authController.getNewToken);
 
   app.use("/api/v1/guest/auths", router);
 };
