@@ -28,7 +28,6 @@ exports.adminLogin = async (req) => {
         exclude: ["password"],
       },
     });
-    console.log(admin);
     if (admin === null) {
       throw new Error(401);
     } else {

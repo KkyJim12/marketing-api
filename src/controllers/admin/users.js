@@ -21,16 +21,14 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   try {
-    const users = await createUser(req);
+    const users = await createUser(req, res);
     res.status(201).send({
       status: "success",
       data: users,
       message: "Create user success.",
     });
   } catch (error) {
-    res
-      .status(500)
-      .send({ status: "fail", data: null, message: "Something went wrong." });
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
   }
 };
 

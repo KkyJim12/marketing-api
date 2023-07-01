@@ -9,14 +9,18 @@ exports.getUsers = async () => {
   return users;
 };
 
-exports.createUser = async (req) => {
-  const user = await User.create({
-    fullName: req.body.fullName,
-    email: req.body.email,
-    phone: req.body.phone,
-    password: bcrypt.hashSync(req.body.password, saltRounds),
-  });
-  return user;
+exports.createUser = async (req, res) => {
+  try {
+    const user = await User.create({
+      fullName: req.body.fullName,
+      email: req.body.email,
+      phone: req.body.phone,
+      password: bcrypt.hashSync(req.body.password, saltRounds),
+    });
+    return user;
+  } catch (error) {
+    throw new Error(500);
+  }
 };
 
 exports.getUser = async (req) => {
