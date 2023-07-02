@@ -23,6 +23,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    lastLogin: {
+      type: "TIMESTAMP",
+      allowNull: true,
+    },
   });
 
   return User;

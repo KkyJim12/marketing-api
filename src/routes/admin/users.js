@@ -1,11 +1,16 @@
+const {
+  editUserValidate,
+  editUserValidateResult,
+} = require("../../validations/edit-user.js");
+
+const {
+  createUserValidate,
+  createUserValidateResult,
+} = require("../../validations/create-user.js");
+
 module.exports = (app) => {
   const router = require("express").Router();
   const userController = require("../../controllers/admin/users.js");
-
-  const {
-    createUserValidate,
-    createUserValidateResult,
-  } = require("../../validations/create-user.js");
 
   // Routes
   router.get("/", userController.index);
@@ -16,8 +21,13 @@ module.exports = (app) => {
     userController.store
   );
   router.get("/:id/edit", userController.edit);
-  router.put("/:id", userController.update);
-  router.delete("/:delete", userController.destroy);
+  router.put(
+    "/:id",
+    editUserValidate(),
+    editUserValidateResult,
+    userController.update
+  );
+  router.delete("/:id", userController.destroy);
 
   app.use("/api/v1/admin/users", router);
 };
