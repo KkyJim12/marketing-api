@@ -8,7 +8,7 @@ const cors = require("cors");
 
 app.use(cors());
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
 
@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Guest Routes
 require("./src/routes/guest/auths")(app);
+
+// User Routes
+require("./src/routes/user/e-commerce")(app);
 
 // Admin Routes
 require("./src/routes/admin/images")(app);
