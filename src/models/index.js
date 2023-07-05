@@ -26,7 +26,11 @@ db.subPage = require("./subPage.js")(sequelize, Sequelize);
 db.setting = require("./setting.js")(sequelize, Sequelize);
 db.admin = require("./admin.js")(sequelize, Sequelize);
 
-db.page.hasMany(db.subPage);
-db.subPage.belongsTo(db.page);
+db.page.hasMany(db.subPage, {
+  constraints: false,
+});
+db.subPage.belongsTo(db.page, {
+  constraints: false,
+});
 
 module.exports = db;

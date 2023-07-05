@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
     lastLogin: {
-      type: "TIMESTAMP",
+      type: Sequelize.DATE,
       allowNull: true,
     },
   });

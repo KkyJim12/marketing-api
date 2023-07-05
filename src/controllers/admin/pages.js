@@ -1,5 +1,6 @@
 const {
   getPages,
+  getMainPages,
   createPage,
   getPage,
   updatePage,
@@ -13,6 +14,21 @@ exports.index = async (req, res) => {
       status: "success",
       data: pages,
       message: "Get pages success.",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.pageChoices = async (req, res) => {
+  try {
+    const pages = await getMainPages();
+    res.status(200).send({
+      status: "success",
+      data: pages,
+      message: "Get main pages success.",
     });
   } catch (error) {
     res
