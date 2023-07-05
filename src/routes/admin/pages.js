@@ -9,7 +9,6 @@ module.exports = (app) => {
 
   // Routes
   router.get("/", pageController.index);
-  router.get("/choices/main", pageController.pageChoices);
   router.post(
     "/",
     createPageValidate(),
