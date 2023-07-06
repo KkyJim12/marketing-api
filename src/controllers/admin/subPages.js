@@ -23,10 +23,10 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   try {
-    const page = await createSubPage(req);
+    const subPage = await createSubPage(req);
     res.status(201).send({
       status: "success",
-      data: page,
+      data: subPage,
       message: "Create page success.",
     });
   } catch (error) {
@@ -69,7 +69,11 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
   try {
     await deleteSubPage(req);
-    res.status(204);
+    res.status(200).send({
+      status: "success",
+      data: null,
+      message: "Delete sub page success",
+    });
   } catch (error) {
     res
       .status(500)

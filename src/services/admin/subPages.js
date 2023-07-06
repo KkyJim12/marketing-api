@@ -1,16 +1,17 @@
 const db = require("../../models/index");
+const Page = db.page;
 const SubPage = db.subPage;
 
 exports.getSubPages = async () => {
   try {
-    const subPages = await subPages.findAll();
+    const subPages = await SubPage.findAll({ include: { model: Page } });
     return subPages;
   } catch (error) {
     throw new Error(500, "Error when get a sub pages");
   }
 };
 
-exports.createSubPages = async (req) => {
+exports.createSubPage = async (req) => {
   try {
     const newSubPage = {
       name: req.body.name,
@@ -35,7 +36,7 @@ exports.getSubPage = async (req) => {
   }
 };
 
-exports.updatePage = async (req) => {
+exports.updateSubPage = async (req) => {
   try {
     const newSubPage = {
       name: req.body.name,
@@ -53,7 +54,7 @@ exports.updatePage = async (req) => {
   }
 };
 
-exports.deletePage = async (req) => {
+exports.deleteSubPage = async (req) => {
   try {
     const subPage = await SubPage.destroy({ where: { id: req.params.id } });
     return subPage;

@@ -27,10 +27,10 @@ db.setting = require("./setting.js")(sequelize, Sequelize);
 db.admin = require("./admin.js")(sequelize, Sequelize);
 
 db.page.hasMany(db.subPage, {
-  constraints: false,
+  constraints: true,
 });
 db.subPage.belongsTo(db.page, {
-  constraints: false,
+  constraints: true,
 });
 
 module.exports = db;

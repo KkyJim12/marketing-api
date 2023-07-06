@@ -10,10 +10,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    sortType: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     sortValue: {
       type: Sequelize.INTEGER.UNSIGNED,
       allowNull: false,
