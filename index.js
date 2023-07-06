@@ -2,13 +2,13 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 require("dotenv").config();
-const port = process.env.PORT || 5000;
+const port = process.env.NODE_DOCKER_PORT || 5000;
 const db = require("./src/models/index");
 const cors = require("cors");
 
 app.use(cors());
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
 
