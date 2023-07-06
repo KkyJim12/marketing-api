@@ -53,6 +53,10 @@ exports.updatePage = async (req) => {
 };
 
 exports.deletePage = async (req) => {
-  const page = await Page.destroy({ where: { id: req.params.id } });
-  return page;
+  try {
+    const page = await Page.destroy({ where: { id: req.params.id } });
+    return page;
+  } catch (error) {
+    throw new Error(500, "Error when delete a page");
+  }
 };

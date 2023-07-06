@@ -15,7 +15,7 @@ exports.createSubPages = async (req) => {
     const newSubPage = {
       name: req.body.name,
       sortValue: req.body.sortValue,
-      subMenuOf: req.body.subMenuOf,
+      pageId: req.body.mainPageId,
       content: req.body.content,
     };
 

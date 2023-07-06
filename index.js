@@ -24,6 +24,7 @@ require("./src/routes/user/e-commerce")(app);
 // Admin Routes
 require("./src/routes/admin/images")(app);
 require("./src/routes/admin/pages")(app);
+require("./src/routes/admin/subPages")(app);
 require("./src/routes/admin/products")(app);
 require("./src/routes/admin/settings")(app);
 require("./src/routes/admin/users")(app);

@@ -69,7 +69,9 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
   try {
     await deletePage(req);
-    res.status(204);
+    res
+      .status(200)
+      .send({ status: "success", data: null, message: "Delete page success" });
   } catch (error) {
     res
       .status(500)

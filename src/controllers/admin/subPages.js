@@ -1,15 +1,14 @@
 const {
-  getPages,
-  getMainPages,
-  createPage,
-  getPage,
-  updatePage,
-  deletePage,
-} = require("../../services/admin/pages");
+  getSubPages,
+  createSubPage,
+  getSubPage,
+  updateSubPage,
+  deleteSubPage,
+} = require("../../services/admin/subPages");
 
 exports.index = async (req, res) => {
   try {
-    const pages = await getPages();
+    const pages = await getSubPages();
     res.status(200).send({
       status: "success",
       data: pages,
@@ -22,24 +21,9 @@ exports.index = async (req, res) => {
   }
 };
 
-exports.pageChoices = async (req, res) => {
-  try {
-    const pages = await getMainPages();
-    res.status(200).send({
-      status: "success",
-      data: pages,
-      message: "Get main pages success.",
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .send({ status: "fail", data: null, message: "Something went wrong." });
-  }
-};
-
 exports.store = async (req, res) => {
   try {
-    const page = await createPage(req);
+    const page = await createSubPage(req);
     res.status(201).send({
       status: "success",
       data: page,
@@ -54,7 +38,7 @@ exports.store = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const page = await getPage(req);
+    const page = await getSubPage(req);
     res.status(200).send({
       status: "success",
       data: page,
@@ -69,7 +53,7 @@ exports.edit = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const page = await updatePage(req);
+    const page = await updateSubPage(req);
     res.status(200).send({
       status: "success",
       data: page,
@@ -84,7 +68,7 @@ exports.update = async (req, res) => {
 
 exports.destroy = async (req, res) => {
   try {
-    await deletePage(req);
+    await deleteSubPage(req);
     res.status(204);
   } catch (error) {
     res
