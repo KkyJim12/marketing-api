@@ -7,15 +7,19 @@ exports.getProducts = async () => {
 };
 
 exports.createProduct = async (req) => {
-  const product = await Product.create({
-    name: req.body.name,
-    type: req.body.type,
-    domains: req.body.domains,
-    duration: req.body.duration,
-    price: req.body.price,
-    image: req.body.image,
-  });
-  return product;
+  try {
+    const product = await Product.create({
+      name: req.body.name,
+      type: req.body.type,
+      domains: req.body.domains,
+      duration: req.body.duration,
+      price: req.body.price,
+      image: req.body.image,
+    });
+    return product;
+  } catch (error) {
+    throw new Error(500, "Error when create a product");
+  }
 };
 
 exports.getProduct = async (req) => {

@@ -7,6 +7,7 @@ const db = require("./src/models/index");
 const cors = require("cors");
 
 app.use(cors());
+app.use(express.static("public"));
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
