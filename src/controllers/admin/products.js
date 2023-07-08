@@ -57,7 +57,7 @@ exports.update = async (req, res) => {
     res.status(200).send({
       status: "success",
       data: product,
-      message: "Update user success",
+      message: "Update product success",
     });
   } catch (error) {
     res
@@ -69,7 +69,10 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
   try {
     await deleteProduct(req);
-    res.status(204);
+    res.status(200).send({
+      status: "success",
+      message: "Delete product success",
+    });
   } catch (error) {
     res
       .status(500)

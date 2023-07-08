@@ -2,8 +2,12 @@ const db = require("../../models/index");
 const Product = db.product;
 
 exports.getProducts = async () => {
-  const products = await Product.findAll();
-  return products;
+  try {
+    const products = await Product.findAll();
+    return products;
+  } catch (error) {
+    throw new Error(500, "Error when get products");
+  }
 };
 
 exports.createProduct = async (req) => {
@@ -23,8 +27,12 @@ exports.createProduct = async (req) => {
 };
 
 exports.getProduct = async (req) => {
-  const product = await product.findOne({ where: { id: req.params.id } });
-  return product;
+  try {
+    const product = await Product.findOne({ where: { id: req.params.id } });
+    return product;
+  } catch (error) {
+    throw new Error(500, "Error when get a product");
+  }
 };
 
 exports.updateProduct = async (req) => {
