@@ -5,7 +5,7 @@ module.exports = (app) => {
   const eCommerceController = require("../../controllers/user/e-commerce.js");
 
   // Routes
-  router.get("/e-commerce", isCorrectJWT, eCommerceController.index);
+  router.get("/", eCommerceController.index);
 
   app.use("/api/v1/user/e-commerce", router);
 };
