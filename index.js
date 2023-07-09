@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 require("dotenv").config();
-const port = process.env.NODE_DOCKER_PORT || 5000;
+const port = process.env.NODE_DOCKER_PORT || 8080;
 const db = require("./src/models/index");
 const cors = require("cors");
 

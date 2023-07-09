@@ -2,18 +2,26 @@ const db = require("../../models/index");
 const Setting = db.setting;
 
 exports.getLatestSetting = async () => {
-  const setting = await Setting.findOne({
-    order: [["createdAt", "DESC"]],
-  });
+  try {
+    const setting = await Setting.findOne({
+      order: [["createdAt", "DESC"]],
+    });
 
-  return setting;
+    return setting;
+  } catch (error) {
+    throw new Error(500, "Error when get a latest setting");
+  }
 };
 
 exports.createSetting = async (req) => {
-  const setting = await Setting.create({
-    eCommercePage: req.body.eCommercePage,
-    myProductPage: req.body.myProductPage,
-    orderHistoryPage: req.body.orderHistoryPage,
-  });
-  return setting;
+  try {
+    const setting = await Setting.create({
+      eCommercePage: req.body.eCommerceContent,
+      myProductPage: req.body.myProductContent,
+      orderHistoryPage: req.body.orderHistoryContent,
+    });
+    return setting;
+  } catch (error) {
+    throw new Error(500, "Error when create a setting");
+  }
 };
