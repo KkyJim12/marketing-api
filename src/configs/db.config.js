@@ -6,6 +6,9 @@ module.exports = {
   PASSWORD: process.env.DB_PASS,
   DB: process.env.DB_DATABASE,
   dialect: "mysql",
+  dialectOptions: {
+    multipleStatements: true,
+  },
   pool: {
     max: 5,
     min: 0,

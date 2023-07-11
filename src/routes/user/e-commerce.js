@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   // Routes
   router.get("/", eCommerceController.index);
+  router.post("/:id", eCommerceController.purchase);
 
   app.use("/api/v1/user/e-commerce", router);
 };

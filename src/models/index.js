@@ -25,6 +25,7 @@ db.page = require("./page.js")(sequelize, Sequelize);
 db.subPage = require("./subPage.js")(sequelize, Sequelize);
 db.setting = require("./setting.js")(sequelize, Sequelize);
 db.admin = require("./admin.js")(sequelize, Sequelize);
+db.invoice = require("./invoice.js")(sequelize, Sequelize);
 
 db.page.hasMany(db.subPage, {
   constraints: true,
@@ -32,5 +33,7 @@ db.page.hasMany(db.subPage, {
 db.subPage.belongsTo(db.page, {
   constraints: true,
 });
+
+db.invoice.hasOne(db.product);
 
 module.exports = db;

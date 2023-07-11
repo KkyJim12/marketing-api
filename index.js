@@ -5,6 +5,7 @@ require("dotenv").config();
 const port = process.env.NODE_DOCKER_PORT || 8080;
 const db = require("./src/models/index");
 const cors = require("cors");
+const fs = require("fs");
 
 app.use(cors());
 app.use(express.static("public"));
