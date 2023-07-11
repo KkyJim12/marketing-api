@@ -35,6 +35,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DATE,
       allowNull: true,
     },
+    image: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     userId: {
       type: Sequelize.UUID,
       allowNull: false,

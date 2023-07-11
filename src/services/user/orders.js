@@ -21,3 +21,15 @@ exports.cancelOrder = async (req) => {
     throw new Error(500, "Error when update order status");
   }
 };
+
+exports.makePayment = async (req, res) => {
+  try {
+    const order = await Order.update(
+      { status: "Wait for checking", image: req.body.image },
+      { where: { id: req.params.id } }
+    );
+    return order;
+  } catch (error) {
+    throw new Error(500, "Error when update order status");
+  }
+};

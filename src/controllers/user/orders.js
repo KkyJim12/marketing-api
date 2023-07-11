@@ -1,4 +1,4 @@
-const { getOrders, cancelOrder } = require("../../services/user/orders");
+const { getOrders, cancelOrder,makePayment } = require("../../services/user/orders");
 
 exports.index = async (req, res) => {
   try {
@@ -25,3 +25,17 @@ exports.cancel = async (req, res) => {
     res.status(500).send({ status: "fail", message: "Something went wrong." });
   }
 };
+
+exports.makePayment = async (req, res) => {
+  try {
+    const order = await makePayment(req, res);
+    res.status(200).send({
+      status: "success",
+      data: order,
+      message: "Make payment order success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+

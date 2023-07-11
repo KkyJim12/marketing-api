@@ -29,6 +29,7 @@ require("./src/routes/guest/auths")(app);
 require("./src/routes/user/e-commerce")(app);
 require("./src/routes/user/pages")(app);
 require("./src/routes/user/orders")(app);
+require("./src/routes/user/images")(app);
 
 // Admin Routes
 require("./src/routes/admin/images")(app);
