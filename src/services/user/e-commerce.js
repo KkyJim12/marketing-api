@@ -22,7 +22,8 @@ exports.storeOrder = async (req) => {
       duration: product.duration,
       price: product.price,
       status: "Wait for payment",
-      paymentDate:null,
+      paymentDate: null,
+      userId: req.user.id,
       productId: product.id,
     };
 
