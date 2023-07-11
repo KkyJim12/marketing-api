@@ -21,6 +21,7 @@ require("./src/routes/guest/auths")(app);
 
 // User Routes
 require("./src/routes/user/e-commerce")(app);
+require("./src/routes/user/pages")(app);
 
 // Admin Routes
 require("./src/routes/admin/images")(app);
