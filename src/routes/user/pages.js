@@ -4,6 +4,7 @@ module.exports = (app) => {
 
   // Routes
   router.get("/", pageController.index);
+  router.get("/:id", pageController.info);
 
   app.use("/api/v1/user/pages", router);
 };

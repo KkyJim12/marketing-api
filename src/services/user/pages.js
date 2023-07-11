@@ -16,3 +16,17 @@ exports.getPages = async () => {
     throw new Error(500, "Error when get pages");
   }
 };
+
+exports.getPage = async (req, res) => {
+  try {
+    let page = await Page.findOne({ where: { id: req.params.id } });
+
+    if (page === null) {
+      page = await SubPage.findOne({ where: { id: req.params.id } });
+    }
+
+    return page;
+  } catch (error) {
+    throw new Error(500, "Error when get page");
+  }
+};
