@@ -10,8 +10,11 @@ const fs = require("fs");
 app.use(cors());
 app.use(express.static("public"));
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
+
+  const sqlDumpFile = fs.readFileSync("./src/storage/admins.sql", "utf8");
+  db.sequelize.query(sqlDumpFile);
 });
 
 app.use(bodyParser.json());

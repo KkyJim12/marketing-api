@@ -1,0 +1,2 @@
+INSERT INTO `admins` (`id`, `fullName`, `phone`, `email`, `password`, `createdAt`, `updatedAt`) VALUES
+('2a964cdb-1ff5-11ee-86e3-d8bbc18ed150', 'Admin', '0999999999', 'admin@gmail.com', 'admin123', '2023-07-11 16:13:36', '2023-07-11 16:13:36');

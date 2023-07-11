@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Page = sequelize.define("invoice", {
+  const Order = sequelize.define("order", {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
@@ -42,5 +42,5 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 
-  return Page;
+  return Order;
 };

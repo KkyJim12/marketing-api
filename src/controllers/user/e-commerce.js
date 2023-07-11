@@ -1,4 +1,4 @@
-const { getProducts, storeInvoice } = require("../../services/user/e-commerce");
+const { getProducts, storeOrder } = require("../../services/user/e-commerce");
 
 exports.index = async (req, res) => {
   try {
@@ -16,11 +16,11 @@ exports.index = async (req, res) => {
 
 exports.purchase = async (req, res) => {
   try {
-    const invoice = await storeInvoice(req);
+    const order = await storeOrder(req);
 
     res.status(200).send({
       status: "success",
-      data: invoice,
+      data: order,
       message: "Get invoice success.",
     });
   } catch (error) {

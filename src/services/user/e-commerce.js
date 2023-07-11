@@ -1,6 +1,6 @@
 const db = require("../../models/index");
 const Product = db.product;
-const Invoice = db.invoice;
+const Order = db.order;
 
 exports.getProducts = async (req) => {
   try {
@@ -11,11 +11,11 @@ exports.getProducts = async (req) => {
   }
 };
 
-exports.storeInvoice = async (req) => {
+exports.storeOrder = async (req) => {
   try {
     const product = await Product.findOne({ where: { id: req.params.id } });
 
-    const newInvoice = {
+    const newOrder = {
       name: product.name,
       type: product.type,
       domains: product.domains,
@@ -25,9 +25,9 @@ exports.storeInvoice = async (req) => {
       status: "Wait for payment",
     };
 
-    const invoice = await Invoice.create(newInvoice);
-    return invoice;
+    const order = await Order.create(newOrder);
+    return order;
   } catch (error) {
-    throw new Error(500, "Error when store an invoice");
+    throw new Error(500, "Error when store an order");
   }
 };
