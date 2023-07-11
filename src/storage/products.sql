@@ -1,0 +1,2 @@
+INSERT INTO `products` (`id`, `name`, `type`, `domains`, `duration`, `price`, `image`, `createdAt`, `updatedAt`) VALUES
+('2a964cdb-1ff5-11ee-86e3-d8bbc18ed222', 'Floating Action Button 1', 'Floating action button', '3', '30','899','http://localhost:8080/lorem.jpg', '2023-07-11 16:13:36', '2023-07-11 16:13:36');

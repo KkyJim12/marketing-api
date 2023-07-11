@@ -1,5 +1,3 @@
-const { isCorrectJWT } = require("../../middlewares/isCorrectJWT.js");
-
 module.exports = (app) => {
   const router = require("express").Router();
   const eCommerceController = require("../../controllers/user/e-commerce.js");

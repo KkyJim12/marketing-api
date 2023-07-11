@@ -31,6 +31,19 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    paymentDate: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
+    userId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+        constraints: true,
+      },
+    },
     productId: {
       type: Sequelize.UUID,
       allowNull: false,

@@ -10,11 +10,13 @@ const fs = require("fs");
 app.use(cors());
 app.use(express.static("public"));
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and re-sync db.");
 
-  const sqlDumpFile = fs.readFileSync("./src/storage/admins.sql", "utf8");
-  db.sequelize.query(sqlDumpFile);
+  // const sqlDumpFile1 = fs.readFileSync("./src/storage/admins.sql", "utf8");
+  // const sqlDumpFile2 = fs.readFileSync("./src/storage/products.sql", "utf8");
+  // db.sequelize.query(sqlDumpFile1);
+  // db.sequelize.query(sqlDumpFile2);
 });
 
 app.use(bodyParser.json());
@@ -26,6 +28,7 @@ require("./src/routes/guest/auths")(app);
 // User Routes
 require("./src/routes/user/e-commerce")(app);
 require("./src/routes/user/pages")(app);
+require("./src/routes/user/orders")(app);
 
 // Admin Routes
 require("./src/routes/admin/images")(app);

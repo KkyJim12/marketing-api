@@ -1,4 +1,3 @@
-const { isCorrectJWT } = require("../../middlewares/isCorrectJWT.js");
 const {
   adminLoginValidate,
   adminLoginValidateResult,

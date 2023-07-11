@@ -10,8 +10,13 @@ exports.login = async (req) => {
     });
 
     if (bcrypt.compareSync(req.body.password, user.password)) {
-      delete user.password;
-      return user;
+      const thisUser = await User.findOne({
+        where: { id: user.id },
+        attributes: {
+          exclude: ["password"],
+        },
+      });
+      return thisUser;
     } else {
       throw new Error(401);
     }

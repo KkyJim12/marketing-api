@@ -21,8 +21,9 @@ exports.storeOrder = async (req) => {
       domains: product.domains,
       duration: product.duration,
       price: product.price,
-      productId: product.id,
       status: "Wait for payment",
+      paymentDate:null,
+      productId: product.id,
     };
 
     const order = await Order.create(newOrder);
