@@ -21,7 +21,7 @@ exports.purchase = async (req, res) => {
     res.status(200).send({
       status: "success",
       data: order,
-      message: "Get invoice success.",
+      message: "Get order success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });

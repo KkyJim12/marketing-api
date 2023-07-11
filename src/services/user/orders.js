@@ -9,3 +9,15 @@ exports.getOrders = async (req) => {
     throw new Error(500, "Error when get orders");
   }
 };
+
+exports.cancelOrder = async (req) => {
+  try {
+    const order = await Order.update(
+      { status: "Cancel" },
+      { where: { id: req.params.id } }
+    );
+    return order;
+  } catch (error) {
+    throw new Error(500, "Error when update order status");
+  }
+};
