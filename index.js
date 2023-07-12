@@ -38,6 +38,7 @@ require("./src/routes/admin/subPages")(app);
 require("./src/routes/admin/products")(app);
 require("./src/routes/admin/settings")(app);
 require("./src/routes/admin/users")(app);
+require("./src/routes/admin/orders")(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
