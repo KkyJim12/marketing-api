@@ -1,5 +1,6 @@
 const db = require("../../models/index");
 const Order = db.order;
+const moment = require("moment");
 
 exports.getOrders = async (req) => {
   try {
@@ -25,7 +26,11 @@ exports.cancelOrder = async (req) => {
 exports.makePayment = async (req, res) => {
   try {
     const order = await Order.update(
-      { status: "Wait for checking", image: req.body.image },
+      {
+        status: "Wait for checking",
+        image: req.body.image,
+        paymentDate: moment().format(),
+      },
       { where: { id: req.params.id } }
     );
     return order;

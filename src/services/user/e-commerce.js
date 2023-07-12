@@ -28,6 +28,7 @@ exports.storeOrder = async (req) => {
     };
 
     const order = await Order.create(newOrder);
+
     return order;
   } catch (error) {
     throw new Error(500, "Error when store an order");

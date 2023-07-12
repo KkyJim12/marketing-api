@@ -1,5 +1,7 @@
 const db = require("../../models/index");
 const Order = db.order;
+const UserProduct = db.userProduct;
+const moment = require("moment");
 
 exports.getOrders = async () => {
   try {
@@ -40,7 +42,22 @@ exports.acceptOrder = async (req) => {
       { status: "Success" },
       { where: { id: req.params.id } }
     );
-    return order;
+
+    const thisOrder = await Order.findOne({ where: { id: req.params.id } });
+
+    const userProduct = await UserProduct.create({
+      name: thisOrder.name,
+      type: thisOrder.type,
+      domains: thisOrder.domains,
+      duration: thisOrder.duration,
+      startDate: moment().format(),
+      endDate: moment().add(thisOrder.duration, "days"),
+      status: "On going",
+      userId: thisOrder.userId,
+      productId: thisOrder.productId,
+    });
+
+    return userProduct;
   } catch (error) {
     throw new Error(500, "Error when update order status");
   }
