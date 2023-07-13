@@ -31,6 +31,7 @@ require("./src/routes/user/my-product")(app);
 require("./src/routes/user/pages")(app);
 require("./src/routes/user/orders")(app);
 require("./src/routes/user/images")(app);
+require("./src/routes/user/settings")(app);
 
 // Admin Routes
 require("./src/routes/admin/images")(app);
