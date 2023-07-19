@@ -10,6 +10,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    bodyColor: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     textColor: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -24,19 +28,19 @@ module.exports = (sequelize, Sequelize) => {
     },
     top: {
       type: Sequelize.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     right: {
       type: Sequelize.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     bottom: {
       type: Sequelize.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     left: {
       type: Sequelize.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
     },
     iconType: {
       type: Sequelize.STRING,

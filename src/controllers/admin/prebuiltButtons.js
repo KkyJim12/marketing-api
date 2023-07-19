@@ -21,7 +21,7 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   try {
-    const prebuiltButton = await createPrebuiltButton(req);
+    const prebuiltButton = await createPrebuiltButton(req, res);
     res.status(201).send({
       status: "success",
       data: prebuiltButton,

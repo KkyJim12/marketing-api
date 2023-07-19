@@ -16,6 +16,7 @@ exports.createPrebuiltButton = async (req, res) => {
   try {
     const newPrebuiltButton = {
       backgroundColor: req.body.backgroundColor,
+      bodyColor: req.body.bodyColor,
       textColor: req.body.textColor,
       textContent: req.body.textContent,
       size: req.body.size,
@@ -25,7 +26,7 @@ exports.createPrebuiltButton = async (req, res) => {
       left: req.body.left,
       iconType: req.body.iconType,
       icon: req.body.icon,
-      visibleOnPc: req.body.visibleOnPc,
+      visibleOnPC: req.body.visibleOnPC,
       visibleOnTablet: req.body.visibleOnTablet,
       visibleOnMobile: req.body.visibleOnMobile,
       productId: req.params.productId,
@@ -34,6 +35,7 @@ exports.createPrebuiltButton = async (req, res) => {
     const prebuiltButton = await PrebuiltButton.create(newPrebuiltButton);
     return prebuiltButton;
   } catch (error) {
+    console.log(error);
     throw new Error(500, "Error when creating a pre-built button");
   }
 };
