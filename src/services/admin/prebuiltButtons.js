@@ -4,7 +4,7 @@ const PrebuiltButton = db.prebuiltButton;
 exports.getPrebuiltButtons = async (req, res) => {
   try {
     const prebuiltButtons = await PrebuiltButton.findAll({
-      where: { id: req.params.productId },
+      where: { productId: req.params.productId },
     });
     return prebuiltButtons;
   } catch (error) {

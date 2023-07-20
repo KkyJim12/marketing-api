@@ -6,7 +6,7 @@ const {
 
 exports.index = async (req, res) => {
   try {
-    const prebuiltButtons = await getPrebuiltButtons();
+    const prebuiltButtons = await getPrebuiltButtons(req, res);
     res.status(200).send({
       status: "success",
       data: prebuiltButtons,
