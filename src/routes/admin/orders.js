@@ -1,7 +1,7 @@
-module.exports = (app) => {
-  const router = require("express").Router();
-  const orderController = require("../../controllers/admin/orders.js");
+const router = require("express").Router();
+const orderController = require("../../controllers/admin/orders.js");
 
+module.exports = (app) => {
   // Routes
   router.get("/", orderController.index);
   router.put("/:id/cancel", orderController.cancel);

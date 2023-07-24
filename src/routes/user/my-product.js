@@ -10,5 +10,19 @@ module.exports = (app) => {
     myProductController.prebuiltButtons
   );
 
+  router.get("/:id/button/:productId", myProductController.button);
+
+  router.get(
+    "/:id/product-detail/:productId",
+    myProductController.productDetail
+  );
+
+  router.put(
+    "/:id/save-button/:productId",
+    myProductController.saveButtonStyle
+  );
+
+  router.get("/:id/public-button", myProductController.publicButton);
+
   app.use("/api/v1/user/my-products", router);
 };

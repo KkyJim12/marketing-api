@@ -1,6 +1,7 @@
 const db = require("../../models/index");
 const UserProduct = db.userProduct;
 const PrebuiltButton = db.prebuiltButton;
+const FloatingActionButton = db.floatingActionButton;
 
 exports.getMyProducts = async (req) => {
   try {
@@ -21,5 +22,67 @@ exports.getPrebuiltButtons = async (req) => {
     return prebuiltButtons;
   } catch (error) {
     throw new Error(500, "Error when get prebuilt buttons");
+  }
+};
+
+exports.getButton = async (req) => {
+  try {
+    const button = await FloatingActionButton.findOne({
+      where: { userProductId: req.params.id },
+    });
+    return button;
+  } catch (error) {
+    throw new Error(500, "Error when get button");
+  }
+};
+
+exports.getPublicButton = async (req) => {
+  try {
+    const button = await FloatingActionButton.findOne({
+      where: { userProductId: req.params.id },
+    });
+    return button;
+  } catch (error) {
+    throw new Error(500, "Error when get button");
+  }
+};
+
+exports.getProductDetail = async (req, res) => {
+  try {
+    const productDetail = await UserProduct.findOne({
+      where: { id: req.params.id },
+    });
+    return productDetail;
+  } catch (error) {
+    throw new Error(500, "Error when get product detail");
+  }
+};
+
+exports.updateButtonStyle = async (req, res) => {
+  try {
+    const button = await FloatingActionButton.update(
+      {
+        backgroundColor: req.body.backgroundColor,
+        bodyColor: req.body.bodyColor,
+        textColor: req.body.textColor,
+        textContent: req.body.textContent,
+        size: req.body.size,
+        top: req.body.top,
+        right: req.body.right,
+        bottom: req.body.bottom,
+        left: req.body.left,
+        iconType: req.body.iconType,
+        icon: req.body.icon,
+        visibleOnPC: req.body.visibleOnPC,
+        visibleOnTablet: req.body.visibleOnTablet,
+        visibleOnMobile: req.body.visibleOnMobile,
+      },
+      {
+        where: { userProductId: req.params.id },
+      }
+    );
+    return button;
+  } catch (error) {
+    throw new Error(500, "Error when save button style");
   }
 };
