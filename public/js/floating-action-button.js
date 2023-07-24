@@ -1,8 +1,9 @@
 const generateButton = async (id) => {
+  require("dotenv").config();
   console.log(id);
 
   const response = await fetch(
-    "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button"
+    process.env.API_URL + "/api/v1/user/my-products/" + id + "/public-button"
   );
   const style = await response.json();
   console.log(style);
