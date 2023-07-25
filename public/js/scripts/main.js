@@ -3,10 +3,11 @@ require.config({
     fontawesome: "./vendor/fontawesome/fontawesome.min",
     "fontawesome/solid": "./vendor/fontawesome/solid.min",
     "fontawesome/brands": "./vendor/fontawesome/brands.min",
+    "fontawesome/regular": "./vendor/fontawesome/regular.min",
   },
   shim: {
     fontawesome: {
-      deps: ["fontawesome/solid", "fontawesome/brands"],
+      deps: ["fontawesome/solid", "fontawesome/brands", "fontawesome/regular"],
     },
   },
 });
