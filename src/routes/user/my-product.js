@@ -10,6 +10,11 @@ module.exports = (app) => {
     myProductController.prebuiltButtons
   );
 
+  router.get(
+    "/:id/prebuilt-contents/:productId",
+    myProductController.prebuiltContents
+  );
+
   router.get("/:id/button/:productId", myProductController.button);
 
   router.get(

@@ -1,6 +1,7 @@
 const db = require("../../models/index");
 const UserProduct = db.userProduct;
 const PrebuiltButton = db.prebuiltButton;
+const PrebuiltContent = db.prebuiltContent;
 const FloatingActionButton = db.floatingActionButton;
 
 exports.getMyProducts = async (req) => {
@@ -22,6 +23,17 @@ exports.getPrebuiltButtons = async (req) => {
     return prebuiltButtons;
   } catch (error) {
     throw new Error(500, "Error when get prebuilt buttons");
+  }
+};
+
+exports.getPrebuiltContents = async (req) => {
+  try {
+    const prebuiltContents = await PrebuiltContent.findAll({
+      where: { productId: req.params.productId },
+    });
+    return prebuiltContents;
+  } catch (error) {
+    throw new Error(500, "Error when get prebuilt contents");
   }
 };
 

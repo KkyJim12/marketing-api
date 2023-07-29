@@ -5,6 +5,7 @@ const {
   updateButtonStyle,
   getProductDetail,
   getPublicButton,
+  getPrebuiltContents,
 } = require("../../services/user/my-product");
 
 exports.index = async (req, res) => {
@@ -27,6 +28,19 @@ exports.prebuiltButtons = async (req, res) => {
       status: "success",
       data: prebuiltButtons,
       message: "Get prebuilt buttons success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.prebuiltContents = async (req, res) => {
+  try {
+    const prebuiltContents = await getPrebuiltContents(req, res);
+    res.status(200).send({
+      status: "success",
+      data: prebuiltContents,
+      message: "Get prebuilt contents success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });

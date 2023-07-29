@@ -42,6 +42,7 @@ require("./src/routes/admin/settings")(app);
 require("./src/routes/admin/users")(app);
 require("./src/routes/admin/orders")(app);
 require("./src/routes/admin/prebuiltButtons")(app);
+require("./src/routes/admin/prebuiltContents")(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
