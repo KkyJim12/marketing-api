@@ -17,6 +17,8 @@ module.exports = (app) => {
 
   router.get("/:id/button/:productId", myProductController.button);
 
+  router.get("/:id/contents/:productId", myProductController.contents);
+
   router.get(
     "/:id/product-detail/:productId",
     myProductController.productDetail

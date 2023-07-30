@@ -38,7 +38,7 @@ exports.getPrebuiltContents = async (req) => {
   }
 };
 
-exports.getButton = async (req) => {
+exports.getButton = async (req, res) => {
   try {
     const button = await FloatingActionButton.findOne({
       where: { userProductId: req.params.id },
@@ -46,6 +46,17 @@ exports.getButton = async (req) => {
     return button;
   } catch (error) {
     throw new Error(500, "Error when get button");
+  }
+};
+
+exports.getContents = async (req, res) => {
+  try {
+    const contents = await FabContent.findAll({
+      where: { userProductId: req.params.id },
+    });
+    return contents;
+  } catch (error) {
+    throw new Error(500, "Error when get contents");
   }
 };
 

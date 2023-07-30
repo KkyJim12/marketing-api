@@ -7,6 +7,7 @@ const {
   getProductDetail,
   getPublicButton,
   getPrebuiltContents,
+  getContents,
 } = require("../../services/user/my-product");
 
 exports.index = async (req, res) => {
@@ -55,6 +56,19 @@ exports.button = async (req, res) => {
       status: "success",
       data: button,
       message: "Get button success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.contents = async (req, res) => {
+  try {
+    const contents = await getContents(req, res);
+    res.status(200).send({
+      status: "success",
+      data: contents,
+      message: "Get contents success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });
