@@ -3,6 +3,7 @@ const UserProduct = db.userProduct;
 const PrebuiltButton = db.prebuiltButton;
 const PrebuiltContent = db.prebuiltContent;
 const FloatingActionButton = db.floatingActionButton;
+const FabContent = db.fabContent;
 
 exports.getMyProducts = async (req) => {
   try {
@@ -96,5 +97,33 @@ exports.updateButtonStyle = async (req, res) => {
     return button;
   } catch (error) {
     throw new Error(500, "Error when save button style");
+  }
+};
+
+exports.updateButtonContents = async (req, res) => {
+  try {
+    // Delete first
+    await FabContent.destroy({
+      where: { userProductId: req.params.id },
+    });
+
+    const contents = [];
+    for (let i = 0; i < req.body.contents.length; i++) {
+      const content = await FabContent.create({
+        backgroundColor: req.body.contents[i].backgroundColor,
+        textContent: req.body.contents[i].textContent,
+        description: req.body.contents[i].description,
+        destination: req.body.contents[i].destination,
+        icon: req.body.contents[i].icon,
+        productId: req.params.productId,
+        userProductId: req.params.id,
+        userId: req.user.id,
+      });
+      contents.push(content);
+    }
+    return contents;
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when save button contents");
   }
 };

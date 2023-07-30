@@ -3,6 +3,7 @@ const {
   getPrebuiltButtons,
   getButton,
   updateButtonStyle,
+  updateButtonContents,
   getProductDetail,
   getPublicButton,
   getPrebuiltContents,
@@ -67,6 +68,19 @@ exports.saveButtonStyle = async (req, res) => {
       status: "success",
       data: button,
       message: "Save button style success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.saveButtonContents = async (req, res) => {
+  try {
+    const contents = await updateButtonContents(req, res);
+    res.status(200).send({
+      status: "success",
+      data: contents,
+      message: "Save button contents success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });

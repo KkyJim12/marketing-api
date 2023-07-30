@@ -30,6 +30,7 @@ db.userProduct = require("./userProduct.js")(sequelize, Sequelize);
 db.prebuiltButton = require("./prebuiltButton.js")(sequelize, Sequelize);
 db.prebuiltContent = require("./prebuiltContent.js")(sequelize, Sequelize);
 db.floatingActionButton = require("./floatingActionButton.js")(sequelize, Sequelize);
+db.fabContent = require("./fabContent.js")(sequelize, Sequelize);
 
 db.page.hasMany(db.subPage, {
   constraints: true,
