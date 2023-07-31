@@ -39,7 +39,7 @@ module.exports = (app) => {
     myProductController.saveButtonContents
   );
 
-  router.get("/:id/public-button", isAuth, myProductController.publicButton);
+  router.get("/:id/public-button", myProductController.publicButton);
 
   app.use("/api/v1/user/my-products", router);
 };
