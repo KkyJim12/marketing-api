@@ -6,11 +6,10 @@ const {
   loginValidate,
   loginValidateResult,
 } = require("../../validations/login.js");
+const router = require("express").Router();
+const authController = require("../../controllers/guest/auths.js");
 
 module.exports = (app) => {
-  const router = require("express").Router();
-  const authController = require("../../controllers/guest/auths.js");
-
   // Routes
   router.post(
     "/admin-login",

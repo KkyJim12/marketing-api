@@ -1,7 +1,8 @@
-module.exports = (app) => {
-  const router = require("express").Router();
-  const { v4: uuidv4 } = require("uuid");
+const router = require("express").Router();
+const { v4: uuidv4 } = require("uuid");
+const isAdmin = require("../../middlewares/isAdmin.js");
 
+module.exports = (app) => {
   const {
     imageValidate,
     imageValidateResult,
@@ -26,13 +27,15 @@ module.exports = (app) => {
 
   router.post(
     "/",
+    isAdmin,
     imageValidate(),
     imageValidateResult,
     upload.single("image"),
     (req, res) => {
       try {
         const newFileName = randomUuid + "_" + req.file.originalname;
-        const returnUrl = process.env.API_URL + "/uploads/images/" + newFileName;
+        const returnUrl =
+          process.env.API_URL + "/uploads/images/" + newFileName;
         res.status(201).send({
           status: "success",
           data: returnUrl,

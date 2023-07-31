@@ -43,7 +43,7 @@ const generateButton = async (id) => {
     top: style.data.button.top ? "10px" : null,
     left: style.data.button.left ? "10px" : null,
     bottom: style.data.button.bottom
-      ? 50 + style.data.button.textContent.length * 50 + "px"
+      ? 150 + style.data.button.textContent.length * 50 + "px"
       : null,
     right: style.data.button.right ? "320px" : null,
   };
@@ -72,7 +72,7 @@ const generateButton = async (id) => {
   const contentListsCss = {
     background: style.data.button.bodyColor,
     cursor: "pointer",
-    minHeight: 200 + 65 * contacts.length,
+    minHeight: 65 * contacts.length,
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
     color: "rgb(75 85 99)",

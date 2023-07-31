@@ -1,0 +1,2 @@
+INSERT INTO `settings` (`id`, `eCommercePage`, `myProductPage`, `orderHistoryPage`, `createdAt`, `updatedAt`) VALUES
+('2a964cdb-1ff5-11ee-86e3-d8bbc18ed333', '"<p>E-commerce</p>"', '"<p>My Product</p>"', '"<p>Order History</p>"', '2023-07-11 16:13:36', '2023-07-11 16:13:36');

@@ -8,26 +8,29 @@ const {
   createUserValidateResult,
 } = require("../../validations/create-user.js");
 
-module.exports = (app) => {
-  const router = require("express").Router();
-  const userController = require("../../controllers/admin/users.js");
+const router = require("express").Router();
+const userController = require("../../controllers/admin/users.js");
+const isAdmin = require("../../middlewares/isAdmin.js");
 
+module.exports = (app) => {
   // Routes
-  router.get("/", userController.index);
+  router.get("/", isAdmin, userController.index);
   router.post(
     "/",
+    isAdmin,
     createUserValidate(),
     createUserValidateResult,
     userController.store
   );
-  router.get("/:id/edit", userController.edit);
+  router.get("/:id/edit", isAdmin, userController.edit);
   router.put(
     "/:id",
+    isAdmin,
     editUserValidate(),
     editUserValidateResult,
     userController.update
   );
-  router.delete("/:id", userController.destroy);
+  router.delete("/:id", isAdmin, userController.destroy);
 
   app.use("/api/v1/admin/users", router);
 };

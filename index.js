@@ -15,8 +15,10 @@ db.sequelize.sync({ force: false }).then(() => {
 
   // const sqlDumpFile1 = fs.readFileSync("./src/storage/admins.sql", "utf8");
   // const sqlDumpFile2 = fs.readFileSync("./src/storage/products.sql", "utf8");
+  // const sqlDumpFile3 = fs.readFileSync("./src/storage/settings.sql", "utf8");
   // db.sequelize.query(sqlDumpFile1);
   // db.sequelize.query(sqlDumpFile2);
+  // db.sequelize.query(sqlDumpFile3);
 });
 
 app.use(bodyParser.json());

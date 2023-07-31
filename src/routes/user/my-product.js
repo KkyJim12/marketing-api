@@ -7,25 +7,29 @@ module.exports = (app) => {
   router.get("/", isAuth, myProductController.index);
   router.get(
     "/:id/prebuilt-buttons/:productId",
+    isAuth,
     myProductController.prebuiltButtons
   );
 
   router.get(
     "/:id/prebuilt-contents/:productId",
+    isAuth,
     myProductController.prebuiltContents
   );
 
-  router.get("/:id/button/:productId", myProductController.button);
+  router.get("/:id/button/:productId", isAuth, myProductController.button);
 
-  router.get("/:id/contents/:productId", myProductController.contents);
+  router.get("/:id/contents/:productId", isAuth, myProductController.contents);
 
   router.get(
     "/:id/product-detail/:productId",
+    isAuth,
     myProductController.productDetail
   );
 
   router.put(
     "/:id/save-button/:productId",
+    isAuth,
     myProductController.saveButtonStyle
   );
 
@@ -35,7 +39,7 @@ module.exports = (app) => {
     myProductController.saveButtonContents
   );
 
-  router.get("/:id/public-button", myProductController.publicButton);
+  router.get("/:id/public-button", isAuth, myProductController.publicButton);
 
   app.use("/api/v1/user/my-products", router);
 };

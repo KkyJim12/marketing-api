@@ -1,18 +1,18 @@
+const router = require("express").Router();
+const { v4: uuidv4 } = require("uuid");
+
+const {
+  imageValidate,
+  imageValidateResult,
+} = require("../../validations/upload-image");
+
+const multer = require("multer");
+
+const randomUuid = uuidv4();
+const isAuth = require("../../middlewares/isAuth.js");
+
 module.exports = (app) => {
-  const router = require("express").Router();
-  const { v4: uuidv4 } = require("uuid");
-
-  const {
-    imageValidate,
-    imageValidateResult,
-  } = require("../../validations/upload-image");
-
-  const multer = require("multer");
-
   const destinationPath = "public/uploads/images";
-
-  const randomUuid = uuidv4();
-
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, destinationPath);
@@ -26,6 +26,7 @@ module.exports = (app) => {
 
   router.post(
     "/",
+    isAuth,
     imageValidate(),
     imageValidateResult,
     upload.single("image"),
