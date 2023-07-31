@@ -65,7 +65,13 @@ exports.getPublicButton = async (req) => {
     const button = await FloatingActionButton.findOne({
       where: { userProductId: req.params.id },
     });
-    return button;
+
+    const contents = await FabContent.findAll({
+      where: {
+        userProductId: req.params.id,
+      },
+    });
+    return { button: button, contents: contents };
   } catch (error) {
     throw new Error(500, "Error when get button");
   }

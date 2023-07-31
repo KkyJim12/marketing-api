@@ -5,50 +5,47 @@ const generateButton = async (id) => {
     "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button"
   );
   const style = await response.json();
-  console.log(style);
 
-  const contacts = [
-    { id: 1, title: "Email", icon: "fa-solid fa-envelope" },
-    { id: 2, title: "Phone", icon: "fa-solid fa-phone" },
-    { id: 3, title: "Line", icon: "fa-brands fa-line" },
-    { id: 4, title: "Facebook", icon: "fa-brands fa-facebook" },
-    { id: 5, title: "Youtube", icon: "fa-brands fa-youtube" },
-  ];
+  const contacts = style.data.contents;
+
+  console.log(contacts);
 
   // 1
   const mainAreaCss = {
     fontFamily: "Arial",
     position: "fixed",
-    top: style.data.top ? style.data.top : null,
-    right: style.data.right ? style.data.right : null,
-    bottom: style.data.bottom ? style.data.bottom : null,
-    left: style.data.left ? style.data.left : null,
-    width: style.data.size,
-    height: style.data.size,
+    top: style.data.button.top ? style.data.button.top + "px" : null,
+    right: style.data.button.right ? style.data.button.right + "px" : null,
+    bottom: style.data.button.bottom ? style.data.button.bottom + "px" : null,
+    left: style.data.button.left ? style.data.button.left + "px" : null,
+    width: style.data.button.size + "px",
+    height: style.data.button.size + "px",
     zIndex: 99999,
   };
 
   // 2
   const buttonCss = {
-    width: style.data.size,
-    height: style.data.size,
+    width: style.data.button.size + "px",
+    height: style.data.button.size + "px",
     borderRadius: "50%",
-    border: 0,
+    border: "0px",
     boxShadow:
       "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-    backgroundColor: style.data.backgroundColor,
-    color: style.data.textColor,
-    fontSize: 32,
+    backgroundColor: style.data.button.backgroundColor,
+    color: style.data.button.textColor,
+    fontSize: "32px",
     cursor: "pointer",
   };
 
   // 2
   const mainContentCss = {
     position: "relative",
-    top: style.data.top ? 10 : null,
-    left: style.data.left ? 10 : null,
-    bottom: style.data.bottom ? 400 + style.data.textContent.length * 10 : null,
-    right: style.data.right ? 320 : null,
+    top: style.data.button.top ? "10px" : null,
+    left: style.data.button.left ? "10px" : null,
+    bottom: style.data.button.bottom
+      ? 50 + style.data.button.textContent.length * 50 + "px"
+      : null,
+    right: style.data.button.right ? "320px" : null,
   };
 
   // 3
@@ -58,33 +55,33 @@ const generateButton = async (id) => {
 
   // 4
   const headerCss = {
-    backgroundColor: style.data.backgroundColor,
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingRight: 20,
-    paddingLeft: 20,
-    color: style.data.textColor,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    minWidth: 350,
-    fontWeight: 600,
-    fontSize: 20,
+    backgroundColor: style.data.button.backgroundColor,
+    paddingTop: "15px",
+    paddingBottom: "15px",
+    paddingRight: "20px",
+    paddingLeft: "20px",
+    color: style.data.button.textColor,
+    borderTopLeftRadius: "15px",
+    borderTopRightRadius: "15px",
+    minWidth: "350px",
+    fontWeight: "600px",
+    fontSize: "20px",
   };
 
   // 4
   const contentListsCss = {
-    background: style.data.bodyColor,
+    background: style.data.button.bodyColor,
     cursor: "pointer",
-    minHeight: 300,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    minHeight: 200 + 65 * contacts.length,
+    borderBottomLeftRadius: "15px",
+    borderBottomRightRadius: "15px",
     color: "rgb(75 85 99)",
-    fontWeight: 500,
+    fontWeight: "500px",
     boxShadow:
       "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
   };
 
-  const splitIcon = style.data.icon.split(" ");
+  const splitIcon = style.data.button.icon.split(" ");
 
   let prefixIcon;
 
@@ -107,19 +104,19 @@ const generateButton = async (id) => {
 
   for (let i = 0; i < contacts.length; i++) {
     contents.push(
-      `<span style="font-size:24;"><i class="${contacts[i].icon}"></i></span><span style="font-size:18; font-weight:500; margin-left:10;"> ${contacts[i].title}</span> <i style="font-size:16; margin-left:auto" class="fa-solid fa-chevron-right"></i>`
+      `<span style="font-size:24px;"><i class="${contacts[i].icon}"></i></span><span style="font-size:18; font-weight:500; margin-left:10;"> ${contacts[i].textContent}</span> <i style="font-size:16; margin-left:auto" class="fa-solid fa-chevron-right"></i>`
     );
   }
 
   const listStyleCss = {
     display: "flex",
     alignItems: "center",
-    gap: 10,
+    gap: "10px",
     borderTop: "1px solid rgb(229 231 235)",
-    paddingTop: 20,
-    paddingRight: 25,
-    paddingBottom: 20,
-    paddingLeft: 25,
+    paddingTop: "20px",
+    paddingRight: "25px",
+    paddingBottom: "20px",
+    paddingLeft: "25px",
   };
 
   for (let i = 0; i < contents.length; i++) {
@@ -130,7 +127,7 @@ const generateButton = async (id) => {
   }
 
   button.innerHTML = `<i class="${prefixIcon} ${iconValue}"></i>`;
-  header.innerHTML = style.data.textContent;
+  header.innerHTML = style.data.button.textContent;
 
   document.body.appendChild(mainArea);
   mainArea.appendChild(button);
