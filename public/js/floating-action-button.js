@@ -10,6 +10,8 @@ const generateButton = async (id) => {
 
   console.log(contacts);
 
+  let isContentsOpened = false;
+
   // 1
   const mainAreaCss = {
     fontFamily: "Arial",
@@ -42,9 +44,7 @@ const generateButton = async (id) => {
     position: "relative",
     top: style.data.button.top ? "10px" : null,
     left: style.data.button.left ? "10px" : null,
-    bottom: style.data.button.bottom
-      ? 150 + style.data.button.textContent.length * 50 + "px"
-      : null,
+    bottom: style.data.button.bottom ? 150 + contacts.length * 65 + "px" : null,
     right: style.data.button.right ? "320px" : null,
   };
 
@@ -64,7 +64,7 @@ const generateButton = async (id) => {
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
     minWidth: "350px",
-    fontWeight: "600px",
+    fontWeight: 600,
     fontSize: "20px",
   };
 
@@ -76,7 +76,7 @@ const generateButton = async (id) => {
     borderBottomLeftRadius: "15px",
     borderBottomRightRadius: "15px",
     color: "rgb(75 85 99)",
-    fontWeight: "500px",
+    fontWeight: 500,
     boxShadow:
       "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
   };
@@ -95,6 +95,7 @@ const generateButton = async (id) => {
 
   const mainArea = document.createElement("div");
   const button = document.createElement("button");
+  button.id = "pluginButton";
   const mainContent = document.createElement("div");
   const innerDiv = document.createElement("div");
   const header = document.createElement("div");
@@ -103,8 +104,19 @@ const generateButton = async (id) => {
   const contents = [];
 
   for (let i = 0; i < contacts.length; i++) {
+    const contentSplitIcon = contacts[i].icon.split(" ");
+    let contentPrefixIcon;
+
+    if (contentSplitIcon[0] === "fas") {
+      contentPrefixIcon = "fa-solid";
+    } else {
+      contentPrefixIcon = "fa-brands";
+    }
+
+    let contentIconValue = "fa-" + contentSplitIcon[1];
+
     contents.push(
-      `<span style="font-size:24px;"><i class="${contacts[i].icon}"></i></span><span style="font-size:18; font-weight:500; margin-left:10;"> ${contacts[i].textContent}</span> <i style="font-size:16; margin-left:auto" class="fa-solid fa-chevron-right"></i>`
+      `<a style="text-decoration:none; color:rgb(75, 85, 99); width:100%; display:flex;" href="${contacts[i].destination}" target="_blank"><span style="font-size:24px;"><i style="font-size:20;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:18; font-weight:500; margin-left:10;"> ${contacts[i].textContent}</span> <i style="font-size:20; margin-left:auto" class="fa-solid fa-chevron-right"></i></a>`
     );
   }
 
@@ -131,7 +143,6 @@ const generateButton = async (id) => {
 
   document.body.appendChild(mainArea);
   mainArea.appendChild(button);
-  mainArea.appendChild(mainContent);
   mainContent.appendChild(innerDiv);
   innerDiv.appendChild(header);
   innerDiv.appendChild(contentLists);
@@ -141,4 +152,17 @@ const generateButton = async (id) => {
   Object.assign(innerDiv.style, innerDivCss);
   Object.assign(header.style, headerCss);
   Object.assign(contentLists.style, contentListsCss);
+
+  const pluginButton = document.getElementById("pluginButton");
+
+  pluginButton.addEventListener("click", (event) => {
+    if (isContentsOpened === false) {
+      mainArea.appendChild(mainContent);
+      mainContent.id = "pluginButtonContents";
+      isContentsOpened = true;
+    } else {
+      mainArea.removeChild(mainContent);
+      isContentsOpened = false;
+    }
+  });
 };
