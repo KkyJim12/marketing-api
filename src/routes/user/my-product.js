@@ -51,6 +51,12 @@ module.exports = (app) => {
     myProductController.storeWhiteListDomain
   );
 
+  router.delete(
+    "/whitelist-domain/:domainId",
+    isAuth,
+    myProductController.removeWhiteListDomain
+  );
+
   router.get("/:id/public-button", myProductController.publicButton);
 
   app.use("/api/v1/user/my-products", router);

@@ -189,3 +189,18 @@ exports.saveWhiteListDomain = async (req, res) => {
     throw new Error(500, "Error when save white list domain");
   }
 };
+
+exports.removeDomain = async (req, res) => {
+  try {
+    const domain = await WhiteListDomain.destroy({
+      where: {
+        id: req.params.domainId,
+      },
+    });
+
+    return domain;
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when delete white list domains");
+  }
+};

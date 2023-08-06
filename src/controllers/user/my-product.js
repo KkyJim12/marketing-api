@@ -10,6 +10,7 @@ const {
   getContents,
   getAllWhiteListDomains,
   saveWhiteListDomain,
+  removeDomain,
 } = require("../../services/user/my-product");
 
 exports.index = async (req, res) => {
@@ -149,6 +150,19 @@ exports.storeWhiteListDomain = async (req, res) => {
       status: "success",
       data: domain,
       message: "Save whitelist domain success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.removeWhiteListDomain = async (req, res) => {
+  try {
+    const domain = await removeDomain(req, res);
+    res.status(200).send({
+      status: "success",
+      data: domain,
+      message: "Remove whitelist domain success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });
