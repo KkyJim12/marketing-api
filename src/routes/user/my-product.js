@@ -39,6 +39,18 @@ module.exports = (app) => {
     myProductController.saveButtonContents
   );
 
+  router.get(
+    "/:id/whitelist-domain/:productId",
+    isAuth,
+    myProductController.getWhiteListDomains
+  );
+
+  router.post(
+    "/:id/whitelist-domain/:productId",
+    isAuth,
+    myProductController.storeWhiteListDomain
+  );
+
   router.get("/:id/public-button", myProductController.publicButton);
 
   app.use("/api/v1/user/my-products", router);

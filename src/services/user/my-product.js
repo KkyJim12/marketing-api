@@ -4,6 +4,7 @@ const PrebuiltButton = db.prebuiltButton;
 const PrebuiltContent = db.prebuiltContent;
 const FloatingActionButton = db.floatingActionButton;
 const FabContent = db.fabContent;
+const WhiteListDomain = db.whiteListDomain;
 
 exports.getMyProducts = async (req) => {
   try {
@@ -142,5 +143,49 @@ exports.updateButtonContents = async (req, res) => {
   } catch (error) {
     console.log(error);
     throw new Error(500, "Error when save button contents");
+  }
+};
+
+exports.getAllWhiteListDomains = async (req, res) => {
+  try {
+    const domains = await WhiteListDomain.findAll({
+      where: {
+        userProductId: req.params.id,
+      },
+    });
+
+    return domains;
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when get white list domains");
+  }
+};
+
+exports.saveWhiteListDomain = async (req, res) => {
+  try {
+    const storedDomains = await WhiteListDomain.count({
+      where: { userProductId: req.params.id },
+    });
+    const thisProduct = await UserProduct.findOne({
+      where: { id: req.params.id },
+    });
+
+    // Check avaiable domains
+    console.log(storedDomains, thisProduct.domains);
+    if (storedDomains >= thisProduct.domains) {
+      throw new Error(422, "No more available domain slots");
+    }
+
+    const domain = await WhiteListDomain.create({
+      url: req.body.url,
+      productId: req.params.productId,
+      userProductId: req.params.id,
+      userId: req.user.id,
+    });
+
+    return domain;
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when save white list domain");
   }
 };

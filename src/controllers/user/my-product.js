@@ -8,6 +8,8 @@ const {
   getPublicButton,
   getPrebuiltContents,
   getContents,
+  getAllWhiteListDomains,
+  saveWhiteListDomain,
 } = require("../../services/user/my-product");
 
 exports.index = async (req, res) => {
@@ -121,6 +123,32 @@ exports.publicButton = async (req, res) => {
       status: "success",
       data: button,
       message: "Get public button success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.getWhiteListDomains = async (req, res) => {
+  try {
+    const domains = await getAllWhiteListDomains(req, res);
+    res.status(200).send({
+      status: "success",
+      data: domains,
+      message: "Get whitelist domains success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.storeWhiteListDomain = async (req, res) => {
+  try {
+    const domain = await saveWhiteListDomain(req, res);
+    res.status(201).send({
+      status: "success",
+      data: domain,
+      message: "Save whitelist domain success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });
