@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const myProductController = require("../../controllers/user/my-product.js");
 const isAuth = require("../../middlewares/isAuth.js");
+const isValidDomain = require("../../middlewares/isValidDomain.js");
 
 module.exports = (app) => {
   // Routes
@@ -57,7 +58,11 @@ module.exports = (app) => {
     myProductController.removeWhiteListDomain
   );
 
-  router.get("/:id/public-button", myProductController.publicButton);
+  router.get(
+    "/:id/public-button",
+    isValidDomain,
+    myProductController.publicButton
+  );
 
   app.use("/api/v1/user/my-products", router);
 };
