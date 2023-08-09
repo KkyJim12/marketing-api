@@ -16,6 +16,10 @@ exports.login = async (req) => {
           exclude: ["password"],
         },
       });
+
+      thisUser.lastLogin = new Date();
+      thisUser.save();
+
       return thisUser;
     } else {
       throw new Error(401);
