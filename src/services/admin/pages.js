@@ -13,6 +13,7 @@ exports.createPage = async (req) => {
       sortType: req.body.sortType,
       sortValue: req.body.sortValue,
       content: req.body.content,
+      icon: req.body.icon,
     };
 
     const page = await Page.create(newPage);
@@ -43,6 +44,7 @@ exports.updatePage = async (req) => {
       sortType: req.body.sortType,
       sortValue: req.body.sortValue,
       content: req.body.content,
+      icon: req.body.icon,
     };
 
     const page = await Page.update(newPage, { where: { id: req.params.id } });

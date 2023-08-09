@@ -18,6 +18,7 @@ exports.createSubPage = async (req) => {
       sortValue: req.body.sortValue,
       pageId: req.body.mainPageId,
       content: req.body.content,
+      icon: req.body.icon,
     };
 
     const subPage = await SubPage.create(newSubPage);
@@ -43,6 +44,7 @@ exports.updateSubPage = async (req) => {
       sortType: req.body.sortType,
       sortValue: req.body.sortValue,
       content: req.body.content,
+      icon: req.body.icon,
     };
 
     const subPage = await SubPage.update(newSubPage, {

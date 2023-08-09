@@ -18,6 +18,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT("long"),
       allowNull: true,
     },
+    icon: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     pageId: {
       type: Sequelize.UUID,
       allowNull: false,
