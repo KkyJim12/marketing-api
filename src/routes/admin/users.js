@@ -23,6 +23,7 @@ module.exports = (app) => {
     userController.store
   );
   router.get("/:id/edit", isAdmin, userController.edit);
+  router.get("/:userId/manage-products", isAdmin, userController.products);
   router.put(
     "/:id",
     isAdmin,
@@ -31,6 +32,8 @@ module.exports = (app) => {
     userController.update
   );
   router.delete("/:id", isAdmin, userController.destroy);
+  router.put("/:userProductId/revoke", isAdmin, userController.revoke);
+  router.post("/:userId/add-product", isAdmin, userController.addProduct);
 
   app.use("/api/v1/admin/users", router);
 };

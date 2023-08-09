@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt");
 const db = require("../../models/index");
 const User = db.user;
+const Product = db.product;
+const UserProduct = db.userProduct;
+const FloatingActionButton = db.floatingActionButton;
+const moment = require("moment");
 
 const saltRounds = 10;
 
@@ -60,5 +64,78 @@ exports.deleteUser = async (req) => {
     return;
   } catch (error) {
     throw new Error(500);
+  }
+};
+
+exports.getUserProducts = async (req, res) => {
+  try {
+    const userProducts = await UserProduct.findAll({
+      where: { userId: req.params.userId },
+    });
+    return userProducts;
+  } catch (error) {
+    throw new Error(500, "Error when get user products.");
+  }
+};
+
+exports.revokeUserProduct = async (req, res) => {
+  try {
+    const userProduct = await UserProduct.update(
+      { status: "Revoke" },
+      {
+        where: { id: req.params.userProductId },
+      }
+    );
+    return userProduct;
+  } catch (error) {
+    throw new Error(500, "Error when revoke user product.");
+  }
+};
+
+exports.addProductToUser = async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      where: { id: req.body.productId },
+    });
+
+    const userProduct = await UserProduct.create({
+      name: product.name,
+      type: product.type,
+      domains: product.domains,
+      duration: product.duration,
+      startDate: moment().format(),
+      endDate: moment().add(product.duration, "days"),
+      status: "On going",
+      userId: req.params.userId,
+      productId: product.id,
+    });
+
+    // Floating Action Button
+    if (product.type === "Floating Action Button") {
+      await FloatingActionButton.create({
+        backgroundColor: "#3b82f6",
+        bodyColor: "#ffffff",
+        textColor: "#f5f5f5",
+        textContent: "Minible",
+        size: 75,
+        top: null,
+        right: 20,
+        bottom: 20,
+        left: null,
+        iconType: "font-awesome",
+        icon: "fas message",
+        visibleOnPC: true,
+        visibleOnTablet: true,
+        visibleOnMobile: true,
+        userId: userProduct.userId,
+        productId: userProduct.productId,
+        userProductId: userProduct.id,
+      });
+    }
+
+    return { userProduct };
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when update order status");
   }
 };

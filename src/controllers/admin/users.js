@@ -4,6 +4,9 @@ const {
   getUser,
   updateUser,
   deleteUser,
+  getUserProducts,
+  revokeUserProduct,
+  addProductToUser,
 } = require("../../services/admin/users");
 
 exports.index = async (req, res) => {
@@ -64,6 +67,51 @@ exports.destroy = async (req, res) => {
     res
       .status(200)
       .send({ status: "success", data: null, message: "Delete user success" });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.products = async (req, res) => {
+  try {
+    const userProducts = await getUserProducts(req, res);
+    res.status(200).send({
+      status: "success",
+      data: userProducts,
+      message: "Get user products success.",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.revoke = async (req, res) => {
+  try {
+    const userProduct = await revokeUserProduct(req, res);
+    res.status(200).send({
+      status: "success",
+      data: userProduct,
+      message: "Revoke user product success.",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.addProduct = async (req, res) => {
+  try {
+    const userProduct = await addProductToUser(req, res);
+    res.status(200).send({
+      status: "success",
+      data: userProduct,
+      message: "Add product to user success.",
+    });
   } catch (error) {
     res
       .status(500)
