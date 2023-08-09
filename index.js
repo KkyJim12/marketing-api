@@ -24,6 +24,8 @@ db.sequelize.sync({ force: false }).then(() => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+require("./src/crons/cron-jobs.js");
+
 // Guest Routes
 require("./src/routes/guest/auths")(app);
 
