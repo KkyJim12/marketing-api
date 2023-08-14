@@ -138,7 +138,7 @@ exports.updateButtonContents = async (req, res) => {
 
     const contents = [];
     for (let i = 0; i < req.body.contents.length; i++) {
-      const content = await FabContent.create({
+      const newContent = {
         backgroundColor: req.body.contents[i].backgroundColor,
         textContent: req.body.contents[i].textContent,
         description: req.body.contents[i].description,
@@ -147,8 +147,19 @@ exports.updateButtonContents = async (req, res) => {
         productId: req.params.productId,
         userProductId: req.params.id,
         userId: req.user.id,
-        prebuiltContentId: req.body.contents[i].id,
+      };
+      const isPrebuiltContent = await PrebuiltContent.count({
+        where: {
+          id: req.body.contents[i].id,
+        },
       });
+
+      if (isPrebuiltContent > 0) {
+        newContent.prebuiltContentId = req.body.contents[i].id;
+      } else {
+        newContent.prebuiltContentId = null;
+      }
+      const content = await FabContent.create(newContent);
       contents.push(content);
     }
     return contents;
