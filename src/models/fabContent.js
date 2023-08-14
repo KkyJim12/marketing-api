@@ -53,6 +53,15 @@ module.exports = (sequelize, Sequelize) => {
         constraints: true,
       },
     },
+    prebuiltContentId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+      references: {
+        model: "prebuilt_contents",
+        key: "id",
+        constraints: true,
+      },
+    },
   });
 
   return FabContent;

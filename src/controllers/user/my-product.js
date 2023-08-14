@@ -7,6 +7,7 @@ const {
   getProductDetail,
   getPublicButton,
   getPrebuiltContents,
+  getExistContents,
   getContents,
   getAllWhiteListDomains,
   saveWhiteListDomain,
@@ -46,6 +47,19 @@ exports.prebuiltContents = async (req, res) => {
       status: "success",
       data: prebuiltContents,
       message: "Get prebuilt contents success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.existContents = async (req, res) => {
+  try {
+    const existContents = await getExistContents(req, res);
+    res.status(200).send({
+      status: "success",
+      data: existContents,
+      message: "Get exist contents success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });

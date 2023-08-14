@@ -18,6 +18,12 @@ module.exports = (app) => {
     myProductController.prebuiltContents
   );
 
+  router.get(
+    "/:id/exist-contents/:productId",
+    isAuth,
+    myProductController.existContents
+  );
+
   router.get("/:id/button/:productId", isAuth, myProductController.button);
 
   router.get("/:id/contents/:productId", isAuth, myProductController.contents);

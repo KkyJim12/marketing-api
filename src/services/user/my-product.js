@@ -39,6 +39,17 @@ exports.getPrebuiltContents = async (req) => {
   }
 };
 
+exports.getExistContents = async (req) => {
+  try {
+    const existContents = await FabContent.findAll({
+      where: { userProductId: req.params.id },
+    });
+    return existContents;
+  } catch (error) {
+    throw new Error(500, "Error when get exist contents");
+  }
+};
+
 exports.getButton = async (req, res) => {
   try {
     const button = await FloatingActionButton.findOne({
@@ -136,6 +147,7 @@ exports.updateButtonContents = async (req, res) => {
         productId: req.params.productId,
         userProductId: req.params.id,
         userId: req.user.id,
+        prebuiltContentId: req.body.contents[i].id,
       });
       contents.push(content);
     }
