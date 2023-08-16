@@ -1,11 +1,5 @@
-const generateButton = async () => {
+const generateButton = async (id) => {
   try {
-    const scripts = document.getElementsByTagName("script");
-    const index = scripts.length - 1;
-    const myScript = scripts[index];
-    // myScript now contains our script object
-    const id = myScript.src.replace(/^[^\?]+\??/, "");
-    console.log(id);
     const response = await fetch(
       "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
       {
