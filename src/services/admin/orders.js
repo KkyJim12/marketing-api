@@ -49,6 +49,7 @@ exports.acceptOrder = async (req) => {
     const userProduct = await UserProduct.create({
       name: thisOrder.name,
       type: thisOrder.type,
+      price: thisOrder.price,
       domains: thisOrder.domains,
       duration: thisOrder.duration,
       startDate: moment().format(),

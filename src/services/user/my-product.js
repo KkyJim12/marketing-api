@@ -5,6 +5,8 @@ const PrebuiltContent = db.prebuiltContent;
 const FloatingActionButton = db.floatingActionButton;
 const FabContent = db.fabContent;
 const WhiteListDomain = db.whiteListDomain;
+const Order = db.order;
+const moment = require("moment");
 
 exports.getMyProducts = async (req) => {
   try {
@@ -226,5 +228,43 @@ exports.removeDomain = async (req, res) => {
   } catch (error) {
     console.log(error);
     throw new Error(500, "Error when delete white list domains");
+  }
+};
+
+exports.renewProduct = async (req, res) => {
+  try {
+    const product = await UserProduct.findOne({
+      where: { id: req.body.product.id },
+    });
+
+    if (product.status !== "Expired") {
+      throw new Error(500, "Your product is not expired yet");
+    }
+
+    const thisUserProduct = UserProduct.update(
+      { status: "Renew" },
+      {
+        where: { id: product.id },
+      }
+    );
+
+    const newOrder = {
+      name: product.name,
+      type: product.type,
+      domains: product.domains,
+      duration: product.duration,
+      price: product.price,
+      status: "Wait for payment",
+      paymentDate: product.price,
+      userId: req.user.id,
+      productId: product.productId,
+    };
+
+    const order = await Order.create(newOrder);
+
+    return order;
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
   }
 };

@@ -10,6 +10,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    price: {
+      type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
     type: {
       type: Sequelize.STRING,
       allowNull: false,

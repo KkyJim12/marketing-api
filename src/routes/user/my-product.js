@@ -34,6 +34,12 @@ module.exports = (app) => {
     myProductController.productDetail
   );
 
+  router.post(
+    "/renew-product",
+    isAuth,
+    myProductController.renew
+  );
+
   router.put(
     "/:id/save-button/:productId",
     isAuth,

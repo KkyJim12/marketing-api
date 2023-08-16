@@ -12,6 +12,7 @@ const {
   getAllWhiteListDomains,
   saveWhiteListDomain,
   removeDomain,
+  renewProduct,
 } = require("../../services/user/my-product");
 
 exports.index = async (req, res) => {
@@ -177,6 +178,19 @@ exports.removeWhiteListDomain = async (req, res) => {
       status: "success",
       data: domain,
       message: "Remove whitelist domain success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.renew = async (req, res) => {
+  try {
+    const order = await renewProduct(req, res);
+    res.status(200).send({
+      status: "success",
+      data: order,
+      message: "Renew product success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });

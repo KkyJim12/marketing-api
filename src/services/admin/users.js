@@ -101,6 +101,7 @@ exports.addProductToUser = async (req, res) => {
     const userProduct = await UserProduct.create({
       name: product.name,
       type: product.type,
+      price: product.price,
       domains: product.domains,
       duration: product.duration,
       startDate: moment().format(),
