@@ -113,6 +113,7 @@ exports.addProductToUser = async (req, res) => {
     // Floating Action Button
     if (product.type === "Floating Action Button") {
       await FloatingActionButton.create({
+        buttonStyle: "Rounded Button",
         backgroundColor: "#3b82f6",
         bodyColor: "#ffffff",
         textColor: "#f5f5f5",

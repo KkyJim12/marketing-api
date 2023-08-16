@@ -61,6 +61,7 @@ exports.acceptOrder = async (req) => {
     // Floating Action Button
     if (thisOrder.type === "Floating Action Button") {
       await FloatingActionButton.create({
+        buttonStyle: "Rounded Button",
         backgroundColor: "#3b82f6",
         bodyColor: "#ffffff",
         textColor: "#f5f5f5",

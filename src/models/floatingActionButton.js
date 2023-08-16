@@ -6,6 +6,10 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
+    buttonStyle: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     backgroundColor: {
       type: Sequelize.STRING,
       allowNull: false,

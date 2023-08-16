@@ -104,6 +104,7 @@ exports.updateButtonStyle = async (req, res) => {
   try {
     const button = await FloatingActionButton.update(
       {
+        buttonStyle: req.body.buttonStyle,
         backgroundColor: req.body.backgroundColor,
         bodyColor: req.body.bodyColor,
         textColor: req.body.textColor,
