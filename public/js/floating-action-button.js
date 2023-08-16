@@ -256,4 +256,4 @@
     console.log(error);
     console.log("This domain is not in the whitelist.");
   }
-})();
+});
