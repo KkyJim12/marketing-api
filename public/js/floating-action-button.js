@@ -14,6 +14,8 @@ const generateButton = async (id) => {
 
     let isContentsOpened = false;
 
+    console.log(style.data.button.buttonStyle);
+
     // 1
     const mainAreaCss = {
       fontFamily: "Arial",
@@ -25,6 +27,31 @@ const generateButton = async (id) => {
       width: style.data.button.size + "px",
       height: style.data.button.size + "px",
       zIndex: 99999,
+    };
+
+    const buttonContainerCss = {
+      display: "flex",
+      gap: "10px 12px",
+      alignItems: "center",
+      float: style.data.button.right === null ? "left" : "right",
+      whiteSpace: "nowrap",
+    };
+
+    const textContainerCss = {
+      height: "28px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: "10px",
+      paddingBottom: "10px",
+      paddingLeft: "20px",
+      paddingRight: "20px",
+      boxShadow:
+        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+      background: "white",
+      borderRadius: "10px",
+      fontSize: "24px",
+      color: "374151",
     };
 
     // 2
@@ -44,10 +71,10 @@ const generateButton = async (id) => {
     // 2
     const mainContentCss = {
       position: "relative",
-      top: style.data.button.top ? "10px" : null,
+      top: style.data.button.top ? 90 : null,
       left: style.data.button.left ? "10px" : null,
       bottom: style.data.button.bottom
-        ? 150 + contacts.length * 65 + "px"
+        ? 50 + contacts.length * 75 + "px"
         : null,
       right: style.data.button.right ? "320px" : null,
     };
@@ -98,12 +125,23 @@ const generateButton = async (id) => {
     let iconValue = "fa-" + splitIcon[1];
 
     const mainArea = document.createElement("div");
+    const buttonContainer = document.createElement("div");
     const button = document.createElement("button");
     button.id = "pluginButton";
     const mainContent = document.createElement("div");
     const innerDiv = document.createElement("div");
     const header = document.createElement("div");
     const contentLists = document.createElement("div");
+    let textContainer;
+    let buttonText;
+    if (
+      style.data.button.buttonStyle === "Rounded Button With Text" ||
+      style.data.button.buttonStyle === "Long Rounded Button#1" ||
+      style.data.button.buttonStyle === "Long Rounded Button#2"
+    ) {
+      textContainer = document.createElement("div");
+      buttonText = document.createElement("h5");
+    }
 
     const contents = [];
 
@@ -145,12 +183,46 @@ const generateButton = async (id) => {
     button.innerHTML = `<i class="${prefixIcon} ${iconValue}"></i>`;
     header.innerHTML = style.data.button.textContent;
 
+    if (
+      style.data.button.buttonStyle === "Rounded Button With Text" ||
+      style.data.button.buttonStyle === "Long Rounded Button#1" ||
+      style.data.button.buttonStyle === "Long Rounded Button#2"
+    ) {
+      buttonText.innerHTML = style.data.button.textContent;
+    }
+
     document.body.appendChild(mainArea);
-    mainArea.appendChild(button);
+
+    mainArea.appendChild(buttonContainer);
+
+    if (style.data.button.left) {
+      buttonContainer.appendChild(button);
+    }
+    if (
+      style.data.button.buttonStyle === "Rounded Button With Text" ||
+      style.data.button.buttonStyle === "Long Rounded Button#1" ||
+      style.data.button.buttonStyle === "Long Rounded Button#2"
+    ) {
+      buttonContainer.appendChild(textContainer);
+      textContainer.appendChild(buttonText);
+    }
+
+    if (style.data.button.right) {
+      buttonContainer.appendChild(button);
+    }
     mainContent.appendChild(innerDiv);
     innerDiv.appendChild(header);
     innerDiv.appendChild(contentLists);
     Object.assign(mainArea.style, mainAreaCss);
+    Object.assign(buttonContainer.style, buttonContainerCss);
+
+    if (
+      style.data.button.buttonStyle === "Rounded Button With Text" ||
+      style.data.button.buttonStyle === "Long Rounded Button#1" ||
+      style.data.button.buttonStyle === "Long Rounded Button#2"
+    ) {
+      Object.assign(textContainer.style, textContainerCss);
+    }
     Object.assign(button.style, buttonCss);
     Object.assign(mainContent.style, mainContentCss);
     Object.assign(innerDiv.style, innerDivCss);
@@ -170,6 +242,7 @@ const generateButton = async (id) => {
       }
     });
   } catch (error) {
+    console.log(error);
     console.log("This domain is not in the whitelist.");
   }
 };
