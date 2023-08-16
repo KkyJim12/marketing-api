@@ -18,98 +18,109 @@ const generateButton = async (id) => {
 
     // 1
     const mainAreaCss = {
-      fontFamily: "Arial",
-      position: "fixed",
-      top: style.data.button.top ? style.data.button.top + "px" : null,
-      right: style.data.button.right ? style.data.button.right + "px" : null,
-      bottom: style.data.button.bottom ? style.data.button.bottom + "px" : null,
-      left: style.data.button.left ? style.data.button.left + "px" : null,
-      width: style.data.button.size + "px",
-      height: style.data.button.size + "px",
-      zIndex: 99999,
+      fontFamily: "Arial !important",
+      position: "fixed !important",
+      top: style.data.button.top
+        ? style.data.button.top + "px !important"
+        : null,
+      right: style.data.button.right
+        ? style.data.button.right + "px !important"
+        : null,
+      bottom: style.data.button.bottom
+        ? style.data.button.bottom + "px !important"
+        : null,
+      left: style.data.button.left
+        ? style.data.button.left + "px !important"
+        : null,
+      width: style.data.button.size + "px !important",
+      height: style.data.button.size + "px !important",
+      zIndex: 99999 + " !important",
     };
 
     const buttonContainerCss = {
-      display: "flex",
-      gap: "10px 12px",
-      alignItems: "center",
-      float: style.data.button.right === null ? "left" : "right",
-      whiteSpace: "nowrap",
+      display: "flex !important",
+      gap: "10px 12px !important",
+      alignItems: "center !important",
+      float:
+        style.data.button.right === null
+          ? "left !important"
+          : "right !important",
+      whiteSpace: "nowrap !important",
     };
 
     const textContainerCss = {
-      height: "28px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: "10px",
-      paddingBottom: "10px",
-      paddingLeft: "20px",
-      paddingRight: "20px",
+      height: "28px !important",
+      display: "flex !important",
+      alignItems: "center !important",
+      justifyContent: "center !important",
+      paddingTop: "10px !important",
+      paddingBottom: "10px !important",
+      paddingLeft: "20px !important",
+      paddingRight: "20px !important",
       boxShadow:
-        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-      background: "white",
-      borderRadius: "10px",
-      fontSize: "24px",
-      color: "374151",
+        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important",
+      background: "white !important",
+      borderRadius: "10px !important",
+      fontSize: "24px !important",
+      color: "#374151 !important",
     };
 
     // 2
     const buttonCss = {
-      width: style.data.button.size + "px",
-      height: style.data.button.size + "px",
-      borderRadius: "50%",
-      border: "0px",
+      width: style.data.button.size + "px !important",
+      height: style.data.button.size + "px !important",
+      borderRadius: "50% !important",
+      border: "0px !important",
       boxShadow:
-        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-      backgroundColor: style.data.button.backgroundColor,
-      color: style.data.button.textColor,
-      fontSize: "32px",
-      cursor: "pointer",
+        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important",
+      backgroundColor: style.data.button.backgroundColor + " !important",
+      color: style.data.button.textColor + " !important",
+      fontSize: "32px !important",
+      cursor: "pointer !important",
     };
 
     // 2
     const mainContentCss = {
-      position: "relative",
-      top: style.data.button.top ? 90 : null,
-      left: style.data.button.left ? "10px" : null,
+      position: "relative !important",
+      top: style.data.button.top ? 90 + "px !important" : null,
+      left: style.data.button.left ? "10px !important" : null,
       bottom: style.data.button.bottom
-        ? 50 + contacts.length * 75 + "px"
+        ? 50 + contacts.length * 75 + "px !important"
         : null,
-      right: style.data.button.right ? "320px" : null,
+      right: style.data.button.right ? "320px !important" : null,
     };
 
     // 3
     const innerDivCss = {
-      position: "absolute",
+      position: "absolute !important",
     };
 
     // 4
     const headerCss = {
       backgroundColor: style.data.button.backgroundColor,
-      paddingTop: "15px",
-      paddingBottom: "15px",
-      paddingRight: "20px",
-      paddingLeft: "20px",
-      color: style.data.button.textColor,
-      borderTopLeftRadius: "15px",
-      borderTopRightRadius: "15px",
-      minWidth: "350px",
-      fontWeight: 600,
-      fontSize: "20px",
+      paddingTop: "15px !important",
+      paddingBottom: "15px !important",
+      paddingRight: "20px !important",
+      paddingLeft: "20px !important",
+      color: style.data.button.textColor + " !important",
+      borderTopLeftRadius: "15px !important",
+      borderTopRightRadius: "15px !important",
+      minWidth: "350px !important",
+      fontWeight: 600 + " !important",
+      fontSize: "20px !important",
     };
 
     // 4
     const contentListsCss = {
-      background: style.data.button.bodyColor,
-      cursor: "pointer",
-      minHeight: 65 * contacts.length,
-      borderBottomLeftRadius: "15px",
-      borderBottomRightRadius: "15px",
-      color: "rgb(75 85 99)",
-      fontWeight: 500,
+      background: style.data.button.bodyColor + " !important",
+      cursor: "pointer !important",
+      minHeight: 65 * contacts.length + " !important",
+      borderBottomLeftRadius: "15px !important",
+      borderBottomRightRadius: "15px !important",
+      color: "rgb(75 85 99) !important",
+      fontWeight: 500 + " !important",
       boxShadow:
-        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important",
     };
 
     const splitIcon = style.data.button.icon.split(" ");
@@ -158,7 +169,7 @@ const generateButton = async (id) => {
       let contentIconValue = "fa-" + contentSplitIcon[1];
 
       contents.push(
-        `<a style="text-decoration:none; color:rgb(75, 85, 99); width:100%; display:flex;" href="${contacts[i].destination}" target="_blank"><span style="font-size:24px;"><i style="font-size:20;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:18; font-weight:500; margin-left:10;"> ${contacts[i].textContent}</span> <i style="font-size:20; margin-left:auto" class="fa-solid fa-chevron-right"></i></a>`
+        `<a style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important;" href="${contacts[i].destination}" target="_blank"><span style="font-size:24px !important;"><i style="font-size:20 !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:18 !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:20 !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
       );
     }
 
