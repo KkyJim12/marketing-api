@@ -1,4 +1,4 @@
-const generateButton = async (id) => {
+(async function generateButton(id) {
   try {
     const response = await fetch(
       "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
@@ -256,4 +256,4 @@ const generateButton = async (id) => {
     console.log(error);
     console.log("This domain is not in the whitelist.");
   }
-};
+})();
