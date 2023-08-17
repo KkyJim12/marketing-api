@@ -1,0 +1,81 @@
+#fab-main-area {
+  position: fixed;
+  font-family: Arial;
+  width: 75px;
+  height: 75px;
+  z-index: 99999;
+  right: 20px;
+  bottom: 20px;
+}
+
+#fab-text-container {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  background: white;
+  border-radius: 10px;
+  font-size: 24px;
+  color: #374151;
+}
+
+.fab-content-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid rgb(229 231 235);
+  padding-top: 20px;
+  padding-right: 25px;
+  padding-bottom: 20px;
+  padding-left: 25px;
+}
+
+#fab-button-container {
+  display: flex;
+  gap: 10px 12px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#fab-button {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 0px;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  font-size: 32px;
+  cursor: pointer;
+}
+
+#fab-inner-div {
+  position: absolute;
+}
+
+#fab-header {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  min-width: 350px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#fab-content-lists {
+  cursor: pointer;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: "rgb(75 85 99)";
+  font-weight: 500;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+}

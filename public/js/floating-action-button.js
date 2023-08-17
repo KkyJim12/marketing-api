@@ -16,113 +16,6 @@ const generateButton = async (id) => {
 
     console.log(style.data.button.buttonStyle);
 
-    // 1
-    const mainAreaCss = {
-      fontFamily: "Arial !important",
-      position: "fixed !important",
-      top: style.data.button.top
-        ? style.data.button.top + "px !important"
-        : null,
-      right: style.data.button.right
-        ? style.data.button.right + "px !important"
-        : null,
-      bottom: style.data.button.bottom
-        ? style.data.button.bottom + "px !important"
-        : null,
-      left: style.data.button.left
-        ? style.data.button.left + "px !important"
-        : null,
-      width: style.data.button.size + "px !important",
-      height: style.data.button.size + "px !important",
-      zIndex: 99999 + " !important",
-    };
-
-    const buttonContainerCss = {
-      display: "flex !important",
-      gap: "10px 12px !important",
-      alignItems: "center !important",
-      float:
-        style.data.button.right === null
-          ? "left !important"
-          : "right !important",
-      whiteSpace: "nowrap !important",
-    };
-
-    const textContainerCss = {
-      height: "28px !important",
-      display: "flex !important",
-      alignItems: "center !important",
-      justifyContent: "center !important",
-      paddingTop: "10px !important",
-      paddingBottom: "10px !important",
-      paddingLeft: "20px !important",
-      paddingRight: "20px !important",
-      boxShadow:
-        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important",
-      background: "white !important",
-      borderRadius: "10px !important",
-      fontSize: "24px !important",
-      color: "#374151 !important",
-    };
-
-    // 2
-    const buttonCss = {
-      width: style.data.button.size + "px !important",
-      height: style.data.button.size + "px !important",
-      borderRadius: "50% !important",
-      border: "0px !important",
-      boxShadow:
-        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important",
-      backgroundColor: style.data.button.backgroundColor + " !important",
-      color: style.data.button.textColor + " !important",
-      fontSize: "32px !important",
-      cursor: "pointer !important",
-    };
-
-    // 2
-    const mainContentCss = {
-      position: "relative !important",
-      top: style.data.button.top ? 90 + "px !important" : null,
-      left: style.data.button.left ? "10px !important" : null,
-      bottom: style.data.button.bottom
-        ? 50 + contacts.length * 75 + "px !important"
-        : null,
-      right: style.data.button.right ? "320px !important" : null,
-    };
-
-    // 3
-    const innerDivCss = {
-      position: "absolute !important",
-    };
-
-    // 4
-    const headerCss = {
-      backgroundColor: style.data.button.backgroundColor,
-      paddingTop: "15px !important",
-      paddingBottom: "15px !important",
-      paddingRight: "20px !important",
-      paddingLeft: "20px !important",
-      color: style.data.button.textColor + " !important",
-      borderTopLeftRadius: "15px !important",
-      borderTopRightRadius: "15px !important",
-      minWidth: "350px !important",
-      fontWeight: 600 + " !important",
-      fontSize: "20px !important",
-    };
-
-    // 4
-    const contentListsCss = {
-      background: style.data.button.bodyColor + " !important",
-      cursor: "pointer !important",
-      minHeight: 65 * contacts.length + " !important",
-      borderBottomLeftRadius: "15px !important",
-      borderBottomRightRadius: "15px !important",
-      color: "rgb(75 85 99) !important",
-      fontWeight: 500 + " !important",
-      boxShadow:
-        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important",
-    };
-
     const splitIcon = style.data.button.icon.split(" ");
 
     let prefixIcon;
@@ -138,7 +31,6 @@ const generateButton = async (id) => {
     const mainArea = document.createElement("div");
     const buttonContainer = document.createElement("div");
     const button = document.createElement("button");
-    button.id = "pluginButton";
     const mainContent = document.createElement("div");
     const innerDiv = document.createElement("div");
     const header = document.createElement("div");
@@ -173,22 +65,11 @@ const generateButton = async (id) => {
       );
     }
 
-    const listStyleCss = {
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      borderTop: "1px solid rgb(229 231 235)",
-      paddingTop: "20px",
-      paddingRight: "25px",
-      paddingBottom: "20px",
-      paddingLeft: "25px",
-    };
-
     for (let i = 0; i < contents.length; i++) {
       let newList = document.createElement("div");
       newList.innerHTML = contents[i];
       contentLists.appendChild(newList);
-      Object.assign(newList.style, listStyleCss);
+      newList.className = "fab-content-list";
     }
 
     button.innerHTML = `<i class="${prefixIcon} ${iconValue}"></i>`;
@@ -224,25 +105,76 @@ const generateButton = async (id) => {
     mainContent.appendChild(innerDiv);
     innerDiv.appendChild(header);
     innerDiv.appendChild(contentLists);
-    Object.assign(mainArea.style, mainAreaCss);
-    Object.assign(buttonContainer.style, buttonContainerCss);
+
+    mainArea.id = "fab-main-area";
+
+    if (style.data.button.top) {
+      mainArea.style.top = style.data.button.top;
+    }
+
+    if (style.data.button.right) {
+      mainArea.style.right = style.data.button.right;
+    }
+
+    if (style.data.button.bottom) {
+      mainArea.style.bottom = style.data.button.bottom;
+    }
+
+    if (style.data.button.left) {
+      mainArea.style.left = style.data.button.left;
+    }
+
+    buttonContainer.id = "fab-button-container";
+
+    if (style.data.button.right) {
+      buttonContainer.style.float = "right";
+    } else {
+      buttonContainer.style.float = "left";
+    }
 
     if (
       style.data.button.buttonStyle === "Rounded Button With Text" ||
       style.data.button.buttonStyle === "Long Rounded Button#1" ||
       style.data.button.buttonStyle === "Long Rounded Button#2"
     ) {
-      Object.assign(textContainer.style, textContainerCss);
+      textContainer.id = "fab-text-container";
     }
-    Object.assign(button.style, buttonCss);
-    Object.assign(mainContent.style, mainContentCss);
-    Object.assign(innerDiv.style, innerDivCss);
-    Object.assign(header.style, headerCss);
-    Object.assign(contentLists.style, contentListsCss);
 
-    const pluginButton = document.getElementById("pluginButton");
+    button.id = "fab-button";
+
+    button.style.backgroundColor = style.data.button.backgroundColor;
+    button.style.color = style.data.button.textColor;
+
+    mainContent.style.position = "relative";
+
+    if (style.data.button.top) {
+      mainContent.style.top = 90 + "px";
+    }
+    if (style.data.button.right) {
+      mainContent.style.right = "280px";
+    }
+    if (style.data.button.bottom) {
+      mainContent.style.bottom = 75 + contacts.length * 75 + "px";
+    }
+    if (style.data.button.left) {
+      mainContent.style.left = "10px";
+    }
+
+    // Inner Div styles
+    innerDiv.id = "fab-inner-div";
+
+    header.style.backgroundColor = style.data.button.backgroundColor;
+    header.style.color = style.data.button.textColor;
+
+    header.id = "fab-header";
+    contentLists.style.minHeight = 65 * contacts.length;
+    contentLists.style.background = style.data.button.bodyColor;
+    contentLists.id = "fab-content-lists";
+
+    const pluginButton = document.getElementById("fab-button");
 
     pluginButton.addEventListener("click", (event) => {
+      console.log("clicked");
       if (isContentsOpened === false) {
         mainArea.appendChild(mainContent);
         mainContent.id = "pluginButtonContents";
