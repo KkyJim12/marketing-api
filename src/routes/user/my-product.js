@@ -2,6 +2,7 @@ const router = require("express").Router();
 const myProductController = require("../../controllers/user/my-product.js");
 const isAuth = require("../../middlewares/isAuth.js");
 const isValidDomain = require("../../middlewares/isValidDomain.js");
+const isValidDevice = require("../../middlewares/isValidDevice.js");
 
 module.exports = (app) => {
   // Routes
@@ -34,11 +35,7 @@ module.exports = (app) => {
     myProductController.productDetail
   );
 
-  router.post(
-    "/renew-product",
-    isAuth,
-    myProductController.renew
-  );
+  router.post("/renew-product", isAuth, myProductController.renew);
 
   router.put(
     "/:id/save-button/:productId",
@@ -73,6 +70,7 @@ module.exports = (app) => {
   router.get(
     "/:id/public-button",
     isValidDomain,
+    isValidDevice,
     myProductController.publicButton
   );
 

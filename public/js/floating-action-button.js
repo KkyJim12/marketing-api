@@ -8,6 +8,7 @@ const generateButton = async (id) => {
         },
       }
     );
+
     const style = await response.json();
 
     const contacts = style.data.contents;
@@ -185,7 +186,6 @@ const generateButton = async (id) => {
       }
     });
   } catch (error) {
-    console.log(error);
-    console.log("This domain is not in the whitelist.");
+    console.log("Website is not match button qualifications.");
   }
 };
