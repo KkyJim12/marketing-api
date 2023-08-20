@@ -62,7 +62,7 @@ const generateButton = async (id) => {
       let contentIconValue = "fa-" + contentSplitIcon[1];
 
       contents.push(
-        `<a style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important;" href="${contacts[i].destination}" target="_blank"><span style="font-size:24px !important;"><i style="font-size:20 !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:18 !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:20 !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
+        `<a style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${contacts[i].destination}" target="_blank"><span style="font-size:24px !important;"><i style="font-size:20 !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:18 !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:20 !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
       );
     }
 
@@ -73,7 +73,10 @@ const generateButton = async (id) => {
       newList.className = "fab-content-list";
     }
 
-    button.innerHTML = `<i class="${prefixIcon} ${iconValue}"></i>`;
+    button.innerHTML =
+      style.data.button.iconType === "font-awesome"
+        ? `<i class="${prefixIcon} ${iconValue}"></i>`
+        : `<img src="${style.data.button.icon}" alt="logo" />`;
     header.innerHTML = style.data.button.textContent;
 
     if (

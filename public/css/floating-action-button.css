@@ -13,15 +13,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
   background: white;
   border-radius: 10px;
-  font-size: 24px;
+  font-size: 1.125rem;
+  font-weight:500;
   color: #374151;
 }
 
@@ -52,6 +53,14 @@
     0 8px 10px -6px rgb(0 0 0 / 0.1);
   font-size: 32px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fab-button img {
+  width: 35px;
+  height: 35px;
 }
 
 #fab-inner-div {
