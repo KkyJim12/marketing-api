@@ -1,5 +1,8 @@
 const generateButton = async (id) => {
   try {
+    console.log(window.document.referrer);
+
+    // Get button details
     const response = await fetch(
       "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
       {
@@ -9,14 +12,16 @@ const generateButton = async (id) => {
       }
     );
 
+    // Convert result to json
     const style = await response.json();
 
+    // Get contents list
     const contacts = style.data.contents;
 
+    // Init open content
     let isContentsOpened = false;
 
-    console.log(style.data.button.buttonStyle);
-
+    // Manage icons
     const splitIcon = style.data.button.icon.split(" ");
 
     let prefixIcon;
@@ -29,24 +34,7 @@ const generateButton = async (id) => {
 
     let iconValue = "fa-" + splitIcon[1];
 
-    const mainArea = document.createElement("div");
-    const buttonContainer = document.createElement("div");
-    const button = document.createElement("button");
-    const mainContent = document.createElement("div");
-    const innerDiv = document.createElement("div");
-    const header = document.createElement("div");
-    const contentLists = document.createElement("div");
-    let textContainer;
-    let buttonText;
-    if (
-      style.data.button.buttonStyle === "Rounded Button With Text" ||
-      style.data.button.buttonStyle === "Long Rounded Button#1" ||
-      style.data.button.buttonStyle === "Long Rounded Button#2"
-    ) {
-      textContainer = document.createElement("div");
-      buttonText = document.createElement("h5");
-    }
-
+    // Manage contents
     const contents = [];
 
     for (let i = 0; i < contacts.length; i++) {
@@ -66,6 +54,27 @@ const generateButton = async (id) => {
       );
     }
 
+    // Create element
+    const mainArea = document.createElement("div");
+    const buttonContainer = document.createElement("div");
+    const button = document.createElement("button");
+    const mainContent = document.createElement("div");
+    const innerDiv = document.createElement("div");
+    const header = document.createElement("div");
+    const contentLists = document.createElement("div");
+    let textContainer;
+    let buttonText;
+
+    // Create text container for rounded button
+    if (
+      style.data.button.buttonStyle === "Rounded Button With Text" ||
+      style.data.button.buttonStyle === "Long Rounded Button#1" ||
+      style.data.button.buttonStyle === "Long Rounded Button#2"
+    ) {
+      textContainer = document.createElement("div");
+      buttonText = document.createElement("h5");
+    }
+
     for (let i = 0; i < contents.length; i++) {
       let newList = document.createElement("div");
       newList.innerHTML = contents[i];
@@ -73,10 +82,17 @@ const generateButton = async (id) => {
       newList.className = "fab-content-list";
     }
 
-    button.innerHTML =
-      style.data.button.iconType === "font-awesome"
-        ? `<i class="${prefixIcon} ${iconValue}"></i>`
-        : `<img src="${style.data.button.icon}" alt="logo" />`;
+    if (
+      style.data.button.buttonStyle === "Rounded Button" ||
+      style.data.button.buttonStyle === "Rounded Button With Text" ||
+      style.data.button.buttonStyle === "Long Rounded Button#1"
+    ) {
+      button.innerHTML =
+        style.data.button.iconType === "font-awesome"
+          ? `<i class="${prefixIcon} ${iconValue}"></i>`
+          : `<img src="${style.data.button.icon}" alt="logo" />`;
+    }
+    
     header.innerHTML = style.data.button.textContent;
 
     if (
@@ -94,13 +110,28 @@ const generateButton = async (id) => {
     if (style.data.button.left) {
       buttonContainer.appendChild(button);
     }
-    if (
-      style.data.button.buttonStyle === "Rounded Button With Text" ||
-      style.data.button.buttonStyle === "Long Rounded Button#1" ||
-      style.data.button.buttonStyle === "Long Rounded Button#2"
-    ) {
+
+    if (style.data.button.buttonStyle === "Rounded Button With Text") {
       buttonContainer.appendChild(textContainer);
       textContainer.appendChild(buttonText);
+    }
+
+    if (style.data.button.buttonStyle === "Long Rounded Button#1") {
+      button.appendChild(buttonText);
+    }
+
+    if (style.data.button.buttonStyle === "Long Rounded Button#2") {
+      const logoContainer = document.createElement("div");
+      button.appendChild(buttonText);
+      logoContainer.innerHTML =
+        style.data.button.iconType === "font-awesome"
+          ? `<i class="${prefixIcon} ${iconValue}"></i>`
+          : `<img src="${style.data.button.icon}" alt="logo" />`;
+      button.appendChild(logoContainer);
+      logoContainer.id = "logo-container";
+      logoContainer.style.background = style.data.button.backgroundColor;
+      logoContainer.style.width = style.data.button.size * 0.9;
+      logoContainer.style.height = style.data.button.size * 0.9;
     }
 
     if (style.data.button.right) {
@@ -136,15 +167,24 @@ const generateButton = async (id) => {
       buttonContainer.style.float = "left";
     }
 
-    if (
-      style.data.button.buttonStyle === "Rounded Button With Text" ||
-      style.data.button.buttonStyle === "Long Rounded Button#1" ||
-      style.data.button.buttonStyle === "Long Rounded Button#2"
-    ) {
+    if (style.data.button.buttonStyle === "Rounded Button With Text") {
       textContainer.id = "fab-text-container";
     }
 
-    button.id = "fab-button";
+    if (
+      style.data.button.buttonStyle === "Rounded Button" ||
+      style.data.button.buttonStyle === "Rounded Button With Text"
+    ) {
+      button.id = "fab-button";
+    }
+
+    if (style.data.button.buttonStyle === "Long Rounded Button#1") {
+      button.id = "fab-button-long-1";
+    }
+
+    if (style.data.button.buttonStyle === "Long Rounded Button#2") {
+      button.id = "fab-button-long-2";
+    }
 
     button.style.backgroundColor = style.data.button.backgroundColor;
     button.style.color = style.data.button.textColor;
@@ -175,7 +215,13 @@ const generateButton = async (id) => {
     contentLists.style.background = style.data.button.bodyColor;
     contentLists.id = "fab-content-lists";
 
-    const pluginButton = document.getElementById("fab-button");
+    const pluginButton =
+      style.data.button.buttonStyle === "Rounded Button" ||
+      style.data.button.buttonStyle === "Rounded Button With Text"
+        ? document.getElementById("fab-button")
+        : style.data.button.buttonStyle === "Long Rounded Button#1"
+        ? document.getElementById("fab-button-long-1")
+        : document.getElementById("fab-button-long-2");
 
     pluginButton.addEventListener("click", (event) => {
       console.log("clicked");
