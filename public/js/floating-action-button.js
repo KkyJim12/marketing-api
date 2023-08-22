@@ -92,7 +92,7 @@ const generateButton = async (id) => {
           ? `<i class="${prefixIcon} ${iconValue}"></i>`
           : `<img src="${style.data.button.icon}" alt="logo" />`;
     }
-    
+
     header.innerHTML = style.data.button.textContent;
 
     if (
@@ -118,6 +118,7 @@ const generateButton = async (id) => {
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.appendChild(buttonText);
+      buttonText.style.color = style.data.button.textColor;
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
@@ -130,8 +131,8 @@ const generateButton = async (id) => {
       button.appendChild(logoContainer);
       logoContainer.id = "logo-container";
       logoContainer.style.background = style.data.button.backgroundColor;
-      logoContainer.style.width = style.data.button.size * 0.9;
-      logoContainer.style.height = style.data.button.size * 0.9;
+      logoContainer.style.width = style.data.button.size * 0.9 + "px";
+      logoContainer.style.height = style.data.button.size * 0.9 + "px";
     }
 
     if (style.data.button.right) {
