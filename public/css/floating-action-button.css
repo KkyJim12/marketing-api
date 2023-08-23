@@ -1,147 +1,152 @@
+* {
+  font-family: inherit !important;
+}
+
 #fab-main-area {
-  position: fixed;
-  font-family: Arial;
-  width: 75px;
-  height: 75px;
-  z-index: 99999;
-  right: 20px;
-  bottom: 20px;
+  position: fixed !important;
+  font-family: Arial !important;
+  width: 75px !important;
+  height: 75px !important;
+  z-index: 99999 !important;
+  right: 20px !important;
+  bottom: 20px !important;
 }
 
 #fab-text-container {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  background: white;
-  border-radius: 10px;
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: #374151;
+    0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+  background: white !important;
+  border-radius: 10px !important;
+  font-size: 1.125rem !important;
+  color: #374151 !important;
 }
 
 .fab-content-list {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-top: 1px solid rgb(229 231 235);
-  padding-top: 20px;
-  padding-right: 25px;
-  padding-bottom: 20px;
-  padding-left: 25px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border-top: 1px solid rgb(229 231 235) !important;
+  padding-top: 20px !important;
+  padding-right: 25px !important;
+  padding-bottom: 20px !important;
+  padding-left: 25px !important;
+  color: rgb(75, 85, 99) !important;
+  font-weight: 600 !important;
 }
 
 #fab-button-container {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  white-space: nowrap;
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  white-space: nowrap !important;
 }
 
 #fab-button {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  border: 0px;
+  width: 75px !important;
+  height: 75px !important;
+  border-radius: 50% !important;
+  border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  font-size: 32px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+  font-size: 32px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 #fab-button img {
-  width: 35px;
-  height: 35px;
+  width: 35px !important;
+  height: 35px !important;
 }
 
 #fab-inner-div {
-  position: absolute;
+  position: absolute !important;
 }
 
 #fab-header {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  min-width: 350px;
-  font-weight: 600;
-  font-size: 20px;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+  border-top-left-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+  min-width: 350px !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
 }
 
 #fab-content-lists {
-  cursor: pointer;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  color: "rgb(75 85 99)";
-  font-weight: 500;
+  cursor: pointer !important;
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important;
+  color: "rgb(75 85 99)" !important;
+  font-weight: 600 !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+    0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
 }
 
 /* Long button #1 */
 
 #fab-button-long-1 {
-  width: 100%;
-  height: 75px;
-  border-radius: 9999px;
-  border: 0px;
+  width: 100% !important;
+  height: 75px !important;
+  border-radius: 9999px !important;
+  border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  font-size: 32px;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-  gap: 1rem;
+    0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+  font-size: 32px !important;
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  gap: 1rem !important;
 }
 
 #fab-button-long-1 h5 {
-  font-size: 1.125rem;
+  font-size: 1.125rem !important;
 }
 
 /* Long button #2 */
 
 #fab-button-long-2 {
   background-color: white !important;
-  width: 100%;
-  height: 75px;
-  border-radius: 9999px;
-  border: 0px;
+  width: 100% !important;
+  height: 75px !important;
+  border-radius: 9999px !important;
+  border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  font-size: 32px;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-  gap: 1rem;
+    0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+  font-size: 32px !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  gap: 1rem !important;
 }
 
 #fab-button-long-2 h5 {
-  font-size: 1.125rem;
-  color: #374151;
+  font-size: 1.125rem !important;
+  color: #374151 !important;
 }
 
 #logo-container {
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 50% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
