@@ -144,19 +144,19 @@ const generateButton = async (id) => {
     mainArea.id = "fab-main-area";
 
     if (style.data.button.top) {
-      mainArea.style.top = style.data.button.top;
+      mainArea.style.top = style.data.button.top + "px";
     }
 
     if (style.data.button.right) {
-      mainArea.style.right = style.data.button.right;
+      mainArea.style.right = style.data.button.right + "px";
     }
 
     if (style.data.button.bottom) {
-      mainArea.style.bottom = style.data.button.bottom;
+      mainArea.style.bottom = style.data.button.bottom + "px";
     }
 
     if (style.data.button.left) {
-      mainArea.style.left = style.data.button.left;
+      mainArea.style.left = style.data.button.left + "px";
     }
 
     buttonContainer.id = "fab-button-container";
