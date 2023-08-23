@@ -3,6 +3,7 @@ const myProductController = require("../../controllers/user/my-product.js");
 const isAuth = require("../../middlewares/isAuth.js");
 const isValidDomain = require("../../middlewares/isValidDomain.js");
 const isValidDevice = require("../../middlewares/isValidDevice.js");
+const storeStats = require("../../middlewares/storeStats.js");
 
 module.exports = (app) => {
   // Routes
@@ -69,6 +70,7 @@ module.exports = (app) => {
 
   router.get(
     "/:id/public-button",
+    storeStats,
     isValidDomain,
     isValidDevice,
     myProductController.publicButton

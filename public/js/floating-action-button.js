@@ -1,13 +1,12 @@
 const generateButton = async (id) => {
   try {
-    console.log(window.document.referrer);
-
     // Get button details
     const response = await fetch(
       "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
       {
         headers: {
           requesthost: window.location.host,
+          exactreferer: window.document.referrer,
         },
       }
     );
