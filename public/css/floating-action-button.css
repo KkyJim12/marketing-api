@@ -1,10 +1,6 @@
-* {
-  font-family: inherit !important;
-}
-
 #fab-main-area {
   position: fixed !important;
-  font-family: Arial !important;
+  font-family: inherit !important;
   width: 75px !important;
   height: 75px !important;
   z-index: 99999 !important;
