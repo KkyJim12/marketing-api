@@ -7,6 +7,8 @@ const FabContent = db.fabContent;
 const WhiteListDomain = db.whiteListDomain;
 const Order = db.order;
 const moment = require("moment");
+const Statistic = db.statistic;
+const Op = require("sequelize");
 
 exports.getMyProducts = async (req) => {
   try {
@@ -263,6 +265,42 @@ exports.renewProduct = async (req, res) => {
     const order = await Order.create(newOrder);
 
     return order;
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.getStats = async (req, res) => {
+  try {
+    const where =
+      req.body.startDate && req.body.endDate
+        ? {
+            userProductId: req.params.id,
+            createdAt: {
+              [Op.between]: [req.body.startDate, req.body.endDate],
+            },
+          }
+        : {
+            userProductId: req.params.id,
+          };
+
+    const stats = await Statistic.findAll({
+      where: where,
+    });
+
+    const groupByKey = (list, key) =>
+      list.reduce(
+        (hash, obj) => ({
+          ...hash,
+          [obj[key]]: (hash[obj[key]] || []).concat(obj),
+        }),
+        {}
+      );
+
+    const data = groupByKey(stats, "sourceType");
+
+    return data;
   } catch (error) {
     console.log(error);
     res.status(500).send({ status: "fail", message: "Something went wrong." });

@@ -13,6 +13,7 @@ const {
   saveWhiteListDomain,
   removeDomain,
   renewProduct,
+  getStats,
 } = require("../../services/user/my-product");
 const { URL } = require("url");
 
@@ -192,6 +193,19 @@ exports.renew = async (req, res) => {
       status: "success",
       data: order,
       message: "Renew product success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.stats = async (req, res) => {
+  try {
+    const stats = await getStats(req, res);
+    res.status(200).send({
+      status: "success",
+      data: stats,
+      message: "Get product stats success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });

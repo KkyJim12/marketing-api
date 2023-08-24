@@ -112,6 +112,7 @@
 
 #fab-button-long-1 h5 {
   font-size: 1.125rem !important;
+  font-weight: 500;
 }
 
 /* Long button #2 */
@@ -137,6 +138,7 @@
 
 #fab-button-long-2 h5 {
   font-size: 1.125rem !important;
+  font-weight: 500;
   color: #374151 !important;
 }
 

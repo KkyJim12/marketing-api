@@ -13,7 +13,7 @@ module.exports = storeStats = async (req, res, next) => {
           parsedUrl.hostname.includes("facebook.com") ||
           parsedUrl.hostname.includes("youtube.com") ||
           parsedUrl.hostname.includes("instagram.com")
-            ? "Social Network"
+            ? "Social Media"
             : parsedUrl.hostname.includes("google.co") ||
               parsedUrl.hostname.includes("bing.com") ||
               parsedUrl.hostname.includes("yahoo.com")
