@@ -46,17 +46,27 @@
 }
 
 #fab-button {
-  width: 75px !important;
-  height: 75px !important;
   border-radius: 50% !important;
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
-  font-size: 32px !important;
   cursor: pointer !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+}
+
+#fab-button i {
+  font-size: 32px !important;
+}
+
+#fab-button svg {
+  font-size: 32px !important;
+}
+
+#fab-button img {
+  width: 35px !important;
+  height: 35px !important;
 }
 
 #fab-button img {
@@ -94,14 +104,12 @@
 
 #fab-button-long-1 {
   width: 100% !important;
-  height: 75px !important;
   border-radius: 9999px !important;
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
-  font-size: 32px !important;
-  padding-right: 1.5rem !important;
-  padding-left: 1.5rem !important;
+  padding-right: 2.5rem !important;
+  padding-left: 2.5rem !important;
   cursor: pointer !important;
   display: flex !important;
   justify-content: center !important;
@@ -115,12 +123,24 @@
   font-weight: 500;
 }
 
+#fab-button-long-1 i {
+  font-size: 32px !important;
+}
+
+#fab-button-long-1 svg {
+  font-size: 32px !important;
+}
+
+#fab-button-long-1 img {
+  width: 35px !important;
+  height: 35px !important;
+}
+
 /* Long button #2 */
 
 #fab-button-long-2 {
   background-color: white !important;
   width: 100% !important;
-  height: 75px !important;
   border-radius: 9999px !important;
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
@@ -140,6 +160,19 @@
   font-size: 1.125rem !important;
   font-weight: 500;
   color: #374151 !important;
+}
+
+#fab-button-long-2 i {
+  font-size: 32px !important;
+}
+
+#fab-button-long-2 svg {
+  font-size: 32px !important;
+}
+
+#fab-button-long-2 img {
+  width: 35px !important;
+  height: 35px !important;
 }
 
 #logo-container {

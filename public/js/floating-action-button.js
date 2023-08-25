@@ -176,14 +176,18 @@ const generateButton = async (id) => {
       style.data.button.buttonStyle === "Rounded Button With Text"
     ) {
       button.id = "fab-button";
+      button.style.width = style.data.button.size;
+      button.style.height = style.data.button.size;
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.id = "fab-button-long-1";
+      button.style.height = style.data.button.size;
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
       button.id = "fab-button-long-2";
+      button.style.height = style.data.button.size;
     }
 
     button.style.backgroundColor = style.data.button.backgroundColor;
