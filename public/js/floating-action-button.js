@@ -143,6 +143,9 @@ const generateButton = async (id) => {
 
     mainArea.id = "fab-main-area";
 
+    mainArea.style.width = style.data.button.size + "px";
+    mainArea.style.height = style.data.button.size + "px";
+
     if (style.data.button.top) {
       mainArea.style.top = style.data.button.top + "px";
     }

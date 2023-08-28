@@ -4,6 +4,7 @@ const isAuth = require("../../middlewares/isAuth.js");
 const isValidDomain = require("../../middlewares/isValidDomain.js");
 const isValidDevice = require("../../middlewares/isValidDevice.js");
 const storeStats = require("../../middlewares/storeStats.js");
+const isActive = require("../../middlewares/isActive.js");
 
 module.exports = (app) => {
   // Routes
@@ -20,11 +21,7 @@ module.exports = (app) => {
     myProductController.prebuiltContents
   );
 
-  router.get(
-    "/:id/stats/:productId",
-    isAuth,
-    myProductController.stats
-  );
+  router.get("/:id/stats/:productId", isAuth, myProductController.stats);
 
   router.get(
     "/:id/exist-contents/:productId",
@@ -76,6 +73,7 @@ module.exports = (app) => {
 
   router.get(
     "/:id/public-button",
+    isActive,
     storeStats,
     isValidDomain,
     isValidDevice,
