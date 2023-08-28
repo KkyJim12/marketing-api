@@ -1,6 +1,11 @@
+@font-face {
+  font-family: Iconic;
+  src: url(../font/Iconic.ttf);
+}
+
 #fab-main-area {
   position: fixed !important;
-  font-family: IBM Plex Sans, sans-serif !important;
+  font-family: Iconic, sans-serif !important;
   z-index: 99999 !important;
 }
 
