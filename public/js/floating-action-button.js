@@ -89,7 +89,7 @@ const generateButton = async (id) => {
       button.innerHTML =
         style.data.button.iconType === "font-awesome"
           ? `<i class="${prefixIcon} ${iconValue}"></i>`
-          : `<img src="${style.data.button.icon}" alt="logo" />`;
+          : `<img id="fab-img" src="${style.data.button.icon}" alt="logo" />`;
     }
 
     header.innerHTML = style.data.button.textContent;
