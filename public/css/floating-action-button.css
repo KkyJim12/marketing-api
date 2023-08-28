@@ -9,6 +9,10 @@
   z-index: 99999 !important;
 }
 
+#fab-main-area * {
+  font-family: Iconic, sans-serif !important;
+}
+
 #fab-text-container {
   height: 40px !important;
   display: flex !important;
