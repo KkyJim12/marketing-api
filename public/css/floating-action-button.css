@@ -1,6 +1,6 @@
 #fab-main-area {
   position: fixed !important;
-  font-family: IBM Plex Sans,sans-serif !important;
+  font-family: IBM Plex Sans, sans-serif !important;
   z-index: 99999 !important;
 }
 
@@ -130,6 +130,7 @@
 #fab-img {
   width: 35px !important;
   height: 35px !important;
+  max-width: none;
 }
 
 /* Long button #2 */
