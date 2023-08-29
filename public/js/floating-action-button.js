@@ -100,6 +100,7 @@ const generateButton = async (id) => {
       style.data.button.buttonStyle === "Long Rounded Button#2"
     ) {
       buttonText.innerHTML = style.data.button.textContent;
+      buttonText.className = "fab-content-text";
     }
 
     document.body.appendChild(mainArea);

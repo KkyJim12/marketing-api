@@ -9,7 +9,15 @@
   z-index: 99999 !important;
 }
 
-#fab-main-area h1,h2,h3,h4,h5,h6,p {
+#fab-text-container h5 {
+  font-family: Iconic, sans-serif !important;
+}
+
+#fab-header {
+  font-family: Iconic, sans-serif !important;
+}
+
+.fab-content-text {
   font-family: Iconic, sans-serif !important;
 }
 
