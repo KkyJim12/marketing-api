@@ -1,18 +1,19 @@
 const storeEvent = async (fabContentId, sessionRef) => {
   try {
+    console.log(fabContentId, sessionRef);
     const response = await fetch(
       "http://localhost:8080/api/v1/guest/products/store-event",
       {
         headers: {
           requesthost: window.location.host,
-          fabContentId: fabContentId,
+          fabcontentid: fabContentId,
           sessionref: sessionRef,
         },
       }
     );
     console.log(response);
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 
@@ -78,7 +79,7 @@ const generateButton = async (id) => {
       let contentIconValue = "fa-" + contentSplitIcon[1];
 
       contents.push(
-        `<a onclick="storeEvent(${contacts[i].id},${sessionRef})" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${contacts[i].destination}" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:16px !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
+        `<a onclick="storeEvent('${contacts[i].id}', '${sessionRef}')" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${contacts[i].destination}" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:16px !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
       );
     }
 

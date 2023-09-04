@@ -28,6 +28,7 @@ require("./src/crons/cron-jobs.js");
 
 // Guest Routes
 require("./src/routes/guest/auths")(app);
+require("./src/routes/guest/products")(app);
 
 // User Routes
 require("./src/routes/user/e-commerce")(app);
