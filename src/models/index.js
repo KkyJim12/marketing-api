@@ -36,6 +36,7 @@ db.floatingActionButton = require("./floatingActionButton.js")(
 db.fabContent = require("./fabContent.js")(sequelize, Sequelize);
 db.whiteListDomain = require("./whiteListDomain.js")(sequelize, Sequelize);
 db.statistic = require("./statistic.js")(sequelize, Sequelize);
+db.targetStatistic = require("./targetStatistic.js")(sequelize, Sequelize);
 
 db.page.hasMany(db.subPage, {
   constraints: true,

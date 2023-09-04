@@ -1,5 +1,33 @@
-const generateButton = async (id) => {
+const storeEvent = async (fabContentId, sessionRef) => {
   try {
+    const response = await fetch(
+      "http://localhost:8080/api/v1/guest/products/store-event",
+      {
+        headers: {
+          requesthost: window.location.host,
+          fabContentId: fabContentId,
+          sessionref: sessionRef,
+        },
+      }
+    );
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const generateButton = async (id) => {
+  const uuidv4 = () => {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+      (
+        c ^
+        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+      ).toString(16)
+    );
+  };
+
+  try {
+    const sessionRef = uuidv4();
     // Get button details
     const response = await fetch(
       "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
@@ -7,6 +35,7 @@ const generateButton = async (id) => {
         headers: {
           requesthost: window.location.host,
           exactreferer: window.document.referrer,
+          sessionref: sessionRef,
         },
       }
     );
@@ -49,7 +78,7 @@ const generateButton = async (id) => {
       let contentIconValue = "fa-" + contentSplitIcon[1];
 
       contents.push(
-        `<a style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${contacts[i].destination}" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:16px !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
+        `<a onclick="storeEvent(${contacts[i].id},${sessionRef})" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${contacts[i].destination}" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:16px !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
       );
     }
 

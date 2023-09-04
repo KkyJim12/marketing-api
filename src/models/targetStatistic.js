@@ -1,24 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
-  const Statistic = sequelize.define("statistic", {
+  const targetStatistic = sequelize.define("target_statistic", {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
-    ipAddress: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    sourceUrl: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
     currentUrl: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    sourceType: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -26,16 +14,16 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    userProductId: {
+    fabContentId: {
       type: Sequelize.UUID,
       allowNull: false,
       references: {
-        model: "user_products",
+        model: "fab_contents",
         key: "id",
         constraints: true,
       },
     },
   });
 
-  return Statistic;
+  return targetStatistic;
 };

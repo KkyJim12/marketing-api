@@ -3,12 +3,14 @@ const Statistic = db.statistic;
 
 module.exports = storeStats = async (req, res, next) => {
   try {
+    console.log(req.headers.sessionref);
     console.log(req.headers.exactreferer);
     if (req.headers.exactreferer !== "") {
       const parsedUrl = new URL(req.headers.exactreferer);
       await Statistic.create({
         ipAddress: req.connection.remoteAddress,
         sourceUrl: parsedUrl.hostname,
+        currentUrl: req.headers.exactreferer,
         sourceType:
           parsedUrl.hostname.includes("facebook.com") ||
           parsedUrl.hostname.includes("youtube.com") ||
@@ -20,12 +22,15 @@ module.exports = storeStats = async (req, res, next) => {
             ? "Search Engine"
             : "Others",
         userProductId: req.params.id,
+        sessionRef: req.headers.sessionref,
       });
     } else {
       await Statistic.create({
         ipAddress: req.connection.remoteAddress,
         sourceType: "Direct",
+        currentUrl: req.headers.exactreferer,
         userProductId: req.params.id,
+        sessionRef: req.headers.sessionref,
       });
     }
 
