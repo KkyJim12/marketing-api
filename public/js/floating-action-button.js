@@ -1,6 +1,5 @@
 const storeEvent = async (fabContentId, sessionRef) => {
   try {
-    console.log(fabContentId, sessionRef);
     const response = await fetch(
       "http://localhost:8080/api/v1/guest/products/store-event",
       {
@@ -17,7 +16,7 @@ const storeEvent = async (fabContentId, sessionRef) => {
   }
 };
 
-const generateButton = async (id) => {
+const generateSession = () => {
   const uuidv4 = () => {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
       (
@@ -27,8 +26,30 @@ const generateButton = async (id) => {
     );
   };
 
+  const getMinutesBetweenDates = (startDate, endDate) => {
+    const diff = endDate - startDate;
+
+    return diff / 60000;
+  };
+
+  if (
+    !localStorage.getItem("fab-session-ref") ||
+    getMinutesBetweenDates(
+      new Date(),
+      atob(localStorage.getItem("fab-session-ref")).split(".")[1]
+    ) < 0
+  ) {
+    const now = new Date();
+    const expireTime = now.setMinutes(now.getMinutes() + 30);
+    const id = uuidv4();
+    const sessionRef = btoa(id + "." + expireTime);
+    localStorage.setItem("fab-session-ref", sessionRef);
+  }
+};
+
+const generateButton = async (id) => {
+  generateSession();
   try {
-    const sessionRef = uuidv4();
     // Get button details
     const response = await fetch(
       "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
@@ -36,7 +57,9 @@ const generateButton = async (id) => {
         headers: {
           requesthost: window.location.host,
           exactreferer: window.document.referrer,
-          sessionref: sessionRef,
+          sessionref: atob(localStorage.getItem("fab-session-ref")).split(
+            "."
+          )[0],
         },
       }
     );
@@ -79,7 +102,13 @@ const generateButton = async (id) => {
       let contentIconValue = "fa-" + contentSplitIcon[1];
 
       contents.push(
-        `<a onclick="storeEvent('${contacts[i].id}', '${sessionRef}')" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${contacts[i].destination}" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${contacts[i].textContent}</span> <i style="font-size:16px !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
+        `<a onclick="storeEvent('${contacts[i].id}', '${
+          atob(localStorage.getItem("fab-session-ref")).split(".")[0]
+        }')" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${
+          contacts[i].destination
+        }" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
+          contacts[i].textContent
+        }</span> <i style="font-size:16px !important; margin-left:auto !important" class="fa-solid fa-chevron-right"></i></a>`
       );
     }
 
