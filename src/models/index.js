@@ -38,6 +38,12 @@ db.whiteListDomain = require("./whiteListDomain.js")(sequelize, Sequelize);
 db.statistic = require("./statistic.js")(sequelize, Sequelize);
 db.targetStatistic = require("./targetStatistic.js")(sequelize, Sequelize);
 
+db.statistic.hasMany(db.targetStatistic, {
+  sourceKey: "sessionRef",
+  foreignKey: "sessionRef",
+  constraints: false,
+});
+
 db.page.hasMany(db.subPage, {
   constraints: true,
 });

@@ -8,7 +8,8 @@ const WhiteListDomain = db.whiteListDomain;
 const Order = db.order;
 const moment = require("moment");
 const Statistic = db.statistic;
-const Op = require("sequelize");
+const { Op } = require("sequelize");
+const TargetStatistic = db.targetStatistic;
 
 exports.getMyProducts = async (req) => {
   try {
@@ -273,12 +274,28 @@ exports.renewProduct = async (req, res) => {
 
 exports.getStats = async (req, res) => {
   try {
+    const groupByKey = (list, key) =>
+      list.reduce(
+        (hash, obj) => ({
+          ...hash,
+          [obj[key].toLowerCase().split(" ").join("_")]: (
+            hash[obj[key]] || []
+          ).concat(obj),
+        }),
+        {}
+      );
+
+    console.log();
+
     const where =
-      req.body.startDate && req.body.endDate
+      req.query.startDate && req.query.endDate
         ? {
             userProductId: req.params.id,
             createdAt: {
-              [Op.between]: [req.body.startDate, req.body.endDate],
+              [Op.between]: [
+                moment(req.query.startDate).format("YYYY-MM-DD 00:00:00"),
+                moment(req.query.endDate).format("YYYY-MM-DD 23:59:59"),
+              ],
             },
           }
         : {
@@ -287,20 +304,102 @@ exports.getStats = async (req, res) => {
 
     const stats = await Statistic.findAll({
       where: where,
+      include: TargetStatistic,
     });
 
-    const groupByKey = (list, key) =>
-      list.reduce(
-        (hash, obj) => ({
-          ...hash,
-          [obj[key]]: (hash[obj[key]] || []).concat(obj),
-        }),
-        {}
+    let labelsByPeriod = [];
+    let sessionsByPeriod = [];
+    let usersByPeriod = [];
+    let conversionByPeriod = [];
+
+    const getGraphData = (range) => {
+      let ipAddresses = [];
+      for (let i = 0; i < range; i++) {
+        const date = moment(req.query.endDate)
+          .subtract(range - 1 - i, "days")
+          .format("MMM DD YYYY");
+        labelsByPeriod.push(
+          moment(req.query.endDate)
+            .subtract(range - 2 - i, "days")
+            .format("MM/DD")
+        );
+
+        // Session Count
+        let sessionCount = 0;
+        for (let j = 0; j < stats.length; j++) {
+          if (stats[j].createdAt.toString().includes(date)) {
+            sessionCount++;
+          }
+        }
+        sessionsByPeriod.push(sessionCount);
+
+        // User Count
+        let userCount = 0;
+
+        for (let j = 0; j < stats.length; j++) {
+          if (
+            stats[j].createdAt.toString().includes(date) &&
+            !ipAddresses.includes(stats[j].ipAddress)
+          ) {
+            ipAddresses.push(stats[j].ipAddress);
+            userCount++;
+          }
+        }
+        usersByPeriod.push(userCount);
+
+        // Conversion Count
+        let conversionCount = 0;
+
+        for (let k = 0; k < stats.length; k++) {
+          if (stats[k].createdAt.toString().includes(date)) {
+            conversionCount += stats[k].target_statistics.length;
+          }
+        }
+        conversionByPeriod.push(conversionCount);
+      }
+
+      return {
+        labels: labelsByPeriod,
+        sessions: sessionsByPeriod,
+        users: usersByPeriod,
+        conversions: conversionByPeriod,
+      };
+    };
+
+    let graphData;
+
+    if (req.query.period === "Today") {
+      graphData = getGraphData(1);
+    } else if (req.query.period === "7 Days") {
+      graphData = getGraphData(7);
+    } else if (req.query.period === "30 Days") {
+      graphData = getGraphData(30);
+    } else if (req.query.period === "90 Days") {
+      graphData = getGraphData(90);
+    } else {
+      graphData = getGraphData(
+        parseInt(
+          moment(req.query.endDate).diff(moment(req.query.startDate), "days")
+        ) + 1
       );
+    }
 
-    const data = groupByKey(stats, "sourceType");
+    const sessionCount = stats.length;
+    const totalUserCount = Object.keys(groupByKey(stats, "ipAddress")).length;
+    const conversionCount = stats.reduce((ac, cr) => {
+      return ac + cr.target_statistics.length;
+    }, 0);
+    const conversionRate = conversionCount / sessionCount;
+    const sourceTypes = groupByKey(stats, "sourceType");
 
-    return data;
+    return {
+      sessionCount: sessionCount,
+      totalUserCount: totalUserCount,
+      conversionCount: conversionCount,
+      conversionRate: conversionRate,
+      sourceTypes: sourceTypes,
+      graphData: graphData,
+    };
   } catch (error) {
     console.log(error);
     res.status(500).send({ status: "fail", message: "Something went wrong." });
