@@ -285,7 +285,26 @@ exports.getStats = async (req, res) => {
         {}
       );
 
-    console.log();
+    const fabContentIds = [];
+    const countGroup = (data) => {
+      let result = {};
+      for (const [key, value] of Object.entries(data)) {
+        result[key] = value.length;
+
+        if (
+          !fabContentIds.includes({
+            id: value[0].id,
+            title: value[0].textContent,
+          })
+        ) {
+          fabContentIds.push({
+            id: value[0].id,
+            title: value[0].textContent,
+          });
+        }
+      }
+      return result;
+    };
 
     const where =
       req.query.startDate && req.query.endDate
@@ -308,7 +327,7 @@ exports.getStats = async (req, res) => {
 
     const stats = await Statistic.findAll({
       where: where,
-      include: TargetStatistic,
+      include: [{ model: TargetStatistic, include: FabContent }],
     });
 
     let labelsByPeriod = [];
@@ -396,6 +415,61 @@ exports.getStats = async (req, res) => {
     const conversionRate = conversionCount / sessionCount;
     const sourceTypes = groupByKey(stats, "sourceType");
 
+    // Tables
+
+    const sources = ["direct", "search_engine", "social_media", "others"];
+
+    const getTableBySources = (source) => {
+      const directTableConversion = [];
+
+      if (!sourceTypes[source]) {
+        let emptySource = {};
+        emptySource[source] = {
+          sessions: 0,
+          conversions: 0,
+        };
+
+        return emptySource;
+      }
+
+      for (let x = 0; x < sourceTypes[source].length; x++) {
+        for (
+          let y = 0;
+          y < sourceTypes[source][x].target_statistics.length;
+          y++
+        ) {
+          directTableConversion.push(
+            sourceTypes[source][x].target_statistics[y].fab_content
+          );
+        }
+      }
+
+      const directTableByFabContents = countGroup(
+        groupByKey(directTableConversion, "id")
+      );
+
+      const directTableMain = {
+        sessions: sourceTypes.direct.length,
+        conversions: sourceTypes.direct.reduce((ac, cr) => {
+          return ac + cr.target_statistics.length;
+        }, 0),
+      };
+
+      const directTable = {};
+      directTable[source] = {
+        ...directTableMain,
+        ...directTableByFabContents,
+      };
+
+      return directTable;
+    };
+
+    const tableContents = [];
+
+    for (let g = 0; g < sources.length; g++) {
+      tableContents.push(getTableBySources(sources[g]));
+    }
+
     return {
       sessionCount: sessionCount,
       totalUserCount: totalUserCount,
@@ -403,6 +477,8 @@ exports.getStats = async (req, res) => {
       conversionRate: conversionRate,
       sourceTypes: sourceTypes,
       graphData: graphData,
+      tableContents: tableContents,
+      tableHeaders: fabContentIds,
     };
   } catch (error) {
     console.log(error);
