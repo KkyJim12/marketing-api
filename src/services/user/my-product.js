@@ -302,6 +302,10 @@ exports.getStats = async (req, res) => {
             userProductId: req.params.id,
           };
 
+    if (req.query.activeWebsite && req.query.activeWebsite !== "All") {
+      where.currentUrl = req.query.activeWebsite;
+    }
+
     const stats = await Statistic.findAll({
       where: where,
       include: TargetStatistic,
@@ -400,6 +404,56 @@ exports.getStats = async (req, res) => {
       sourceTypes: sourceTypes,
       graphData: graphData,
     };
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.getWebsites = async (req, res) => {
+  try {
+    const groupByKey = (list, key) =>
+      list.reduce(
+        (hash, obj) => ({
+          ...hash,
+          [obj[key].toLowerCase().split(" ").join("_")]: (
+            hash[obj[key]] || []
+          ).concat(obj),
+        }),
+        {}
+      );
+
+    const where =
+      req.query.startDate && req.query.endDate
+        ? {
+            userProductId: req.params.id,
+            createdAt: {
+              [Op.between]: [
+                moment(req.query.startDate).format("YYYY-MM-DD 00:00:00"),
+                moment(req.query.endDate).format("YYYY-MM-DD 23:59:59"),
+              ],
+            },
+          }
+        : {
+            userProductId: req.params.id,
+          };
+
+    if (req.query.activeWebsite && req.query.activeWebsite !== "All") {
+      where.currentUrl = req.query.activeWebsite;
+    }
+
+    const stats = await Statistic.findAll({
+      where: where,
+    });
+    const websites = [];
+
+    for (const [key, value] of Object.entries(
+      groupByKey(stats, "currentUrl")
+    )) {
+      websites.push(key);
+    }
+
+    return websites;
   } catch (error) {
     console.log(error);
     res.status(500).send({ status: "fail", message: "Something went wrong." });

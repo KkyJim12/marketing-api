@@ -23,6 +23,8 @@ module.exports = (app) => {
 
   router.get("/:id/stats/:productId", isAuth, myProductController.stats);
 
+  router.get("/:id/websites/:productId", isAuth, myProductController.websites);
+
   router.get(
     "/:id/exist-contents/:productId",
     isAuth,

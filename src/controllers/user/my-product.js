@@ -14,6 +14,7 @@ const {
   removeDomain,
   renewProduct,
   getStats,
+  getWebsites,
 } = require("../../services/user/my-product");
 const { URL } = require("url");
 
@@ -206,6 +207,19 @@ exports.stats = async (req, res) => {
       status: "success",
       data: stats,
       message: "Get product stats success.",
+    });
+  } catch (error) {
+    res.status(500).send({ status: "fail", message: "Something went wrong." });
+  }
+};
+
+exports.websites = async (req, res) => {
+  try {
+    const websites = await getWebsites(req, res);
+    res.status(200).send({
+      status: "success",
+      data: websites,
+      message: "Get product websites success.",
     });
   } catch (error) {
     res.status(500).send({ status: "fail", message: "Something went wrong." });
