@@ -279,28 +279,36 @@ exports.getStats = async (req, res) => {
         (hash, obj) => ({
           ...hash,
           [obj[key].toLowerCase().split(" ").join("_")]: (
-            hash[obj[key]] || []
+            hash[obj[key].toLowerCase().split(" ").join("_")] || []
           ).concat(obj),
         }),
         {}
       );
 
-    const fabContentIds = [];
+    const fabContentIds = [
+      { label: "Sessions", field: "sessions" },
+      { label: "Conversions", field: "conversions" },
+    ];
+
+    const storeId = [];
+
     const countGroup = (data) => {
       let result = {};
       for (const [key, value] of Object.entries(data)) {
-        result[key] = value.length;
+        result[value[0].textContent] = value.length;
 
-        if (
-          !fabContentIds.includes({
-            id: value[0].id,
-            title: value[0].textContent,
-          })
-        ) {
-          fabContentIds.push({
-            id: value[0].id,
-            title: value[0].textContent,
-          });
+        const newData = {
+          id: value[0].id,
+          label: value[0].textContent,
+          field: value[0].textContent,
+          sort: "asc",
+          width: 150,
+        };
+
+        if (!storeId.includes(value[0].id)) {
+          fabContentIds.push(newData);
+
+          storeId.push(value[0].id);
         }
       }
       return result;
@@ -321,7 +329,7 @@ exports.getStats = async (req, res) => {
             userProductId: req.params.id,
           };
 
-    if (req.query.activeWebsite && req.query.activeWebsite !== "All") {
+    if (req.query.activeWebsite !== "All") {
       where.currentUrl = req.query.activeWebsite;
     }
 
@@ -424,7 +432,11 @@ exports.getStats = async (req, res) => {
 
       if (!sourceTypes[source]) {
         let emptySource = {};
-        emptySource[source] = {
+        emptySource = {
+          source: source
+            .split("_")
+            .map((i) => i.charAt(0).toUpperCase() + i.slice(1))
+            .join(" "),
           sessions: 0,
           conversions: 0,
         };
@@ -449,17 +461,22 @@ exports.getStats = async (req, res) => {
       );
 
       const directTableMain = {
-        sessions: sourceTypes.direct.length,
-        conversions: sourceTypes.direct.reduce((ac, cr) => {
+        sessions: sourceTypes[source].length,
+        conversions: sourceTypes[source].reduce((ac, cr) => {
           return ac + cr.target_statistics.length;
         }, 0),
       };
 
-      const directTable = {};
-      directTable[source] = {
+      let directTable = {};
+      directTable = {
         ...directTableMain,
         ...directTableByFabContents,
       };
+
+      directTable.source = source
+        .split("_")
+        .map((i) => i.charAt(0).toUpperCase() + i.slice(1))
+        .join(" ");
 
       return directTable;
     };
