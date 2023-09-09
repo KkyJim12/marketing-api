@@ -15,7 +15,7 @@ module.exports = storeStats = async (req, res, next) => {
         await Statistic.create({
           ipAddress: req.connection.remoteAddress,
           sourceUrl: parsedUrl.hostname,
-          currentUrl: req.headers.exactreferer,
+          currentUrl: req.headers.requesthost,
           sourceType:
             parsedUrl.hostname.includes("facebook.com") ||
             parsedUrl.hostname.includes("youtube.com") ||
