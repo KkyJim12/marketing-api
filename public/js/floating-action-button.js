@@ -104,7 +104,9 @@ const generateButton = async (id) => {
       contents.push(
         `<a onclick="storeEvent('${contacts[i].id}', '${
           atob(localStorage.getItem("fab-session-ref")).split(".")[0]
-        }')" style="text-decoration:none !important; width:100% !important; display:flex !important; align-items: center; gap: 10px; color: ${contacts[i].textColor} !important;" href="${
+        }')" style="text-decoration:none !important; width:100% !important; display:flex !important; align-items: center; gap: 10px; color: ${
+          contacts[i].textColor
+        } !important;" href="${
           contacts[i].destination
         }" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
           contacts[i].textContent
@@ -147,10 +149,15 @@ const generateButton = async (id) => {
     ) {
       button.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<i class="${prefixIcon} ${iconValue}"></i>`
+          ? `<iframe id="my-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="http://localhost:3000/icons/${style.data.button.icon
+              .split(" ")
+              .join("-")}/${style.data.button.textColor.slice(
+              1
+            )}/${style.data.button.backgroundColor.slice(1)}"></iframe>`
           : `<img id="fab-img" src="${style.data.button.icon}" alt="logo" />`;
     }
 
+    console.log(document.getElementById("my-iframe"));
     header.innerHTML = style.data.button.textContent;
 
     if (
