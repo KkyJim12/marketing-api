@@ -145,7 +145,7 @@ exports.updateButtonContents = async (req, res) => {
     const contents = [];
     for (let i = 0; i < req.body.contents.length; i++) {
       const newContent = {
-        backgroundColor: req.body.contents[i].backgroundColor,
+        textColor: req.body.contents[i].textColor,
         textContent: req.body.contents[i].textContent,
         description: req.body.contents[i].description,
         destination: req.body.contents[i].destination,

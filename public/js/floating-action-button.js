@@ -104,7 +104,7 @@ const generateButton = async (id) => {
       contents.push(
         `<a onclick="storeEvent('${contacts[i].id}', '${
           atob(localStorage.getItem("fab-session-ref")).split(".")[0]
-        }')" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px;" href="${
+        }')" style="text-decoration:none !important; color:rgb(75, 85, 99) !important; width:100% !important; display:flex !important; align-items: center; gap: 10px; color: ${contacts[i].textColor}" href="${
           contacts[i].destination
         }" target="_blank"><span><i style="font-size:16px !important;" class="${contentPrefixIcon} ${contentIconValue}"></i></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
           contacts[i].textContent

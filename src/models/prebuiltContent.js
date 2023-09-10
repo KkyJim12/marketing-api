@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    backgroundColor: {
+    textColor: {
       type: Sequelize.STRING,
       allowNull: false,
     },

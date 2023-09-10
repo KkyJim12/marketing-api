@@ -15,7 +15,7 @@ exports.getPrebuiltContents = async (req, res) => {
 exports.createPrebuiltContent = async (req, res) => {
   try {
     const newPrebuiltContent = {
-      backgroundColor: req.body.backgroundColor,
+      textColor: req.body.textColor,
       textContent: req.body.textContent,
       icon: req.body.icon,
       description: req.body.description,
