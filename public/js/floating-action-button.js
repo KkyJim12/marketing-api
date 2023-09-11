@@ -111,7 +111,7 @@ const generateButton = async (id) => {
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
-        }" target="_blank"><span><iframe scrolling="no" width="20" height="20" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${contacts[i].icon
+        }" target="_blank"><span style="display:flex; align-items: center;"><iframe scrolling="no" width="20" height="20" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${contacts[i].icon
           .split(" ")
           .join("_")}/${contacts[i].textColor.slice(
           1
