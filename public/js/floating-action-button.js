@@ -1,7 +1,10 @@
+const apiUrl = "http://localhost:8080";
+const iconUrl = "http://localhost:3000";
+
 const storeEvent = async (fabContentId, sessionRef) => {
   try {
     const response = await fetch(
-      "http://localhost:8080/api/v1/guest/products/store-event",
+      `${apiUrl}/api/v1/guest/products/store-event`,
       {
         headers: {
           requesthost: window.location.host,
@@ -52,7 +55,7 @@ const generateButton = async (id) => {
   try {
     // Get button details
     const response = await fetch(
-      "http://localhost:8080/api/v1/user/my-products/" + id + "/public-button",
+      `${apiUrl}/api/v1/user/my-products/${id}/public-button`,
       {
         headers: {
           requesthost: window.location.host,
@@ -108,7 +111,7 @@ const generateButton = async (id) => {
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
-        }" target="_blank"><span><iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="http://localhost:3000/icons/${style.data.button.icon
+        }" target="_blank"><span><iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
           .split(" ")
           .join("-")}/${contacts[i].textColor.slice(
           1
@@ -116,7 +119,7 @@ const generateButton = async (id) => {
           1
         )}"></iframe></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
           contacts[i].textContent
-        }</span> <iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="http://localhost:3000/icons/${style.data.button.icon
+        }</span> <iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
           .split(" ")
           .join("-")}/${contacts[i].textColor.slice(
           1
@@ -159,7 +162,7 @@ const generateButton = async (id) => {
     ) {
       button.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="http://localhost:3000/icons/${style.data.button.icon
+          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
               .join("-")}/${style.data.button.textColor.slice(
               1
@@ -202,7 +205,7 @@ const generateButton = async (id) => {
       button.appendChild(buttonText);
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="http://localhost:3000/icons/${style.data.button.icon
+          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
               .join("-")}/${style.data.button.textColor.slice(
               1
