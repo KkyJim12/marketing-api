@@ -111,19 +111,19 @@ const generateButton = async (id) => {
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
-        }" target="_blank"><span><iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
+        }" target="_blank"><span><iframe scrolling="no" width="20" height="20" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
           .split(" ")
-          .join("-")}/${contacts[i].textColor.slice(
+          .join("_")}/${contacts[i].textColor.slice(
           1
         )}/${style.data.button.bodyColor.slice(
           1
-        )}"></iframe></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
+        )}/20"></iframe></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
           contacts[i].textContent
-        }</span> <iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
-          .split(" ")
-          .join("-")}/${contacts[i].textColor.slice(
+        }</span> <iframe scrolling="no" width="20" height="20" style="border: 0px none; margin-left:auto;" src="${iconUrl}/icons/fas_angle-right/${contacts[
+          i
+        ].textColor.slice(1)}/${style.data.button.bodyColor.slice(
           1
-        )}/${style.data.button.bodyColor.slice(1)}"></iframe></a>`
+        )}/20"></iframe></a>`
       );
     }
 
@@ -164,13 +164,12 @@ const generateButton = async (id) => {
         style.data.button.iconType === "font-awesome"
           ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
-              .join("-")}/${style.data.button.textColor.slice(
+              .join("_")}/${style.data.button.textColor.slice(
               1
-            )}/${style.data.button.backgroundColor.slice(1)}"></iframe>`
+            )}/${style.data.button.backgroundColor.slice(1)}/35"></iframe>`
           : `<img id="fab-img" src="${style.data.button.icon}" alt="logo" />`;
     }
 
-    console.log(document.getElementById("my-iframe"));
     header.innerHTML = style.data.button.textContent;
 
     if (
@@ -207,9 +206,9 @@ const generateButton = async (id) => {
         style.data.button.iconType === "font-awesome"
           ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
-              .join("-")}/${style.data.button.textColor.slice(
+              .join("_")}/${style.data.button.textColor.slice(
               1
-            )}/${style.data.button.backgroundColor.slice(1)}"></iframe>`
+            )}/${style.data.button.backgroundColor.slice(1)}/35"></iframe>`
           : `<img src="${style.data.button.icon}" alt="logo" />`;
       button.appendChild(logoContainer);
       logoContainer.id = "logo-container";
