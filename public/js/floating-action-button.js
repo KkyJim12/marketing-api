@@ -111,13 +111,13 @@ const generateButton = async (id) => {
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
-        }" target="_blank"><span><iframe scrolling="no" width="20" height="20" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
+        }" target="_blank"><span><iframe scrolling="no" width="20" height="20" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${contacts[i].icon
           .split(" ")
           .join("_")}/${contacts[i].textColor.slice(
           1
         )}/${style.data.button.bodyColor.slice(
           1
-        )}/20"></iframe></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important;"> ${
+        )}/20"></iframe></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> ${
           contacts[i].textContent
         }</span> <iframe scrolling="no" width="20" height="20" style="border: 0px none; margin-left:auto;" src="${iconUrl}/icons/fas_angle-right/${contacts[
           i
@@ -162,7 +162,7 @@ const generateButton = async (id) => {
     ) {
       button.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
+          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
               .join("_")}/${style.data.button.textColor.slice(
               1
@@ -204,7 +204,7 @@ const generateButton = async (id) => {
       button.appendChild(buttonText);
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none;" src="${iconUrl}/icons/${style.data.button.icon
+          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
               .join("_")}/${style.data.button.textColor.slice(
               1
