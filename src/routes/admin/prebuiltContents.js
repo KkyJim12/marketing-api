@@ -2,9 +2,9 @@ const router = require("express").Router();
 const prebuiltContentController = require("../../controllers/admin/prebuiltContents.js");
 const isAdmin = require("../../middlewares/isAdmin.js");
 const {
-  createPrebuiltButtonValidate,
-  createPrebuiltButtonValidateResult,
-} = require("../../validations/create-prebuilt-button");
+  createPrebuiltContentValidate,
+  createPrebuiltContentValidateResult,
+} = require("../../validations/create-prebuilt-content");
 
 module.exports = (app) => {
   // Routes
@@ -16,8 +16,8 @@ module.exports = (app) => {
   router.post(
     "/:productId/prebuilt-contents",
     isAdmin,
-    createPrebuiltButtonValidate(),
-    createPrebuiltButtonValidateResult,
+    createPrebuiltContentValidate(),
+    createPrebuiltContentValidateResult,
     prebuiltContentController.store
   );
   router.delete(
