@@ -33,7 +33,7 @@ module.exports = storeStats = async (req, res, next) => {
         await Statistic.create({
           ipAddress: req.connection.remoteAddress,
           sourceType: "Direct",
-          currentUrl: req.headers.exactreferer,
+          currentUrl: req.headers.requesthost,
           userProductId: req.params.id,
           sessionRef: req.headers.sessionref,
         });
