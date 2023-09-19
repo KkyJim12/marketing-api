@@ -83,6 +83,8 @@ const generateButton = async (id) => {
 
     if (splitIcon[0] === "fas") {
       prefixIcon = "fa-solid";
+    } else if (splitIcon[0] === "far") {
+      prefixIcon = "fa-regular";
     } else {
       prefixIcon = "fa-brands";
     }
@@ -98,6 +100,8 @@ const generateButton = async (id) => {
 
       if (contentSplitIcon[0] === "fas") {
         contentPrefixIcon = "fa-solid";
+      } else if (splitIcon[0] === "far") {
+        prefixIcon = "fa-regular";
       } else {
         contentPrefixIcon = "fa-brands";
       }
