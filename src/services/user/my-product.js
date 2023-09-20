@@ -469,14 +469,13 @@ exports.getStats = async (req, res) => {
 
       let directTable = {};
       directTable = {
+        source: source
+          .split("_")
+          .map((i) => i.charAt(0).toUpperCase() + i.slice(1))
+          .join(" "),
         ...directTableMain,
         ...directTableByFabContents,
       };
-
-      directTable.source = source
-        .split("_")
-        .map((i) => i.charAt(0).toUpperCase() + i.slice(1))
-        .join(" ");
 
       return directTable;
     };
