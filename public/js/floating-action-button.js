@@ -1,13 +1,31 @@
 const apiUrl = "http://localhost:8080";
 const iconUrl = "http://localhost:3000";
 
+const getDomain = (url, subdomain) => {
+  subdomain = subdomain || false;
+
+  url = url.replace(/(https?:\/\/)?(www.)?/i, "");
+
+  if (!subdomain) {
+    url = url.split(".");
+
+    url = url.slice(url.length - 2).join(".");
+  }
+
+  if (url.indexOf("/") !== -1) {
+    return url.split("/")[0];
+  }
+
+  return url;
+};
+
 const storeEvent = async (fabContentId, sessionRef) => {
   try {
     const response = await fetch(
       `${apiUrl}/api/v1/guest/products/store-event`,
       {
         headers: {
-          requesthost: window.location.hostname,
+          requesthost: getDomain(window.location.hostname),
           fabcontentid: fabContentId,
           sessionref: sessionRef,
         },
