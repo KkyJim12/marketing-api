@@ -22,6 +22,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    class: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     icon: {
       type: Sequelize.STRING,
       allowNull: false,

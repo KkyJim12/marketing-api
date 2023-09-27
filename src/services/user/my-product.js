@@ -150,6 +150,7 @@ exports.updateButtonContents = async (req, res) => {
         description: req.body.contents[i].description,
         destination: req.body.contents[i].destination,
         icon: req.body.contents[i].icon,
+        class: req.body.contents[i].class,
         productId: req.params.productId,
         userProductId: req.params.id,
         userId: req.user.id,
