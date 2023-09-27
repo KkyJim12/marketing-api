@@ -20,6 +20,7 @@ exports.createPrebuiltContent = async (req, res) => {
       icon: req.body.icon,
       description: req.body.description,
       destination: req.body.destination,
+      class: req.body.myClass,
       productId: req.params.productId,
     };
 

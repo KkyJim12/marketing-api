@@ -26,6 +26,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    class: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     productId: {
       type: Sequelize.UUID,
       allowNull: false,
