@@ -20,7 +20,6 @@ module.exports = (sequelize, Sequelize) => {
       references: {
         model: "fab_contents",
         key: "id",
-        constraints: true,
       },
     },
   });

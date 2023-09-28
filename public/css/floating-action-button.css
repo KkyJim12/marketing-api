@@ -3,27 +3,27 @@
   src: url(https://api.jimmytechnology.com/font/Iconic.ttf);
 }
 
-#fab-main-area {
+#fab-main-area-65150cd97e5e7 {
   position: fixed !important;
   font-family: Iconic, sans-serif !important;
   z-index: 99999 !important;
 }
 
-#fab-text-container h5 {
+#fab-text-container-65150cd97e5e7 h5 {
   font-family: Iconic, sans-serif !important;
 }
 
-#fab-header {
+#fab-header-65150cd97e5e7 {
   font-family: Iconic, sans-serif !important;
 }
 
-.fab-content-text {
+.fab-content-text-65150cd97e5e7 {
   font-family: Iconic, sans-serif !important;
   margin-top: auto !important;
   margin-bottom: auto !important;
 }
 
-#fab-text-container {
+#fab-text-container-65150cd97e5e7 {
   height: 40px !important;
   display: flex !important;
   align-items: center !important;
@@ -40,26 +40,25 @@
   color: #374151 !important;
 }
 
-.fab-content-list {
+.fab-content-list-65150cd97e5e7 {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
   border-top: 1px solid rgb(229 231 235) !important;
-  padding-top: 20px !important;
   padding-right: 25px !important;
-  padding-bottom: 20px !important;
   padding-left: 25px !important;
   font-weight: 600 !important;
+  height: 75px;
 }
 
-#fab-button-container {
+#fab-button-container-65150cd97e5e7 {
   display: flex !important;
   gap: 0.5rem !important;
   align-items: center !important;
   white-space: nowrap !important;
 }
 
-#fab-button {
+#fab-button-65150cd97e5e7 {
   border-radius: 50% !important;
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
@@ -70,41 +69,41 @@
   align-items: center !important;
 }
 
-#fab-button i {
+#fab-button-65150cd97e5e7 i {
   font-size: 32px !important;
 }
 
-#fab-button svg {
+#fab-button-65150cd97e5e7 svg {
   font-size: 32px !important;
 }
 
-#fab-button img {
+#fab-button-65150cd97e5e7 img {
   width: 35px !important;
   height: 35px !important;
 }
 
-#fab-button img {
+#fab-button-65150cd97e5e7 img {
   width: 35px !important;
   height: 35px !important;
 }
 
-#fab-inner-div {
+#fab-inner-div-65150cd97e5e7 {
   position: absolute !important;
 }
 
-#fab-header {
+#fab-header-65150cd97e5e7 {
   padding-top: 15px !important;
   padding-bottom: 15px !important;
   padding-right: 20px !important;
   padding-left: 20px !important;
   border-top-left-radius: 15px !important;
   border-top-right-radius: 15px !important;
-  min-width: 350px !important;
+  min-width: 300px !important;
   font-weight: 500 !important;
   font-size: 20px !important;
 }
 
-#fab-content-lists {
+#fab-content-lists-65150cd97e5e7 {
   cursor: pointer !important;
   border-bottom-left-radius: 15px !important;
   border-bottom-right-radius: 15px !important;
@@ -115,7 +114,7 @@
 
 /* Long button #1 */
 
-#fab-button-long-1 {
+#fab-button-long-1-65150cd97e5e7 {
   width: 100% !important;
   border-radius: 9999px !important;
   border: 0px !important;
@@ -131,20 +130,20 @@
   gap: 1rem !important;
 }
 
-#fab-button-long-1 h5 {
+#fab-button-long-1-65150cd97e5e7 h5 {
   font-size: 1.125rem !important;
   font-weight: 500;
 }
 
-#fab-button-long-1 i {
+#fab-button-long-1-65150cd97e5e7 i {
   font-size: 32px !important;
 }
 
-#fab-button-long-1 svg {
+#fab-button-long-1-65150cd97e5e7 svg {
   font-size: 32px !important;
 }
 
-#fab-img {
+#fab-img-65150cd97e5e7 {
   width: 35px !important;
   height: 35px !important;
   max-width: none;
@@ -152,7 +151,7 @@
 
 /* Long button #2 */
 
-#fab-button-long-2 {
+#fab-button-long-2-65150cd97e5e7 {
   background-color: white !important;
   width: 100% !important;
   border-radius: 9999px !important;
@@ -170,26 +169,26 @@
   gap: 1rem !important;
 }
 
-#fab-button-long-2 h5 {
+#fab-button-long-2-65150cd97e5e7 h5 {
   font-size: 1.125rem !important;
   font-weight: 500;
   color: #374151 !important;
 }
 
-#fab-button-long-2 i {
+#fab-button-long-2-65150cd97e5e7 i {
   font-size: 32px !important;
 }
 
-#fab-button-long-2 svg {
+#fab-button-long-2-65150cd97e5e7 svg {
   font-size: 32px !important;
 }
 
-#fab-button-long-2 img {
+#fab-button-long-2-65150cd97e5e7 img {
   width: 35px !important;
   height: 35px !important;
 }
 
-#logo-container {
+#logo-container-65150cd97e5e7 {
   border-radius: 50% !important;
   display: flex !important;
   justify-content: center !important;

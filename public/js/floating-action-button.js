@@ -71,7 +71,6 @@ const generateSession = () => {
 const generateButton = async (id) => {
   generateSession();
 
-  const cssId = "65138ab59ed07";
   try {
     // Get button details
     const response = await fetch(
@@ -129,13 +128,15 @@ const generateButton = async (id) => {
       let contentIconValue = "fa-" + contentSplitIcon[1];
 
       contents.push(
-        `<a onclick="storeEvent('${contacts[i].id}', '${
+        `<a class="${contacts[i].class}" onclick="storeEvent('${
+          contacts[i].id
+        }', '${
           atob(localStorage.getItem("fab-session-ref")).split(".")[0]
         }')" style="text-decoration:none !important; width:100% !important; display:flex !important; align-items: center; gap: 10px; color: ${
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
-        }" target="_blank"><span style="display:flex; align-items: center;"><div style="width:20px; height:20px; cursor:pointer; z-index:9999;background:transparent; position:absolute;"></div><iframe scrolling="no" width="20" height="20" style="z-index:1111;border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${contacts[
+        }" target="_blank"><span style="display:flex; align-items: center;"><div style="width:24px; height:24px; cursor:pointer; z-index:9999;background:transparent; position:absolute;"></div><iframe scrolling="no" width="24" height="24" style="z-index:1111;border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${contacts[
           i
         ].icon
           .split(" ")
@@ -143,13 +144,14 @@ const generateButton = async (id) => {
           1
         )}/${style.data.button.bodyColor.slice(
           1
-        )}/20"></iframe></span><span style="font-size:20px !important; font-weight:500 !important; margin-left:10 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> ${
+        )}/24"></iframe></span><span style="color:#343a40; display:flex; font-size:18px !important; font-weight:500 !important; margin-left:10 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p>${
           contacts[i].textContent
-        }</span><div style="width:20px; height:20px; cursor:pointer; z-index:9999;right:25px;background:transparent; position:absolute;"></div> <iframe scrolling="no" width="20" height="20" style="z-index:1111;border: 0px none; margin-left:auto;" src="${iconUrl}/icons/fas_angle-right/${contacts[
-          i
-        ].textColor.slice(1)}/${style.data.button.bodyColor.slice(
+        } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto; margin-left:15px;">${
+          contacts[i].description
+        }</p></span> <div style="width:24px; height:24px; cursor:pointer; z-index:9999;right:25px;background:transparent; position:absolute;"></div>
+        <iframe scrolling="no" width="24" height="24" style="z-index:1111;border: 0px none; margin-left:auto;" src="${iconUrl}/icons/fas_angle-right/343a40/${style.data.button.bodyColor.slice(
           1
-        )}/20"></iframe></a>`
+        )}/24"></iframe></a>`
       );
     }
 
@@ -178,7 +180,7 @@ const generateButton = async (id) => {
       let newList = document.createElement("div");
       newList.innerHTML = contents[i];
       contentLists.appendChild(newList);
-      newList.className = "fab-content-list";
+      newList.className = "fab-content-list-65150cd97e5e7";
     }
 
     if (
@@ -204,7 +206,7 @@ const generateButton = async (id) => {
       style.data.button.buttonStyle === "Long Rounded Button#2"
     ) {
       buttonText.innerHTML = style.data.button.textContent;
-      buttonText.className = "fab-content-text";
+      buttonText.className = "fab-content-text-65150cd97e5e7";
     }
 
     document.body.appendChild(mainArea);
@@ -237,7 +239,7 @@ const generateButton = async (id) => {
             )}/${style.data.button.backgroundColor.slice(1)}/35"></iframe>`
           : `<img src="${style.data.button.icon}" alt="logo" />`;
       button.appendChild(logoContainer);
-      logoContainer.id = "logo-container";
+      logoContainer.id = "logo-container-65150cd97e5e7";
       logoContainer.style.background = style.data.button.backgroundColor;
       logoContainer.style.width = style.data.button.size * 0.9 + "px";
       logoContainer.style.height = style.data.button.size * 0.9 + "px";
@@ -250,7 +252,7 @@ const generateButton = async (id) => {
     innerDiv.appendChild(header);
     innerDiv.appendChild(contentLists);
 
-    mainArea.id = "fab-main-area";
+    mainArea.id = "fab-main-area-65150cd97e5e7";
 
     mainArea.style.width = style.data.button.size + "px";
     mainArea.style.height = style.data.button.size + "px";
@@ -271,7 +273,7 @@ const generateButton = async (id) => {
       mainArea.style.left = style.data.button.left + "px";
     }
 
-    buttonContainer.id = "fab-button-container";
+    buttonContainer.id = "fab-button-container-65150cd97e5e7";
 
     if (style.data.button.right) {
       buttonContainer.style.float = "right";
@@ -280,25 +282,25 @@ const generateButton = async (id) => {
     }
 
     if (style.data.button.buttonStyle === "Rounded Button With Text") {
-      textContainer.id = "fab-text-container";
+      textContainer.id = "fab-text-container-65150cd97e5e7";
     }
 
     if (
       style.data.button.buttonStyle === "Rounded Button" ||
       style.data.button.buttonStyle === "Rounded Button With Text"
     ) {
-      button.id = "fab-button";
+      button.id = "fab-button-65150cd97e5e7";
       button.style.width = style.data.button.size + "px";
       button.style.height = style.data.button.size + "px";
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
-      button.id = "fab-button-long-1";
+      button.id = "fab-button-long-1-65150cd97e5e7";
       button.style.height = style.data.button.size + "px";
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
-      button.id = "fab-button-long-2";
+      button.id = "fab-button-long-2-65150cd97e5e7";
       button.style.height = style.data.button.size + "px";
     }
 
@@ -321,28 +323,29 @@ const generateButton = async (id) => {
     }
 
     // Inner Div styles
-    innerDiv.id = "fab-inner-div";
+    innerDiv.id = "fab-inner-div-65150cd97e5e7";
+    innerDiv.style.width = "350px";
 
     header.style.backgroundColor = style.data.button.backgroundColor;
     header.style.color = style.data.button.textColor;
 
-    header.id = "fab-header";
+    header.id = "fab-header-65150cd97e5e7";
     contentLists.style.minHeight = 65 * contacts.length;
     contentLists.style.background = style.data.button.bodyColor;
-    contentLists.id = "fab-content-lists";
+    contentLists.id = "fab-content-lists-65150cd97e5e7";
 
     const pluginButton =
       style.data.button.buttonStyle === "Rounded Button" ||
       style.data.button.buttonStyle === "Rounded Button With Text"
-        ? document.getElementById("fab-button")
+        ? document.getElementById("fab-button-65150cd97e5e7")
         : style.data.button.buttonStyle === "Long Rounded Button#1"
-        ? document.getElementById("fab-button-long-1")
-        : document.getElementById("fab-button-long-2");
+        ? document.getElementById("fab-button-long-1-65150cd97e5e7")
+        : document.getElementById("fab-button-long-2-65150cd97e5e7");
 
     pluginButton.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
         mainArea.appendChild(mainContent);
-        mainContent.id = "pluginButtonContents";
+        mainContent.id = "pluginButtonContents-65150cd97e5e7";
         isContentsOpened = true;
       } else {
         mainArea.removeChild(mainContent);
@@ -354,7 +357,7 @@ const generateButton = async (id) => {
     logoIframe.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
         mainArea.appendChild(mainContent);
-        mainContent.id = "pluginButtonContents";
+        mainContent.id = "pluginButtonContents-65150cd97e5e7";
         isContentsOpened = true;
       } else {
         mainArea.removeChild(mainContent);
