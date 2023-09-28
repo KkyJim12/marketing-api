@@ -18,6 +18,14 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT("long"),
       allowNull: true,
     },
+    buttonSettingPage: {
+      type: Sequelize.TEXT("long"),
+      allowNull: true,
+    },
+    websiteSetupPage: {
+      type: Sequelize.TEXT("long"),
+      allowNull: true,
+    },
   });
 
   return Page;

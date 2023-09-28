@@ -19,6 +19,8 @@ exports.createSetting = async (req) => {
       eCommercePage: req.body.eCommerceContent,
       myProductPage: req.body.myProductContent,
       orderHistoryPage: req.body.orderHistoryContent,
+      buttonSettingPage: req.body.buttonSettingContent,
+      websiteSetupPage: req.body.websiteSetupContent,
     });
     return setting;
   } catch (error) {

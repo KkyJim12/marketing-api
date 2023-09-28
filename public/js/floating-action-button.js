@@ -70,6 +70,8 @@ const generateSession = () => {
 
 const generateButton = async (id) => {
   generateSession();
+
+  const cssId = "65138ab59ed07";
   try {
     // Get button details
     const response = await fetch(
