@@ -119,7 +119,7 @@ exports.addProductToUser = async (req, res) => {
         bodyColor: "#ffffff",
         textColor: "#f5f5f5",
         textContent: "Minible",
-        size: 75,
+        size: 70,
         top: null,
         right: 20,
         bottom: 20,

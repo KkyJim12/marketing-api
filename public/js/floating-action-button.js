@@ -190,12 +190,38 @@ const generateButton = async (id) => {
     ) {
       button.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<div style="width:35px; height:35px; cursor:pointer; z-index:9999;background:transparent; position:absolute;"></div><iframe id="logo-iframe" scrolling="no" width="35" height="35" style="z-index:1111; border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
+          ? `<div style="width:${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }px; height:${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }px; cursor:pointer; z-index:9999;background:transparent; position:absolute;"></div><iframe id="logo-iframe" scrolling="no" width="${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }" height="${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }" style="z-index:1111; border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
               .join("_")}/${style.data.button.textColor.slice(
               1
-            )}/${style.data.button.backgroundColor.slice(1)}/35"></iframe>`
-          : `<img id="fab-img" src="${style.data.button.icon}" alt="logo" />`;
+            )}/${style.data.button.backgroundColor.slice(1)}/${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }"></iframe>`
+          : `<img id="fab-img-65150cd97e5e7" style="width:${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }px; height:${style.data.button.size / 2}px;" src="${
+              style.data.button.icon
+            }" alt="logo" />`;
     }
 
     header.innerHTML = style.data.button.textContent;
@@ -225,6 +251,7 @@ const generateButton = async (id) => {
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.appendChild(buttonText);
       buttonText.style.color = style.data.button.textColor;
+      buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
@@ -232,17 +259,26 @@ const generateButton = async (id) => {
       button.appendChild(buttonText);
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<iframe id="logo-iframe" scrolling="no" width="35" height="35" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
+          ? `<iframe id="logo-iframe" scrolling="no" width="${
+              style.data.button.size / 2.5
+            }" height="${
+              style.data.button.size / 2.5
+            }" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
               .split(" ")
               .join("_")}/${style.data.button.textColor.slice(
               1
-            )}/${style.data.button.backgroundColor.slice(1)}/35"></iframe>`
+            )}/${style.data.button.backgroundColor.slice(1)}/${
+              style.data.button.size / 2.5
+            }"></iframe>`
           : `<img src="${style.data.button.icon}" alt="logo" />`;
       button.appendChild(logoContainer);
       logoContainer.id = "logo-container-65150cd97e5e7";
       logoContainer.style.background = style.data.button.backgroundColor;
-      logoContainer.style.width = style.data.button.size * 0.9 + "px";
-      logoContainer.style.height = style.data.button.size * 0.9 + "px";
+      logoContainer.style.width = (style.data.button.size - 10) * 0.95 + "px";
+      logoContainer.style.height = (style.data.button.size - 10) * 0.95 + "px";
+
+      buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
+      buttonText.style.marginLeft = style.data.button.size / 4 + "px";
     }
 
     if (style.data.button.right) {
@@ -283,6 +319,7 @@ const generateButton = async (id) => {
 
     if (style.data.button.buttonStyle === "Rounded Button With Text") {
       textContainer.id = "fab-text-container-65150cd97e5e7";
+      textContainer.style.fontSize = style.data.button.size / 3.5 + "px";
     }
 
     if (
@@ -296,12 +333,12 @@ const generateButton = async (id) => {
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.id = "fab-button-long-1-65150cd97e5e7";
-      button.style.height = style.data.button.size + "px";
+      button.style.height = style.data.button.size - 10 + "px";
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
       button.id = "fab-button-long-2-65150cd97e5e7";
-      button.style.height = style.data.button.size + "px";
+      button.style.height = style.data.button.size - 10 + "px";
     }
 
     button.style.backgroundColor = style.data.button.backgroundColor;
@@ -310,10 +347,20 @@ const generateButton = async (id) => {
     mainContent.style.position = "relative";
 
     if (style.data.button.top) {
-      mainContent.style.top = 90 + "px";
+      mainContent.style.top =
+        style.data.button.size === 50
+          ? "60px"
+          : style.data.button.size === 70
+          ? "80px"
+          : "100px";
     }
     if (style.data.button.right) {
-      mainContent.style.right = "280px";
+      mainContent.style.right =
+        style.data.button.size === 50
+          ? "300px"
+          : style.data.button.size === 70
+          ? "280px"
+          : "260px";
     }
     if (style.data.button.bottom) {
       mainContent.style.bottom = 75 + contacts.length * 75 + "px";
