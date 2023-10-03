@@ -142,7 +142,6 @@ h5 {
 
 #fab-button-long-2-65150cd97e5e7 {
   background-color: white !important;
-  width: 100% !important;
   border-radius: 9999px !important;
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
@@ -150,13 +149,13 @@ h5 {
   font-size: 32px !important;
   cursor: pointer !important;
   display: flex !important;
-  justify-content: center !important;
   align-items: center !important;
   white-space: nowrap !important;
   gap: 1rem !important;
 }
 
 #fab-button-long-2-65150cd97e5e7 h5 {
+  position: absolute;
   font-weight: 500;
   color: #374151 !important;
 }
@@ -174,4 +173,20 @@ h5 {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  right: 3;
+  position: absolute;
+}
+
+#fab-button-cover-65150cd97e5e7 {
+  position: absolute;
+  border-radius: 9999px;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }

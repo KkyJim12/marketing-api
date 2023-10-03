@@ -159,6 +159,7 @@ const generateButton = async (id) => {
     const mainArea = document.createElement("div");
     const buttonContainer = document.createElement("div");
     const button = document.createElement("button");
+    const buttonCover = document.createElement("div");
     const mainContent = document.createElement("div");
     const innerDiv = document.createElement("div");
     const header = document.createElement("div");
@@ -241,15 +242,18 @@ const generateButton = async (id) => {
 
     if (style.data.button.left) {
       buttonContainer.appendChild(button);
+      buttonContainer.appendChild(buttonCover);
     }
 
     if (style.data.button.buttonStyle === "Rounded Button With Text") {
       buttonContainer.appendChild(textContainer);
+      buttonContainer.appendChild(buttonCover);
       textContainer.appendChild(buttonText);
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.appendChild(buttonText);
+      buttonContainer.appendChild(buttonCover);
       buttonText.style.color = style.data.button.textColor;
       buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
     }
@@ -257,6 +261,7 @@ const generateButton = async (id) => {
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
       const logoContainer = document.createElement("div");
       button.appendChild(buttonText);
+      buttonContainer.appendChild(buttonCover);
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
           ? `<iframe id="logo-iframe" scrolling="no" width="${
@@ -283,6 +288,7 @@ const generateButton = async (id) => {
 
     if (style.data.button.right) {
       buttonContainer.appendChild(button);
+      buttonContainer.appendChild(buttonCover);
     }
     mainContent.appendChild(innerDiv);
     innerDiv.appendChild(header);
@@ -329,16 +335,50 @@ const generateButton = async (id) => {
       button.id = "fab-button-65150cd97e5e7";
       button.style.width = style.data.button.size + "px";
       button.style.height = style.data.button.size + "px";
+      buttonCover.id = "fab-button-cover-65150cd97e5e7";
+      buttonCover.style.width = style.data.button.size + "px";
+      buttonCover.style.height = style.data.button.size + "px";
+      buttonCover.style.background = style.data.button.backgroundColor;
+      buttonCover.style.right = 0;
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.id = "fab-button-long-1-65150cd97e5e7";
       button.style.height = style.data.button.size - 10 + "px";
+      button.style.zIndex = 99999;
+      buttonCover.id = "fab-button-cover-65150cd97e5e7";
+      buttonCover.style.height = style.data.button.size + "px";
+      buttonCover.style.width =
+        style.data.button.size -
+        10 +
+        style.data.button.textContent.length * 15 +
+        "px";
+      buttonCover.style.position = "absolute";
+      buttonCover.style.background = style.data.button.backgroundColor;
+      buttonCover.style.opacity = "0.4";
+      buttonCover.style.zIndex = 99998;
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
       button.id = "fab-button-long-2-65150cd97e5e7";
       button.style.height = style.data.button.size - 10 + "px";
+      button.style.width =
+        style.data.button.size +
+        30 +
+        style.data.button.textContent.length * 10 +
+        "px";
+      button.style.zIndex = 99999;
+      buttonCover.id = "fab-button-cover-65150cd97e5e7";
+      buttonCover.style.height = style.data.button.size + "px";
+      buttonCover.style.width =
+        style.data.button.size +
+        30 +
+        style.data.button.textContent.length * 10 +
+        "px";
+      buttonCover.style.position = "absolute";
+      buttonCover.style.background = style.data.button.backgroundColor;
+      buttonCover.style.opacity = "0.15";
+      buttonCover.style.zIndex = 99998;
     }
 
     button.style.backgroundColor = style.data.button.backgroundColor;
