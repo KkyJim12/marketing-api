@@ -466,8 +466,10 @@ const generateButton = async (id) => {
       }
     });
 
-    button.style.visibility = "hidden";
-    buttonCover.style.visibility = "hidden";
+    if (style.data.button.iconType === "font-awesome") {
+      button.style.visibility = "hidden";
+      buttonCover.style.visibility = "hidden";
+    }
 
     const logoIframe = document.getElementById("logo-iframe");
     logoIframe.addEventListener("load", function () {
