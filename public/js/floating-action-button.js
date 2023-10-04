@@ -319,7 +319,6 @@ const generateButton = async (id) => {
     if (style.data.button.left) {
       mainArea.style.left = style.data.button.left + "px";
     }
-
     buttonContainer.id = "fab-button-container-65150cd97e5e7";
 
     if (
@@ -462,7 +461,14 @@ const generateButton = async (id) => {
       }
     });
 
+    button.style.visibility = "hidden";
+    buttonCover.style.visibility = "hidden";
+
     const logoIframe = document.getElementById("logo-iframe");
+    logoIframe.addEventListener("load", function () {
+      button.style.visibility = "visible";
+      buttonCover.style.visibility = "visible";
+    });
     logoIframe.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
         mainContent.style.visibility = "visible";
