@@ -77,7 +77,7 @@ const generateButton = async (id) => {
       `${apiUrl}/api/v1/user/my-products/${id}/public-button`,
       {
         headers: {
-          requesthost: window.location.hostname,
+          requesthost: getDomain(window.location.hostname),
           exactreferer: window.document.referrer,
           sessionref: atob(localStorage.getItem("fab-session-ref")).split(
             "."
@@ -144,7 +144,7 @@ const generateButton = async (id) => {
           1
         )}/${style.data.button.bodyColor.slice(
           1
-        )}/24"></iframe></span><span style="color:#343a40; display:flex; font-size:18px !important; font-weight:500 !important; margin-left:10 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p>${
+        )}/24"></iframe></span><span style="color:#343a40; display:flex; font-size:18px !important; font-weight:500 !important; margin-left:10 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p style="margin-top:auto; margin-bottom:auto;">${
           contacts[i].textContent
         } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto; margin-left:15px;">${
           contacts[i].description
@@ -453,9 +453,11 @@ const generateButton = async (id) => {
 
     pluginButton.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
+        innerDiv.style.visibility = "visible";
         mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
+        innerDiv.style.visibility = "hidden";
         mainContent.style.visibility = "hidden";
         isContentsOpened = false;
       }
@@ -471,9 +473,11 @@ const generateButton = async (id) => {
     });
     logoIframe.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
+        innerDiv.style.visibility = "visible";
         mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
+        innerDiv.style.visibility = "hidden";
         mainContent.style.visibility = "hidden";
         isContentsOpened = false;
       }

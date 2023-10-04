@@ -5,7 +5,6 @@ const createPrebuiltButtonValidate = () => {
     check("contents.*.textColor").not().isEmpty().withMessage("Please select text color"),
     check("contents.*.icon").not().isEmpty().withMessage("Please select icon"),
     check("contents.*.textContent").not().isEmpty().withMessage("Please type content"),
-    check("contents.*.description").not().isEmpty().withMessage("Please type description"),
     check("contents.*.destination")
       .not()
       .isEmpty()
