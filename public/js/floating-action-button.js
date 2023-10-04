@@ -132,7 +132,7 @@ const generateButton = async (id) => {
           contacts[i].id
         }', '${
           atob(localStorage.getItem("fab-session-ref")).split(".")[0]
-        }')" style="text-decoration:none !important; width:100% !important; display:flex !important; align-items: center; gap: 10px; color: ${
+        }')" style="transition:visibility 0s; text-decoration:none !important; width:100% !important; display:flex !important; align-items: center; gap: 10px; color: ${
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
@@ -458,13 +458,9 @@ const generateButton = async (id) => {
 
     pluginButton.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
-        contentLists.style.visibility = "visible";
-        innerDiv.style.visibility = "visible";
         mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
-        contentLists.style.visibility = "hidden";
-        innerDiv.style.visibility = "hidden";
         mainContent.style.visibility = "hidden";
         isContentsOpened = false;
       }
@@ -480,13 +476,9 @@ const generateButton = async (id) => {
     });
     logoIframe.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
-        contentLists.style.visibility = "visible";
-        innerDiv.style.visibility = "visible";
         mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
-        contentLists.style.visibility = "hidden";
-        innerDiv.style.visibility = "hidden";
         mainContent.style.visibility = "hidden";
         isContentsOpened = false;
       }
