@@ -426,7 +426,7 @@ exports.getStats = async (req, res) => {
 
     // Tables
 
-    const sources = ["direct", "search_engine (Organic)", "search_engine (Paid)", "social_media", "others"];
+    const sources = ["direct", "organic_search", "paid_search", "social_media", "others"];
 
     const getTableBySources = (source) => {
       const directTableConversion = [];

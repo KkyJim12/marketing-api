@@ -23,11 +23,11 @@ module.exports = storeStats = async (req, res, next) => {
               ? "Social Media"
               : parsedUrl.hostname.includes("google.co") &&
                 parsedUrl.hostname.includes("gclid")
-              ? "Search Engine (Paid)"
+              ? "Paid Search"
               : parsedUrl.hostname.includes("google.co") ||
                 parsedUrl.hostname.includes("bing.com") ||
                 parsedUrl.hostname.includes("yahoo.com")
-              ? "Search Engine (Organic)"
+              ? "Organic Search"
               : "Others",
           userProductId: req.params.id,
           sessionRef: req.headers.sessionref,
