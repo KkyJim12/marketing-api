@@ -353,6 +353,11 @@ const generateButton = async (id) => {
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.id = "fab-button-long-1-65150cd97e5e7";
+      button.style.width =
+        style.data.button.size -
+        10 +
+        style.data.button.textContent.length * 15 +
+        "px";
       button.style.height = style.data.button.size - 10 + "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
@@ -453,10 +458,12 @@ const generateButton = async (id) => {
 
     pluginButton.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
+        contentLists.style.visibility = "visible";
         innerDiv.style.visibility = "visible";
         mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
+        contentLists.style.visibility = "hidden";
         innerDiv.style.visibility = "hidden";
         mainContent.style.visibility = "hidden";
         isContentsOpened = false;
@@ -473,10 +480,12 @@ const generateButton = async (id) => {
     });
     logoIframe.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
+        contentLists.style.visibility = "visible";
         innerDiv.style.visibility = "visible";
         mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
+        contentLists.style.visibility = "hidden";
         innerDiv.style.visibility = "hidden";
         mainContent.style.visibility = "hidden";
         isContentsOpened = false;
