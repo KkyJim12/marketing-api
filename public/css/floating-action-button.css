@@ -116,7 +116,6 @@ h5 {
   padding-left: 30px !important;
   cursor: pointer !important;
   display: flex !important;
-  justify-content: center !important;
   align-items: center !important;
   white-space: nowrap !important;
   gap: 1rem !important;
@@ -173,7 +172,7 @@ h5 {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  right: 3;
+  right: 3px;
   position: absolute;
 }
 

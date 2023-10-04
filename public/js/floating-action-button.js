@@ -261,7 +261,6 @@ const generateButton = async (id) => {
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
       const logoContainer = document.createElement("div");
       button.appendChild(buttonText);
-      buttonContainer.appendChild(buttonCover);
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
           ? `<iframe id="logo-iframe" scrolling="no" width="${
@@ -281,6 +280,12 @@ const generateButton = async (id) => {
       logoContainer.style.background = style.data.button.backgroundColor;
       logoContainer.style.width = (style.data.button.size - 10) * 0.95 + "px";
       logoContainer.style.height = (style.data.button.size - 10) * 0.95 + "px";
+      const logoCover = document.createElement("div");
+      logoCover.style.position = "absolute";
+      logoCover.style.background = "transparent";
+      logoCover.style.width = (style.data.button.size - 10) * 0.95 + "px";
+      logoCover.style.height = (style.data.button.size - 10) * 0.95 + "px";
+      logoContainer.appendChild(logoCover);
 
       buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
       buttonText.style.marginLeft = style.data.button.size / 4 + "px";
@@ -317,7 +322,10 @@ const generateButton = async (id) => {
 
     buttonContainer.id = "fab-button-container-65150cd97e5e7";
 
-    if (style.data.button.right) {
+    if (
+      style.data.button.right ||
+      style.data.button.buttonStyle === "Long Rounded Button#2"
+    ) {
       buttonContainer.style.float = "right";
     } else {
       buttonContainer.style.float = "left";
@@ -335,11 +343,13 @@ const generateButton = async (id) => {
       button.id = "fab-button-65150cd97e5e7";
       button.style.width = style.data.button.size + "px";
       button.style.height = style.data.button.size + "px";
+      button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
       buttonCover.style.width = style.data.button.size + "px";
       buttonCover.style.height = style.data.button.size + "px";
       buttonCover.style.background = style.data.button.backgroundColor;
       buttonCover.style.right = 0;
+      buttonCover.style.zIndex = 99998;
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
@@ -405,8 +415,17 @@ const generateButton = async (id) => {
     if (style.data.button.bottom) {
       mainContent.style.bottom = 75 + contacts.length * 75 + "px";
     }
+
     if (style.data.button.left) {
       mainContent.style.left = "10px";
+
+      if (style.data.button.buttonStyle === "Long Rounded Button#2") {
+        buttonContainer.style.position = "relative";
+        buttonContainer.style.left =
+          style.data.button.size +
+          style.data.button.textContent.length * 10 +
+          "px";
+      }
     }
 
     // Inner Div styles
@@ -429,13 +448,16 @@ const generateButton = async (id) => {
         ? document.getElementById("fab-button-long-1-65150cd97e5e7")
         : document.getElementById("fab-button-long-2-65150cd97e5e7");
 
+    mainArea.appendChild(mainContent);
+    mainContent.id = "pluginButtonContents-65150cd97e5e7";
+    mainContent.style.visibility = "hidden";
+
     pluginButton.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
-        mainArea.appendChild(mainContent);
-        mainContent.id = "pluginButtonContents-65150cd97e5e7";
+        mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
-        mainArea.removeChild(mainContent);
+        mainContent.style.visibility = "hidden";
         isContentsOpened = false;
       }
     });
@@ -443,11 +465,10 @@ const generateButton = async (id) => {
     const logoIframe = document.getElementById("logo-iframe");
     logoIframe.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
-        mainArea.appendChild(mainContent);
-        mainContent.id = "pluginButtonContents-65150cd97e5e7";
+        mainContent.style.visibility = "visible";
         isContentsOpened = true;
       } else {
-        mainArea.removeChild(mainContent);
+        mainContent.style.visibility = "hidden";
         isContentsOpened = false;
       }
     });
