@@ -19,6 +19,9 @@ h5 {
 
 #fab-header-65150cd97e5e7 {
   font-family: Iconic, sans-serif !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .fab-content-text-65150cd97e5e7 {

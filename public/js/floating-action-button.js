@@ -378,16 +378,26 @@ const generateButton = async (id) => {
       button.style.height = style.data.button.size - 10 + "px";
       button.style.width =
         style.data.button.size +
-        30 +
-        style.data.button.textContent.length * 10 +
+        style.data.button.size / 3.5 +
+        style.data.button.textContent.length *
+          (style.data.button.size === 90
+            ? 16
+            : style.data.button.size === 70
+            ? 13
+            : 10) +
         "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
       buttonCover.style.height = style.data.button.size + "px";
       buttonCover.style.width =
         style.data.button.size +
-        30 +
-        style.data.button.textContent.length * 10 +
+        style.data.button.size / 3.5 +
+        style.data.button.textContent.length *
+          (style.data.button.size === 90
+            ? 16
+            : style.data.button.size === 70
+            ? 13
+            : 10) +
         "px";
       buttonCover.style.position = "absolute";
       buttonCover.style.background = style.data.button.backgroundColor;
@@ -426,8 +436,13 @@ const generateButton = async (id) => {
       if (style.data.button.buttonStyle === "Long Rounded Button#2") {
         buttonContainer.style.position = "relative";
         buttonContainer.style.left =
-          style.data.button.size +
-          style.data.button.textContent.length * 10 +
+          25 +
+          style.data.button.textContent.length *
+            (style.data.button.size === 90
+              ? 16
+              : style.data.button.size === 70
+              ? 13
+              : 10) +
           "px";
       }
     }
