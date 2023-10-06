@@ -1,5 +1,5 @@
-const apiUrl = "https://api.jimmytechnology.com";
-const iconUrl = "https://marketing-cta.netlify.app";
+const apiUrl = "http://localhost:8080";
+const iconUrl = "http://localhost:3000";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
@@ -66,6 +66,18 @@ const generateSession = () => {
     const sessionRef = btoa(id + "." + expireTime);
     localStorage.setItem("fab-session-ref", sessionRef);
   }
+};
+
+const getTextWidth = (text, font) => {
+  // re-use canvas object for better performance
+  const canvas =
+    getTextWidth.canvas ||
+    (getTextWidth.canvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  context.font = font;
+  const metrics = context.measureText(text);
+  console.log(metrics.width);
+  return metrics.width;
 };
 
 const generateButton = async (id) => {
@@ -217,9 +229,7 @@ const generateButton = async (id) => {
                 : style.data.button.size / 2
             }"></iframe>`
           : `<img id="fab-img-65150cd97e5e7" style="width:${
-              style.data.button.buttonStyle === "Long Rounded Button#1"
-                ? style.data.button.size / 2.5
-                : style.data.button.size / 2
+              style.data.button.size / 2
             }px; height:${style.data.button.size / 2}px;" src="${
               style.data.button.icon
             }" alt="logo" />`;
@@ -274,7 +284,9 @@ const generateButton = async (id) => {
             )}/${style.data.button.backgroundColor.slice(1)}/${
               style.data.button.size / 2.5
             }"></iframe>`
-          : `<img src="${style.data.button.icon}" alt="logo" />`;
+          : `<img style="width:${style.data.button.size * 0.5}px; height:${
+              style.data.button.size * 0.5
+            }px;" src="${style.data.button.icon}" alt="logo" />`;
       button.appendChild(logoContainer);
       logoContainer.id = "logo-container-65150cd97e5e7";
       logoContainer.style.background = style.data.button.backgroundColor;
@@ -377,27 +389,27 @@ const generateButton = async (id) => {
       button.id = "fab-button-long-2-65150cd97e5e7";
       button.style.height = style.data.button.size - 10 + "px";
       button.style.width =
+        style.data.button.size / 4 +
         style.data.button.size +
-        style.data.button.size / 3.5 +
-        style.data.button.textContent.length *
+        getTextWidth(style.data.button.textContent) *
           (style.data.button.size === 90
-            ? 16
+            ? 2.8
             : style.data.button.size === 70
-            ? 13
-            : 10) +
+            ? 2.2
+            : 1.6) +
         "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
       buttonCover.style.height = style.data.button.size + "px";
       buttonCover.style.width =
+        style.data.button.size / 4 +
         style.data.button.size +
-        style.data.button.size / 3.5 +
-        style.data.button.textContent.length *
+        getTextWidth(style.data.button.textContent) *
           (style.data.button.size === 90
-            ? 16
+            ? 2.8
             : style.data.button.size === 70
-            ? 13
-            : 10) +
+            ? 2.2
+            : 1.6) +
         "px";
       buttonCover.style.position = "absolute";
       buttonCover.style.background = style.data.button.backgroundColor;
@@ -436,13 +448,13 @@ const generateButton = async (id) => {
       if (style.data.button.buttonStyle === "Long Rounded Button#2") {
         buttonContainer.style.position = "relative";
         buttonContainer.style.left =
-          25 +
-          style.data.button.textContent.length *
+          style.data.button.size / 2.8 +
+          getTextWidth(style.data.button.textContent) *
             (style.data.button.size === 90
-              ? 16
+              ? 2.8
               : style.data.button.size === 70
-              ? 13
-              : 10) +
+              ? 2.2
+              : 1.6) +
           "px";
       }
     }
