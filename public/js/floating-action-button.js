@@ -365,20 +365,17 @@ const generateButton = async (id) => {
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.id = "fab-button-long-1-65150cd97e5e7";
-      button.style.width =
-        style.data.button.size -
-        10 +
-        style.data.button.textContent.length * 15 +
-        "px";
       button.style.height = style.data.button.size - 10 + "px";
+      button.style.paddingRight =
+        style.data.button.size === 90
+          ? 70
+          : style.data.button.size === 70
+          ? 60
+          : 50 + "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
       buttonCover.style.height = style.data.button.size + "px";
-      buttonCover.style.width =
-        style.data.button.size -
-        10 +
-        style.data.button.textContent.length * 15 +
-        "px";
+      buttonCover.style.width = button.offsetWidth + "px";
       buttonCover.style.position = "absolute";
       buttonCover.style.background = style.data.button.backgroundColor;
       buttonCover.style.opacity = "0.4";
