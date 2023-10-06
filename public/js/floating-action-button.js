@@ -368,9 +368,9 @@ const generateButton = async (id) => {
       button.style.height = style.data.button.size - 10 + "px";
       button.style.paddingRight =
         style.data.button.size === 90
-          ? 70
+          ? 70 + "px"
           : style.data.button.size === 70
-          ? 60
+          ? 60 + "px"
           : 50 + "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
