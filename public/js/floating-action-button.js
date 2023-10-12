@@ -1,4 +1,4 @@
-const apiUrl = "https//api.jimmytechnology.com";
+const apiUrl = "https://api.jimmytechnology.com";
 const iconUrl = "https://marketing-cta.netlify.app";
 
 const getDomain = (url, subdomain) => {
