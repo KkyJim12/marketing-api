@@ -1,5 +1,5 @@
-const apiUrl = "https://api.jimmytechnology.com";
-const iconUrl = "https://marketing-cta.netlify.app";
+const apiUrl = "http://localhost:8080";
+const iconUrl = "http://localhost:3000";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
@@ -385,29 +385,11 @@ const generateButton = async (id) => {
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
       button.id = "fab-button-long-2-65150cd97e5e7";
       button.style.height = style.data.button.size - 10 + "px";
-      button.style.width =
-        style.data.button.size / 4 +
-        style.data.button.size +
-        getTextWidth(style.data.button.textContent) *
-          (style.data.button.size === 90
-            ? 2.8
-            : style.data.button.size === 70
-            ? 2.2
-            : 1.6) +
-        "px";
+      button.style.paddingRight = style.data.button.size + "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
       buttonCover.style.height = style.data.button.size + "px";
-      buttonCover.style.width =
-        style.data.button.size / 4 +
-        style.data.button.size +
-        getTextWidth(style.data.button.textContent) *
-          (style.data.button.size === 90
-            ? 2.8
-            : style.data.button.size === 70
-            ? 2.2
-            : 1.6) +
-        "px";
+      buttonCover.style.width = button.offsetWidth + "px";
       buttonCover.style.position = "absolute";
       buttonCover.style.background = style.data.button.backgroundColor;
       buttonCover.style.opacity = "0.15";

@@ -142,7 +142,6 @@ h5 {
 
 #fab-button-long-2-65150cd97e5e7 {
   padding-left:10px;
-  padding-right:10px;
   background-color: white !important;
   border-radius: 9999px !important;
   border: 0px !important;
@@ -157,7 +156,6 @@ h5 {
 }
 
 #fab-button-long-2-65150cd97e5e7 h5 {
-  position: absolute;
   font-weight: 500;
   color: #374151 !important;
 }
