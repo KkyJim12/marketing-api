@@ -141,6 +141,7 @@ h5 {
 /* Long button #2 */
 
 #fab-button-long-2-65150cd97e5e7 {
+  width: auto;
   padding-left:10px;
   background-color: white !important;
   border-radius: 9999px !important;
