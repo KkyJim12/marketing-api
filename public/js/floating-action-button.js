@@ -113,14 +113,14 @@ const generateButton = async (id) => {
     let prefixIcon;
 
     if (splitIcon[0] === "fas") {
-      prefixIcon = "fa-solid";
+      prefixIcon = "fas";
     } else if (splitIcon[0] === "far") {
-      prefixIcon = "fa-regular";
+      prefixIcon = "far";
     } else {
-      prefixIcon = "fa-brands";
+      prefixIcon = "fab";
     }
 
-    let iconValue = "fa-" + splitIcon[1];
+    let iconValue = splitIcon[1];
 
     // Manage contents
     const contents = [];
@@ -130,14 +130,14 @@ const generateButton = async (id) => {
       let contentPrefixIcon;
 
       if (contentSplitIcon[0] === "fas") {
-        contentPrefixIcon = "fa-solid";
+        contentPrefixIcon = "fas";
       } else if (splitIcon[0] === "far") {
-        prefixIcon = "fa-regular";
+        contentPrefixIcon = "far";
       } else {
-        contentPrefixIcon = "fa-brands";
+        contentPrefixIcon = "fab";
       }
 
-      let contentIconValue = "fa-" + contentSplitIcon[1];
+      let contentIconValue = contentSplitIcon[1];
 
       contents.push(
         `<a class="${contacts[i].class}" onclick="storeEvent('${
@@ -148,22 +148,13 @@ const generateButton = async (id) => {
           contacts[i].textColor
         } !important;" href="${
           contacts[i].destination
-        }" target="_blank"><span style="display:flex; align-items: center;"><div style="width:24px; height:24px; cursor:pointer; z-index:9999;background:transparent; position:absolute;"></div><iframe scrolling="no" width="24" height="24" style="z-index:1111;border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${contacts[
-          i
-        ].icon
-          .split(" ")
-          .join("_")}/${contacts[i].textColor.slice(
-          1
-        )}/${style.data.button.bodyColor.slice(
-          1
-        )}/24"></iframe></span><span style="color:#343a40; display:flex; font-size:18px !important; font-weight:500 !important; margin-left:10 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p style="margin-top:auto; margin-bottom:auto;">${
+        }" target="_blank"><div style="display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: 1fr; grid-column-gap: 1.5rem; grid-row-gap: 0px;"><div style="grid-column: 1/3"><span style="display:flex; align-items: center; justify-content: center; font-size:24px; height: 100%;"><i class="${contentPrefixIcon} ${contentIconValue}"></i></span></div>
+        <div style="grid-column: 3/11;"><span style="color:#343a40; display:flex; flex-direction: column; font-size:18px !important; font-weight:500 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p style="margin-top:auto; margin-bottom:auto;">${
           contacts[i].textContent
-        } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto; margin-left:15px;">${
+        } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto;">${
           contacts[i].description
-        }</p></span> <div style="width:24px; height:24px; cursor:pointer; z-index:9999;right:25px;background:transparent; position:absolute;"></div>
-        <iframe scrolling="no" width="24" height="24" style="z-index:1111;border: 0px none; margin-left:auto;" src="${iconUrl}/icons/fas_angle-right/343a40/${style.data.button.bodyColor.slice(
-          1
-        )}/24"></iframe></a>`
+        }</p></span></div> <div style="cursor:pointer; z-index:9999; grid-column:12/12;"><div style="display: flex; align-items: center; justify-content: center; font-size: 24px; height: 100%; margin-right: 5px;"><i class="fa fa-chevron-right"></i></div></div></div>
+       </a>`
       );
     }
 
@@ -178,6 +169,8 @@ const generateButton = async (id) => {
     const contentLists = document.createElement("div");
     let textContainer;
     let buttonText;
+
+    mainContent.style.visibility = "hidden";
 
     // Create text container for rounded button
     if (
@@ -211,23 +204,7 @@ const generateButton = async (id) => {
               style.data.button.buttonStyle === "Long Rounded Button#1"
                 ? style.data.button.size / 2.5
                 : style.data.button.size / 2
-            }px; cursor:pointer; z-index:9999;background:transparent; position:absolute;"></div><iframe id="logo-iframe" scrolling="no" width="${
-              style.data.button.buttonStyle === "Long Rounded Button#1"
-                ? style.data.button.size / 2.5
-                : style.data.button.size / 2
-            }" height="${
-              style.data.button.buttonStyle === "Long Rounded Button#1"
-                ? style.data.button.size / 2.5
-                : style.data.button.size / 2
-            }" style="z-index:1111; border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
-              .split(" ")
-              .join("_")}/${style.data.button.textColor.slice(
-              1
-            )}/${style.data.button.backgroundColor.slice(1)}/${
-              style.data.button.buttonStyle === "Long Rounded Button#1"
-                ? style.data.button.size / 2.5
-                : style.data.button.size / 2
-            }"></iframe>`
+            }px; cursor:pointer; z-index:9999;background:transparent; position:absolute; display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
           : `<img id="fab-img-65150cd97e5e7" style="width:${
               style.data.button.size / 2
             }px; height:${style.data.button.size / 2}px;" src="${
@@ -252,7 +229,6 @@ const generateButton = async (id) => {
 
     if (style.data.button.left) {
       buttonContainer.appendChild(button);
-      buttonContainer.appendChild(buttonCover);
     }
 
     if (style.data.button.buttonStyle === "Rounded Button With Text") {
@@ -273,17 +249,7 @@ const generateButton = async (id) => {
       button.appendChild(buttonText);
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<iframe id="logo-iframe" scrolling="no" width="${
-              style.data.button.size / 2.5
-            }" height="${
-              style.data.button.size / 2.5
-            }" style="border: 0px none; cursor:pointer; margin-top:auto; margin-bottom:auto;" src="${iconUrl}/icons/${style.data.button.icon
-              .split(" ")
-              .join("_")}/${style.data.button.textColor.slice(
-              1
-            )}/${style.data.button.backgroundColor.slice(1)}/${
-              style.data.button.size / 2.5
-            }"></iframe>`
+          ? ``
           : `<img style="width:${style.data.button.size * 0.5}px; height:${
               style.data.button.size * 0.5
             }px;" src="${style.data.button.icon}" alt="logo" />`;
@@ -460,7 +426,6 @@ const generateButton = async (id) => {
 
     mainArea.appendChild(mainContent);
     mainContent.id = "pluginButtonContents-65150cd97e5e7";
-    mainContent.style.visibility = "hidden";
 
     pluginButton.addEventListener("click", (event) => {
       if (isContentsOpened === false) {
@@ -471,27 +436,8 @@ const generateButton = async (id) => {
         isContentsOpened = false;
       }
     });
-
-    if (style.data.button.iconType === "font-awesome") {
-      button.style.visibility = "hidden";
-      buttonCover.style.visibility = "hidden";
-    }
-
-    const logoIframe = document.getElementById("logo-iframe");
-    logoIframe.addEventListener("load", function () {
-      button.style.visibility = "visible";
-      buttonCover.style.visibility = "visible";
-    });
-    logoIframe.addEventListener("click", (event) => {
-      if (isContentsOpened === false) {
-        mainContent.style.visibility = "visible";
-        isContentsOpened = true;
-      } else {
-        mainContent.style.visibility = "hidden";
-        isContentsOpened = false;
-      }
-    });
   } catch (error) {
+    console.log(error);
     console.log("Website is not match button qualifications.");
   }
 };
