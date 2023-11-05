@@ -1,5 +1,5 @@
-const apiUrl = "https://api.jimmytechnology.com";
-const iconUrl = "https://marketing-cta.netlify.app";
+const apiUrl = "http://localhost:8080";
+const iconUrl = "http://localhost:3000";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
@@ -204,7 +204,7 @@ const generateButton = async (id) => {
               style.data.button.buttonStyle === "Long Rounded Button#1"
                 ? style.data.button.size / 2.5
                 : style.data.button.size / 2
-            }px; cursor:pointer; z-index:9999;background:transparent; position:absolute; display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
+            }px; cursor:pointer; z-index:99999; background:transparent; position:absolute; display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
           : `<img id="fab-img-65150cd97e5e7" style="width:${
               style.data.button.size / 2
             }px; height:${style.data.button.size / 2}px;" src="${
@@ -363,6 +363,7 @@ const generateButton = async (id) => {
     }
 
     button.style.backgroundColor = style.data.button.backgroundColor;
+    button.style.background = style.data.button.backgroundColor;
     button.style.color = style.data.button.textColor;
 
     mainContent.style.position = "relative";
