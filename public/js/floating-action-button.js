@@ -204,7 +204,7 @@ const generateButton = async (id) => {
               style.data.button.buttonStyle === "Long Rounded Button#1"
                 ? style.data.button.size / 2.5
                 : style.data.button.size / 2
-            }px; cursor:pointer; z-index:99999; background:transparent; position:absolute; display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
+            }px; cursor:pointer; z-index:99999; background:transparent;  display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
           : `<img id="fab-img-65150cd97e5e7" style="width:${
               style.data.button.size / 2
             }px; height:${style.data.button.size / 2}px;" src="${
@@ -258,12 +258,23 @@ const generateButton = async (id) => {
       logoContainer.style.background = style.data.button.backgroundColor;
       logoContainer.style.width = (style.data.button.size - 10) * 0.95 + "px";
       logoContainer.style.height = (style.data.button.size - 10) * 0.95 + "px";
-      const logoCover = document.createElement("div");
-      logoCover.style.position = "absolute";
-      logoCover.style.background = "transparent";
-      logoCover.style.width = (style.data.button.size - 10) * 0.95 + "px";
-      logoCover.style.height = (style.data.button.size - 10) * 0.95 + "px";
-      logoContainer.appendChild(logoCover);
+      logoContainer.innerHTML =
+        style.data.button.iconType === "font-awesome"
+          ? `<div style="width:${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }px; height:${
+              style.data.button.buttonStyle === "Long Rounded Button#1"
+                ? style.data.button.size / 2.5
+                : style.data.button.size / 2
+            }px; cursor:pointer; z-index:99999; background:transparent;  display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
+          : `<img id="fab-img-65150cd97e5e7" style="width:${
+              style.data.button.size / 2
+            }px; height:${style.data.button.size / 2}px;" src="${
+              style.data.button.icon
+            }" alt="logo" />`;
+      
 
       buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
       buttonText.style.marginLeft = style.data.button.size / 4 + "px";
@@ -332,12 +343,6 @@ const generateButton = async (id) => {
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
       button.id = "fab-button-long-1-65150cd97e5e7";
       button.style.height = style.data.button.size - 10 + "px";
-      button.style.paddingRight =
-        style.data.button.size === 90
-          ? 70 + "px"
-          : style.data.button.size === 70
-          ? 60 + "px"
-          : 50 + "px";
       button.style.zIndex = 99999;
       buttonCover.id = "fab-button-cover-65150cd97e5e7";
       buttonCover.style.height = style.data.button.size + "px";
