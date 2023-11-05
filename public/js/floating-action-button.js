@@ -1,5 +1,5 @@
-const apiUrl = "http://localhost:8080";
-const iconUrl = "http://localhost:3000";
+const apiUrl = "https://api.jimmytechnology.com";
+const iconUrl = "https://marketing-cta.netlify.app";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
@@ -232,9 +232,16 @@ const generateButton = async (id) => {
     }
 
     if (style.data.button.buttonStyle === "Rounded Button With Text") {
-      buttonContainer.appendChild(textContainer);
+      if (style.data.button.left) {
+        buttonContainer.appendChild(button);
+      }
       buttonContainer.appendChild(buttonCover);
+      buttonContainer.appendChild(textContainer);
       textContainer.appendChild(buttonText);
+
+      if (style.data.button.right) {
+        buttonContainer.appendChild(button);
+      }
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#1") {
@@ -274,16 +281,16 @@ const generateButton = async (id) => {
             }px; height:${style.data.button.size / 2}px;" src="${
               style.data.button.icon
             }" alt="logo" />`;
-      
 
       buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
       buttonText.style.marginLeft = style.data.button.size / 4 + "px";
     }
 
-    if (style.data.button.right) {
+    if (style.data.button.buttonStyle !== "Rounded Button With Text") {
       buttonContainer.appendChild(button);
       buttonContainer.appendChild(buttonCover);
     }
+
     mainContent.appendChild(innerDiv);
     innerDiv.appendChild(header);
     innerDiv.appendChild(contentLists);
