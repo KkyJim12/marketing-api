@@ -151,8 +151,10 @@ const generateButton = async (id) => {
         }" target="_blank"><div style="display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: 1fr; grid-column-gap: 1.5rem; grid-row-gap: 0px;"><div style="grid-column: 1/3"><span style="display:flex; align-items: center; justify-content: center; font-size:24px; height: 100%;"><i class="${contentPrefixIcon} ${contentIconValue}"></i></span></div>
         <div style="grid-column: 3/11;"><span style="color:#343a40; display:flex; flex-direction: column; font-size:18px !important; font-weight:500 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p style="margin-top:auto; margin-bottom:auto;">${
           contacts[i].textContent
-        } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto;">${
-          contacts[i].description
+        } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto; visibility: ${
+          contacts[i].description ? "visible" : "hidden"
+        };">${
+          contacts[i].description ? contacts[i].description : "description"
         }</p></span></div> <div style="cursor:pointer; z-index:9999; grid-column:12/12;"><div style="display: flex; align-items: center; justify-content: center; font-size: 24px; height: 100%; margin-right: 5px; color: rgb(107 114 128);"><i class="fa fa-chevron-right"></i></div></div></div>
        </a>`
       );
