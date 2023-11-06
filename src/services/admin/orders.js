@@ -46,44 +46,74 @@ exports.acceptOrder = async (req) => {
 
     const thisOrder = await Order.findOne({ where: { id: req.params.id } });
 
-    const userProduct = await UserProduct.create({
-      name: thisOrder.name,
-      type: thisOrder.type,
-      price: thisOrder.price,
-      domains: thisOrder.domains,
-      duration: thisOrder.duration,
-      startDate: moment().format(),
-      endDate: moment().add(thisOrder.duration, "days"),
-      status: "On going",
-      userId: thisOrder.userId,
-      productId: thisOrder.productId,
-    });
+    if (thisOrder.type === "Extends") {
+      const userProduct = await UserProduct.findOne({
+        where: { id: thisOrder.name },
+      });
 
-    // Floating Action Button
-    if (thisOrder.type === "Floating Action Button") {
-      await FloatingActionButton.create({
-        buttonStyle: "Rounded Button",
-        backgroundColor: "#3b82f6",
-        bodyColor: "#ffffff",
-        textColor: "#f5f5f5",
-        textContent: "Minible",
-        size: 70,
-        top: null,
-        right: 20,
-        bottom: 20,
-        left: null,
-        iconType: "font-awesome",
-        icon: "fas message",
-        visibleOnPC: true,
-        visibleOnTablet: true,
-        visibleOnMobile: true,
+      if (userProduct.status === "Expired") {
+        await UserProduct.update(
+          {
+            startDate: moment().format(),
+            endDate: moment().add(thisOrder.duration, "days"),
+          },
+          {
+            where: { id: thisOrder.name },
+          }
+        );
+      } else {
+        await UserProduct.update(
+          {
+            endDate: moment(userProduct.endDate).add(
+              thisOrder.duration,
+              "days"
+            ),
+          },
+          {
+            where: { id: thisOrder.name },
+          }
+        );
+      }
+      return { userProduct };
+    } else {
+      const userProduct = await UserProduct.create({
+        name: thisOrder.name,
+        type: thisOrder.type,
+        price: thisOrder.price,
+        domains: thisOrder.domains,
+        duration: thisOrder.duration,
+        startDate: moment().format(),
+        endDate: moment().add(thisOrder.duration, "days"),
+        status: "On going",
         userId: thisOrder.userId,
         productId: thisOrder.productId,
-        userProductId: userProduct.id,
       });
-    }
 
-    return { userProduct };
+      // Floating Action Button
+      if (thisOrder.type === "Floating Action Button") {
+        await FloatingActionButton.create({
+          buttonStyle: "Rounded Button",
+          backgroundColor: "#3b82f6",
+          bodyColor: "#ffffff",
+          textColor: "#f5f5f5",
+          textContent: "Minible",
+          size: 70,
+          top: null,
+          right: 20,
+          bottom: 20,
+          left: null,
+          iconType: "font-awesome",
+          icon: "fas message",
+          visibleOnPC: true,
+          visibleOnTablet: true,
+          visibleOnMobile: true,
+          userId: thisOrder.userId,
+          productId: thisOrder.productId,
+          userProductId: userProduct.id,
+        });
+      }
+      return { userProduct };
+    }
   } catch (error) {
     throw new Error(500, "Error when update order status");
   }

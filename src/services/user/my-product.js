@@ -241,20 +241,9 @@ exports.renewProduct = async (req, res) => {
       where: { id: req.body.product.id },
     });
 
-    if (product.status !== "Expired") {
-      throw new Error(500, "Your product is not expired yet");
-    }
-
-    const thisUserProduct = UserProduct.update(
-      { status: "Renew" },
-      {
-        where: { id: product.id },
-      }
-    );
-
     const newOrder = {
-      name: product.name,
-      type: product.type,
+      name: product.id,
+      type: 'Extends',
       domains: product.domains,
       duration: product.duration,
       price: product.price,
@@ -426,7 +415,13 @@ exports.getStats = async (req, res) => {
 
     // Tables
 
-    const sources = ["direct", "organic_search", "paid_search", "social_media", "others"];
+    const sources = [
+      "direct",
+      "organic_search",
+      "paid_search",
+      "social_media",
+      "others",
+    ];
 
     const getTableBySources = (source) => {
       const directTableConversion = [];
