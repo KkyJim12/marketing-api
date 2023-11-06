@@ -153,7 +153,7 @@ const generateButton = async (id) => {
           contacts[i].textContent
         } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto;">${
           contacts[i].description
-        }</p></span></div> <div style="cursor:pointer; z-index:9999; grid-column:12/12;"><div style="display: flex; align-items: center; justify-content: center; font-size: 24px; height: 100%; margin-right: 5px;"><i class="fa fa-chevron-right"></i></div></div></div>
+        }</p></span></div> <div style="cursor:pointer; z-index:9999; grid-column:12/12;"><div style="display: flex; align-items: center; justify-content: center; font-size: 24px; height: 100%; margin-right: 5px; color: rgb(107 114 128);"><i class="fa fa-chevron-right"></i></div></div></div>
        </a>`
       );
     }
