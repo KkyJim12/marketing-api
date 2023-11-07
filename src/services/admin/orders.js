@@ -103,7 +103,7 @@ exports.acceptOrder = async (req) => {
           bottom: 20,
           left: null,
           iconType: "font-awesome",
-          icon: "fas message",
+          icon: "fab facebook",
           visibleOnPC: true,
           visibleOnTablet: true,
           visibleOnMobile: true,
