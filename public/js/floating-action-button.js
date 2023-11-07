@@ -1,5 +1,5 @@
-const apiUrl = "http://localhost:8080";
-const iconUrl = "http://localhost:3000";
+const apiUrl = "https://api.jimmytechnology.com";
+const iconUrl = "https://marketing-cta.netlify.app";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
