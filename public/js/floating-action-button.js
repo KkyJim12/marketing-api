@@ -1,5 +1,5 @@
-const apiUrl = "https://api.jimmytechnology.com";
-const iconUrl = "https://marketing-cta.netlify.app";
+const apiUrl = "http://localhost:8080";
+const iconUrl = "http://localhost:3000";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
@@ -149,7 +149,7 @@ const generateButton = async (id) => {
         } !important;" href="${
           contacts[i].destination
         }" target="_blank"><div style="display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: 1fr; grid-column-gap: 1.5rem; grid-row-gap: 0px;"><div style="grid-column: 1/3"><span style="display:flex; align-items: center; justify-content: center; font-size:24px; height: 100%;"><i class="${contentPrefixIcon} ${contentIconValue}"></i></span></div>
-        <div style="grid-column: 3/11;"><span style="color:#343a40; display:flex; flex-direction: column; font-size:18px !important; font-weight:500 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p style="margin-top:auto; margin-bottom:auto;">${
+        <div style="grid-column: 3/11;"><span style="width:200px; white-space:nowrap; overflow: hidden; text-overflow: ellipsis;  color:#343a40; display:flex; flex-direction: column; font-size:18px !important; font-weight:500 !important; cursor:pointer; margin-top:auto; margin-bottom:auto;"> <p style="margin-top:auto; margin-bottom:auto;">${
           contacts[i].textContent
         } <p style="font-size:12px; font-weight:400; color: rgb(107 114 128); margin-top:auto; margin-bottom:auto;">${
           contacts[i].description
@@ -196,14 +196,10 @@ const generateButton = async (id) => {
     ) {
       button.innerHTML =
         style.data.button.iconType === "font-awesome"
-          ? `<div style="width:${
-              style.data.button.buttonStyle === "Long Rounded Button#1"
-                ? style.data.button.size / 2.5
-                : style.data.button.size / 2
+          ? `<div style="font-size:${style.data.button.size / 2.5}px; width:${
+              style.data.button.size / 2.5
             }px; height:${
-              style.data.button.buttonStyle === "Long Rounded Button#1"
-                ? style.data.button.size / 2.5
-                : style.data.button.size / 2
+              style.data.button.size / 2.5
             }px; cursor:pointer; z-index:99999; background:transparent;  display: flex; justify-content: center; align-items: center;"><i class="${prefixIcon} ${iconValue}"></i></div>`
           : `<img id="fab-img-65150cd97e5e7" style="width:${
               style.data.button.size / 2
@@ -237,6 +233,7 @@ const generateButton = async (id) => {
       }
       buttonContainer.appendChild(buttonCover);
       buttonContainer.appendChild(textContainer);
+      buttonText.style.fontSize = style.data.button.size / 3.5 + "px";
       textContainer.appendChild(buttonText);
 
       if (style.data.button.right) {
@@ -252,6 +249,7 @@ const generateButton = async (id) => {
     }
 
     if (style.data.button.buttonStyle === "Long Rounded Button#2") {
+      button.style.position = "relative";
       const logoContainer = document.createElement("div");
       button.appendChild(buttonText);
       logoContainer.innerHTML =
@@ -265,6 +263,8 @@ const generateButton = async (id) => {
       logoContainer.style.background = style.data.button.backgroundColor;
       logoContainer.style.width = (style.data.button.size - 10) * 0.95 + "px";
       logoContainer.style.height = (style.data.button.size - 10) * 0.95 + "px";
+      logoContainer.style.position = "absolute";
+      logoContainer.style.right = "3px";
       logoContainer.innerHTML =
         style.data.button.iconType === "font-awesome"
           ? `<div style="width:${
@@ -317,10 +317,7 @@ const generateButton = async (id) => {
     }
     buttonContainer.id = "fab-button-container-65150cd97e5e7";
 
-    if (
-      style.data.button.right ||
-      style.data.button.buttonStyle === "Long Rounded Button#2"
-    ) {
+    if (style.data.button.right) {
       buttonContainer.style.float = "right";
     } else {
       buttonContainer.style.float = "left";
@@ -382,39 +379,26 @@ const generateButton = async (id) => {
 
     if (style.data.button.top) {
       mainContent.style.top =
-        style.data.button.size === 50
-          ? "60px"
+        style.data.button.size === 60
+          ? "70px"
           : style.data.button.size === 70
           ? "80px"
-          : "100px";
+          : "90px";
     }
     if (style.data.button.right) {
       mainContent.style.right =
-        style.data.button.size === 50
-          ? "300px"
+        style.data.button.size === 60
+          ? "290px"
           : style.data.button.size === 70
           ? "280px"
-          : "260px";
+          : "270px";
     }
     if (style.data.button.bottom) {
       mainContent.style.bottom = 75 + contacts.length * 75 + "px";
     }
 
     if (style.data.button.left) {
-      mainContent.style.left = "10px";
-
-      if (style.data.button.buttonStyle === "Long Rounded Button#2") {
-        buttonContainer.style.position = "relative";
-        buttonContainer.style.left =
-          style.data.button.size / 2.8 +
-          getTextWidth(style.data.button.textContent) *
-            (style.data.button.size === 90
-              ? 2.8
-              : style.data.button.size === 70
-              ? 2.2
-              : 1.6) +
-          "px";
-      }
+      mainContent.style.left = "5px";
     }
 
     // Inner Div styles

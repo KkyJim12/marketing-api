@@ -51,8 +51,6 @@ h5 {
   align-items: center !important;
   gap: 10px !important;
   border-top: 1px solid rgb(229 231 235) !important;
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
   padding-right: 1.5rem !important;
   padding-left: 1.5rem !important;
   font-weight: 500 !important;
@@ -76,13 +74,6 @@ h5 {
   align-items: center !important;
 }
 
-#fab-button-65150cd97e5e7 i {
-  font-size: 24px !important;
-}
-
-#fab-button-65150cd97e5e7 svg {
-  font-size: 24px !important;
-}
 
 #fab-inner-div-65150cd97e5e7 {
   position: absolute !important;
