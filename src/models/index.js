@@ -58,4 +58,10 @@ db.subPage.belongsTo(db.page, {
   constraints: true,
 });
 
+db.order.hasOne(db.product, {
+  sourceKey: "productId",
+  foreignKey: "id",
+  constraints: true,
+});
+
 module.exports = db;
