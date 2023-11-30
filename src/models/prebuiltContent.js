@@ -6,6 +6,10 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     textColor: {
       type: Sequelize.STRING,
       allowNull: false,

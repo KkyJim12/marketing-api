@@ -2,6 +2,7 @@ const { body, check, validationResult } = require("express-validator");
 
 const createPrebuiltContentValidate = () => {
   return [
+    check("name").not().isEmpty().withMessage("Please type name"),
     check("textColor").not().isEmpty().withMessage("Please select text color"),
     check("icon").not().isEmpty().withMessage("Please select icon"),
     check("textContent").not().isEmpty().withMessage("Please type content"),

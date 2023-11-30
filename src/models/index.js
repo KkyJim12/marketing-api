@@ -64,4 +64,10 @@ db.order.hasOne(db.product, {
   constraints: true,
 });
 
+db.order.hasOne(db.user, {
+  sourceKey: "userId",
+  foreignKey: "id",
+  constraints: true,
+});
+
 module.exports = db;

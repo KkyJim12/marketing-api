@@ -15,6 +15,7 @@ exports.getPrebuiltButtons = async (req, res) => {
 exports.createPrebuiltButton = async (req, res) => {
   try {
     const newPrebuiltButton = {
+      name: req.body.name,
       buttonStyle: req.body.buttonStyle,
       backgroundColor: req.body.backgroundColor,
       bodyColor: req.body.bodyColor,

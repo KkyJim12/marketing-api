@@ -1,12 +1,16 @@
 const db = require("../../models/index");
 const Order = db.order;
+const User = db.user;
+const Product = db.product;
 const UserProduct = db.userProduct;
 const FloatingActionButton = db.floatingActionButton;
 const moment = require("moment");
 
 exports.getOrders = async () => {
   try {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      include: [{ model: User }, { model: Product }],
+    });
     return orders;
   } catch (error) {
     throw new Error(500, "Error when get orders");
