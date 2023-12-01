@@ -137,38 +137,83 @@ exports.updateButtonStyle = async (req, res) => {
 
 exports.updateButtonContents = async (req, res) => {
   try {
-    // Delete first
-    await FabContent.destroy({
-      where: { userProductId: req.params.id },
-    });
-
     const contents = [];
     for (let i = 0; i < req.body.contents.length; i++) {
-      const newContent = {
-        textColor: req.body.contents[i].textColor,
-        textContent: req.body.contents[i].textContent,
-        description: req.body.contents[i].description,
-        destination: req.body.contents[i].destination,
-        icon: req.body.contents[i].icon,
-        class: req.body.contents[i].class,
-        productId: req.params.productId,
-        userProductId: req.params.id,
-        userId: req.user.id,
-      };
-      const isPrebuiltContent = await PrebuiltContent.count({
-        where: {
-          id: req.body.contents[i].id,
-        },
+      const existContent = await FabContent.findOne({
+        where: { id: req.body.contents[i].id },
       });
 
-      if (isPrebuiltContent > 0) {
-        newContent.prebuiltContentId = req.body.contents[i].id;
+      if (existContent) {
+        existContent.textColor = req.body.contents[i].textColor;
+        existContent.textContent = req.body.contents[i].textContent;
+        existContent.description = req.body.contents[i].description;
+        existContent.destination = req.body.contents[i].destination;
+        existContent.icon = req.body.contents[i].icon;
+        existContent.class = req.body.contents[i].class;
+        existContent.productId = req.body.contents[i].productId;
+        existContent.userProductId = req.body.contents[i].userProductId;
+        existContent.userId = req.body.contents[i].userId;
+        existContent.prebuiltContentId = req.body.contents[i].userId;
+
+        const isPrebuiltContent = await PrebuiltContent.count({
+          where: {
+            id: req.body.contents[i].id,
+          },
+        });
+
+        if (isPrebuiltContent > 0) {
+          existContent.prebuiltContentId = req.body.contents[i].id;
+        } else {
+          existContent.prebuiltContentId = null;
+        }
+
+        await existContent.save();
       } else {
-        newContent.prebuiltContentId = null;
+        const newContent = {
+          textColor: req.body.contents[i].textColor,
+          textContent: req.body.contents[i].textContent,
+          description: req.body.contents[i].description,
+          destination: req.body.contents[i].destination,
+          icon: req.body.contents[i].icon,
+          class: req.body.contents[i].class,
+          productId: req.params.productId,
+          userProductId: req.params.id,
+          userId: req.user.id,
+        };
+
+        const isPrebuiltContent = await PrebuiltContent.count({
+          where: {
+            id: req.body.contents[i].id,
+          },
+        });
+
+        if (isPrebuiltContent > 0) {
+          newContent.prebuiltContentId = req.body.contents[i].id;
+        } else {
+          newContent.prebuiltContentId = null;
+        }
+        const content = await FabContent.create(newContent);
+        contents.push(content);
       }
-      const content = await FabContent.create(newContent);
-      contents.push(content);
     }
+
+    const contentIds = [];
+
+    for (let j = 0; j < contents.length; j++) {
+      contentIds.push(contents[j].id);
+    }
+
+    const unusedContents = await FabContent.destroy({
+      where: {
+        [Op.and]: [
+          { userProductId: req.params.id },
+          { id: { [Op.notIn]: contentIds } },
+        ],
+      },
+    });
+
+    console.log('tyessdfazsdasd')
+
     return contents;
   } catch (error) {
     console.log(error);
@@ -243,7 +288,7 @@ exports.renewProduct = async (req, res) => {
 
     const newOrder = {
       name: product.id,
-      type: 'Extends',
+      type: "Extends",
       domains: product.domains,
       duration: product.duration,
       price: product.price,
