@@ -48,6 +48,7 @@ exports.getExistContents = async (req) => {
   try {
     const existContents = await FabContent.findAll({
       where: { userProductId: req.params.id },
+      order: [["sortValue", "asc"]],
     });
     return existContents;
   } catch (error) {
@@ -87,6 +88,7 @@ exports.getPublicButton = async (req) => {
       where: {
         userProductId: req.params.id,
       },
+      order: [["sortValue", "asc"]],
     });
     return { button: button, contents: contents };
   } catch (error) {
@@ -154,6 +156,7 @@ exports.updateButtonContents = async (req, res) => {
         existContent.userProductId = req.body.contents[i].userProductId;
         existContent.userId = req.body.contents[i].userId;
         existContent.prebuiltContentId = req.body.contents[i].userId;
+        existContent.sortValue = req.body.contents[i].sortValue;
 
         const isPrebuiltContent = await PrebuiltContent.count({
           where: {
@@ -163,6 +166,7 @@ exports.updateButtonContents = async (req, res) => {
 
         if (isPrebuiltContent > 0) {
           existContent.prebuiltContentId = req.body.contents[i].id;
+          existContent.name = req.body.contents[i].name;
         } else {
           existContent.prebuiltContentId = null;
         }
@@ -176,6 +180,7 @@ exports.updateButtonContents = async (req, res) => {
           destination: req.body.contents[i].destination,
           icon: req.body.contents[i].icon,
           class: req.body.contents[i].class,
+          sortValue: req.body.contents[i].sortValue,
           productId: req.params.productId,
           userProductId: req.params.id,
           userId: req.user.id,
@@ -189,6 +194,7 @@ exports.updateButtonContents = async (req, res) => {
 
         if (isPrebuiltContent > 0) {
           newContent.prebuiltContentId = req.body.contents[i].id;
+          newContent.name = req.body.contents[i].name;
         } else {
           newContent.prebuiltContentId = null;
         }
@@ -212,7 +218,7 @@ exports.updateButtonContents = async (req, res) => {
       },
     });
 
-    console.log('tyessdfazsdasd')
+    console.log("tyessdfazsdasd");
 
     return contents;
   } catch (error) {

@@ -6,6 +6,10 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     textColor: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -28,6 +32,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     icon: {
       type: Sequelize.STRING,
+      allowNull: false,
+    },
+    sortValue: {
+      type: Sequelize.INTEGER.UNSIGNED,
       allowNull: false,
     },
     productId: {
