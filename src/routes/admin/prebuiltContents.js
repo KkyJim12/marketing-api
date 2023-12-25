@@ -20,6 +20,16 @@ module.exports = (app) => {
     createPrebuiltContentValidateResult,
     prebuiltContentController.store
   );
+  router.get(
+    "/:productId/prebuilt-contents/:id/edit",
+    isAdmin,
+    prebuiltContentController.edit
+  );
+  router.put(
+    "/:productId/prebuilt-contents/:id",
+    isAdmin,
+    prebuiltContentController.update
+  );
   router.delete(
     "/:productId/prebuilt-contents/:id",
     isAdmin,

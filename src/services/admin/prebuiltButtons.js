@@ -42,6 +42,51 @@ exports.createPrebuiltButton = async (req, res) => {
   }
 };
 
+exports.getPrebuiltButton = async (req, res) => {
+  try {
+    const prebuiltButton = await PrebuiltButton.findOne({
+      where: { id: req.params.id },
+    });
+    return prebuiltButton;
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when get a pre-built button");
+  }
+};
+
+exports.updatePrebuiltButton = async (req, res) => {
+  try {
+    const prebuiltButton = await PrebuiltButton.update(
+      {
+        name: req.body.name,
+        buttonStyle: req.body.buttonStyle,
+        backgroundColor: req.body.backgroundColor,
+        bodyColor: req.body.bodyColor,
+        textColor: req.body.textColor,
+        textContent: req.body.textContent,
+        size: req.body.size,
+        top: req.body.top,
+        right: req.body.right,
+        bottom: req.body.bottom,
+        left: req.body.left,
+        iconType: req.body.iconType,
+        icon: req.body.icon,
+        visibleOnPC: req.body.visibleOnPC,
+        visibleOnTablet: req.body.visibleOnTablet,
+        visibleOnMobile: req.body.visibleOnMobile,
+        productId: req.params.productId,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    return prebuiltButton;
+  } catch (error) {
+    console.log(error);
+    throw new Error(500, "Error when get a pre-built button");
+  }
+};
+
 exports.deletePrebuiltButton = async (req, res) => {
   try {
     const prebuiltButton = await PrebuiltButton.destroy({

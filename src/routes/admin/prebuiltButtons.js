@@ -14,6 +14,16 @@ module.exports = (app) => {
     isAdmin,
     prebuiltButtonController.store
   );
+  router.get(
+    "/:productId/prebuilt-buttons/:id/edit",
+    isAdmin,
+    prebuiltButtonController.edit
+  );
+  router.put(
+    "/:productId/prebuilt-buttons/:id",
+    isAdmin,
+    prebuiltButtonController.update
+  );
   router.delete(
     "/:productId/prebuilt-buttons/:id",
     isAdmin,

@@ -1,6 +1,8 @@
 const {
   getPrebuiltButtons,
   createPrebuiltButton,
+  getPrebuiltButton,
+  updatePrebuiltButton,
   deletePrebuiltButton,
 } = require("../../services/admin/prebuiltButtons");
 
@@ -26,6 +28,36 @@ exports.store = async (req, res) => {
       status: "success",
       data: prebuiltButton,
       message: "Create prebuiltButton success.",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.edit = async (req, res) => {
+  try {
+    const prebuiltButton = await getPrebuiltButton(req, res);
+    res.status(200).send({
+      status: "success",
+      data: prebuiltButton,
+      message: "Get prebuiltButton success.",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const prebuiltButton = await updatePrebuiltButton(req, res);
+    res.status(200).send({
+      status: "success",
+      data: prebuiltButton,
+      message: "Get prebuiltButton success.",
     });
   } catch (error) {
     res

@@ -33,6 +33,40 @@ exports.createPrebuiltContent = async (req, res) => {
   }
 };
 
+exports.getPrebuiltContent = async (req, res) => {
+  try {
+    const prebuiltContent = await PrebuiltContent.findOne({
+      where: { id: req.params.id },
+    });
+    return prebuiltContent;
+  } catch (error) {
+    throw new Error(500, "Error when get a pre-built contents");
+  }
+};
+
+exports.updatePrebuiltContent = async (req, res) => {
+  try {
+    const prebuiltContent = await PrebuiltContent.update(
+      {
+        name: req.body.name,
+        textColor: req.body.textColor,
+        textContent: req.body.textContent,
+        icon: req.body.icon,
+        description: req.body.description,
+        destination: req.body.destination,
+        class: req.body.myClass,
+        productId: req.params.productId,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    return prebuiltContent;
+  } catch (error) {
+    throw new Error(500, "Error when get a pre-built contents");
+  }
+};
+
 exports.deletePrebuiltContent = async (req, res) => {
   try {
     const prebuiltContent = await PrebuiltContent.destroy({
