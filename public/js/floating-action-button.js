@@ -179,7 +179,7 @@ const generateButton = async (id) => {
       style.data.button.buttonStyle === "Long Rounded Button#2"
     ) {
       textContainer = document.createElement("div");
-      buttonText = document.createElement("h5");
+      buttonText = document.createElement("p");
     }
 
     for (let i = 0; i < contents.length; i++) {

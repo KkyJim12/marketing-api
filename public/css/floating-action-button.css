@@ -3,7 +3,7 @@
   src: url(https://api.jimmytechnology.com/font/Iconic.ttf);
 }
 
-h5 {
+p {
   font-weight: 500 !important;
 }
 
@@ -13,7 +13,7 @@ h5 {
   z-index: 99999 !important;
 }
 
-#fab-text-container-65150cd97e5e7 h5 {
+#fab-text-container-65150cd97e5e7 p {
   font-family: Iconic, sans-serif !important;
 }
 
@@ -116,7 +116,7 @@ h5 {
   gap: 1rem !important;
 }
 
-#fab-button-long-1-65150cd97e5e7 h5 {
+#fab-button-long-1-65150cd97e5e7 p {
   font-weight: 500;
 }
 
@@ -150,7 +150,7 @@ h5 {
   gap: 1rem !important;
 }
 
-#fab-button-long-2-65150cd97e5e7 h5 {
+#fab-button-long-2-65150cd97e5e7 p {
   font-weight: 500;
   color: #374151 !important;
 }
