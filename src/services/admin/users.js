@@ -78,10 +78,34 @@ exports.getUserProducts = async (req, res) => {
   }
 };
 
+exports.extendUserProduct = async (req, res) => {
+  try {
+    const userProduct = await UserProduct.findOne({
+      where: { id: req.params.userProductId },
+    });
+
+    const days = userProduct.duration;
+
+    if (userProduct.status === "On going") {
+      userProduct.endDate = moment(userProduct.endDate).add(days, "days");
+    } else {
+      userProduct.startDate = moment().format();
+      userProduct.endDate = moment().add(days, "days");
+      userProduct.status = "On going";
+    }
+
+    await userProduct.save();
+
+    return userProduct;
+  } catch (error) {
+    throw new Error(500, "Error when extend user product.");
+  }
+};
+
 exports.revokeUserProduct = async (req, res) => {
   try {
     const userProduct = await UserProduct.update(
-      { status: "Revoke" },
+      { endDate: moment(), status: "Revoke" },
       {
         where: { id: req.params.userProductId },
       }

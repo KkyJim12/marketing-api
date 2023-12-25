@@ -32,6 +32,7 @@ module.exports = (app) => {
     userController.update
   );
   router.delete("/:id", isAdmin, userController.destroy);
+  router.put("/:userProductId/extend", isAdmin, userController.extend);
   router.put("/:userProductId/revoke", isAdmin, userController.revoke);
   router.post("/:userId/add-product", isAdmin, userController.addProduct);
 

@@ -60,6 +60,7 @@ exports.acceptOrder = async (req) => {
           {
             startDate: moment().format(),
             endDate: moment().add(thisOrder.duration, "days"),
+            status: "On going",
           },
           {
             where: { id: thisOrder.name },

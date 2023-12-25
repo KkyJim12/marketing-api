@@ -5,6 +5,7 @@ const {
   updateUser,
   deleteUser,
   getUserProducts,
+  extendUserProduct,
   revokeUserProduct,
   addProductToUser,
 } = require("../../services/admin/users");
@@ -81,6 +82,21 @@ exports.products = async (req, res) => {
       status: "success",
       data: userProducts,
       message: "Get user products success.",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "fail", data: null, message: "Something went wrong." });
+  }
+};
+
+exports.extend = async (req, res) => {
+  try {
+    const userProduct = await extendUserProduct(req, res);
+    res.status(200).send({
+      status: "success",
+      data: userProduct,
+      message: "Extend user product success.",
     });
   } catch (error) {
     res
