@@ -60,6 +60,7 @@ exports.acceptOrder = async (req) => {
           {
             startDate: moment().format(),
             endDate: moment().add(thisOrder.duration, "days"),
+            paymentDate: null,
             status: "On going",
           },
           {
@@ -69,6 +70,7 @@ exports.acceptOrder = async (req) => {
       } else {
         await UserProduct.update(
           {
+            paymentDate: null,
             endDate: moment(userProduct.endDate).add(
               thisOrder.duration,
               "days"
@@ -108,7 +110,7 @@ exports.acceptOrder = async (req) => {
           bottom: 20,
           left: null,
           iconType: "font-awesome",
-          icon: "fab facebook",
+          icon: "fab fa-facebook",
           visibleOnPC: true,
           visibleOnTablet: true,
           visibleOnMobile: true,

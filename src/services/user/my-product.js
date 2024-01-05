@@ -299,7 +299,7 @@ exports.renewProduct = async (req, res) => {
       duration: product.duration,
       price: product.price,
       status: "Wait for payment",
-      paymentDate: product.price,
+      paymentDate: null,
       userId: req.user.id,
       productId: product.productId,
     };

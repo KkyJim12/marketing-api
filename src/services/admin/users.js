@@ -149,7 +149,7 @@ exports.addProductToUser = async (req, res) => {
         bottom: 20,
         left: null,
         iconType: "font-awesome",
-        icon: "fab facebook",
+        icon: "fab fa-facebook",
         visibleOnPC: true,
         visibleOnTablet: true,
         visibleOnMobile: true,

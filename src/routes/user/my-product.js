@@ -6,9 +6,9 @@ const isValidDevice = require("../../middlewares/isValidDevice.js");
 const storeStats = require("../../middlewares/storeStats.js");
 const isActive = require("../../middlewares/isActive.js");
 const {
-  createPrebuiltButtonValidate,
-  createPrebuiltButtonValidateResult,
-} = require("../../validations/create-prebuilt-button");
+  saveButtonContentValidate,
+  saveButtonContentValidateResult,
+} = require("../../validations/save-button-content");
 
 module.exports = (app) => {
   // Routes
@@ -56,8 +56,8 @@ module.exports = (app) => {
   router.put(
     "/:id/save-button-contents/:productId",
     isAuth,
-    createPrebuiltButtonValidate(),
-    createPrebuiltButtonValidateResult,
+    saveButtonContentValidate(),
+    saveButtonContentValidateResult,
     myProductController.saveButtonContents
   );
 
