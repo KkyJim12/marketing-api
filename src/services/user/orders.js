@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const moment = require("moment");
 const db = require("../../models/index");
 const Order = db.order;
@@ -12,7 +11,6 @@ exports.getOrders = async (req) => {
     });
     return orders;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get orders");
   }
 };
@@ -25,7 +23,6 @@ exports.cancelOrder = async (req) => {
     );
     return order;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when update order status");
   }
 };
@@ -42,7 +39,6 @@ exports.makePayment = async (req, res) => {
     );
     return order;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when update order status");
   }
 };

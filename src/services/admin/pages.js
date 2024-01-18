@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const Page = db.page;
 
@@ -20,7 +19,6 @@ exports.createPage = async (req) => {
     const page = await Page.create(newPage);
     return page;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when creating a page");
   }
 };
@@ -35,7 +33,6 @@ exports.getPage = async (req) => {
       return subPage;
     }
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get a page");
   }
 };
@@ -53,7 +50,6 @@ exports.updatePage = async (req) => {
     const page = await Page.update(newPage, { where: { id: req.params.id } });
     return page;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when update a page");
   }
 };
@@ -63,7 +59,6 @@ exports.deletePage = async (req) => {
     const page = await Page.destroy({ where: { id: req.params.id } });
     return page;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when delete a page");
   }
 };

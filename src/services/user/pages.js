@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const Page = db.page;
 const SubPage = db.subPage;
@@ -14,7 +13,6 @@ exports.getPages = async () => {
     });
     return pages;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get pages");
   }
 };
@@ -29,7 +27,6 @@ exports.getPage = async (req, res) => {
 
     return page;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get page");
   }
 };

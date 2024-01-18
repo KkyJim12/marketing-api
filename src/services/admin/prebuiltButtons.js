@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const PrebuiltButton = db.prebuiltButton;
 
@@ -9,7 +8,6 @@ exports.getPrebuiltButtons = async (req, res) => {
     });
     return prebuiltButtons;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get a pre-built button");
   }
 };
@@ -40,7 +38,6 @@ exports.createPrebuiltButton = async (req, res) => {
     return prebuiltButton;
   } catch (error) {
     console.log(error);
-    Sentry.captureException(error);
     throw new Error(500, "Error when creating a pre-built button");
   }
 };
@@ -53,7 +50,6 @@ exports.getPrebuiltButton = async (req, res) => {
     return prebuiltButton;
   } catch (error) {
     console.log(error);
-    Sentry.captureException(error);
     throw new Error(500, "Error when get a pre-built button");
   }
 };
@@ -87,7 +83,6 @@ exports.updatePrebuiltButton = async (req, res) => {
     return prebuiltButton;
   } catch (error) {
     console.log(error);
-    Sentry.captureException(error);
     throw new Error(500, "Error when get a pre-built button");
   }
 };
@@ -99,7 +94,6 @@ exports.deletePrebuiltButton = async (req, res) => {
     });
     return prebuiltButton;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when delete a pre-built button");
   }
 };

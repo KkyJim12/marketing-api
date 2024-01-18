@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const bcrypt = require("bcrypt");
 const db = require("../../models/index");
 const Admin = db.admin;
@@ -26,7 +25,6 @@ exports.login = async (req) => {
       throw new Error(401);
     }
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when login");
   }
 };
@@ -45,7 +43,6 @@ exports.adminLogin = async (req) => {
       return admin;
     }
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when login");
   }
 };

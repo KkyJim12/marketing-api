@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const moment = require("moment");
 const { Op } = require("sequelize");
 const db = require("../../models/index");
@@ -19,7 +18,6 @@ exports.getMyProducts = async (req) => {
     });
     return myProducts;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get orders");
   }
 };
@@ -31,7 +29,6 @@ exports.getPrebuiltButtons = async (req) => {
     });
     return prebuiltButtons;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get prebuilt buttons");
   }
 };
@@ -43,7 +40,6 @@ exports.getPrebuiltContents = async (req) => {
     });
     return prebuiltContents;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get prebuilt contents");
   }
 };
@@ -56,7 +52,6 @@ exports.getExistContents = async (req) => {
     });
     return existContents;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get exist contents");
   }
 };
@@ -68,7 +63,6 @@ exports.getButton = async (req, res) => {
     });
     return button;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get button");
   }
 };
@@ -80,7 +74,6 @@ exports.getContents = async (req, res) => {
     });
     return contents;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get contents");
   }
 };
@@ -99,7 +92,6 @@ exports.getPublicButton = async (req) => {
     });
     return { button: button, contents: contents };
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get button");
   }
 };
@@ -111,7 +103,6 @@ exports.getProductDetail = async (req, res) => {
     });
     return productDetail;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get product detail");
   }
 };
@@ -142,7 +133,6 @@ exports.updateButtonStyle = async (req, res) => {
     );
     return button;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when save button style");
   }
 };
@@ -228,11 +218,8 @@ exports.updateButtonContents = async (req, res) => {
       },
     });
 
-    console.log("tyessdfazsdasd");
-
     return contents;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when save button contents");
   }
 };
@@ -276,7 +263,6 @@ exports.saveWhiteListDomain = async (req, res) => {
 
     return domain;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when save white list domain");
   }
 };
@@ -554,7 +540,6 @@ exports.getStats = async (req, res) => {
       tableHeaders: fabContentIds,
     };
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get stats");
   }
 };
@@ -604,7 +589,6 @@ exports.getWebsites = async (req, res) => {
 
     return websites;
   } catch (error) {
-    Sentry.captureException(error);
     throw new Error(500, "Error when get websites");
   }
 };

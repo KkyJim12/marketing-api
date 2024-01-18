@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -7,19 +6,9 @@ const cors = require("cors");
 const fs = require("fs");
 require("dotenv").config();
 const port = process.env.NODE_DOCKER_PORT || 8080;
-const dsn = process.env.DSN_URL;
 
 app.use(cors());
 app.use(express.static("public"));
-
-Sentry.init({
-  dsn: dsn,
-  integrations: [
-    new Sentry.Integrations.Http({ tracing: true }),
-    new Sentry.Integrations.Express({ app }),
-  ],
-  tracesSampleRate: 1.0,
-});
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
@@ -65,8 +54,6 @@ require("./src/routes/admin/users")(app);
 require("./src/routes/admin/orders")(app);
 require("./src/routes/admin/prebuiltButtons")(app);
 require("./src/routes/admin/prebuiltContents")(app);
-
-app.use(Sentry.Handlers.errorHandler());
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
