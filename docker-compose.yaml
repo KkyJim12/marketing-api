@@ -15,7 +15,7 @@ services:
     volumes:
       - db:/var/lib/mysqldb
     networks:
-      - db-net
+      - main-net
 
   # DB GUI
   phpmyadmin:
@@ -31,7 +31,7 @@ services:
       PMA_HOST: mysqldb
       MYSQL_ROOT_PASSWORD: $DB_PASS
     networks:
-      - db-net
+      - main-net
 
   # Main App
   nodejs:
@@ -50,10 +50,10 @@ services:
       - DB_NAME=$DB_DATABASE
       - DB_PORT=$DB_PORT
     networks:
-      - db-net
+      - main-net
     stdin_open: true
     tty: true
 volumes:
   db:
 networks:
-  db-net:
+  main-net:
