@@ -23,8 +23,6 @@ db.sequelize.sync({ force: true }).then(() => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(Sentry.Handlers.requestHandler());
-app.use(Sentry.Handlers.tracingHandler());
 
 app.get("/", (req, res) => {
   res.send("Server is running");
