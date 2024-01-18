@@ -12,6 +12,6 @@ module.exports = isActive = async (req, res, next) => {
       res.status(500).send({ message: "This product is not active." });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
   }
 };

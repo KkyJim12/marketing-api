@@ -1,6 +1,6 @@
+const DeviceDetector = require("node-device-detector");
 const db = require("../models/index");
 const FloatingActionButtton = db.floatingActionButton;
-const DeviceDetector = require("node-device-detector");
 
 module.exports = isValidDomain = async (req, res, next) => {
   try {
@@ -40,6 +40,6 @@ module.exports = isValidDomain = async (req, res, next) => {
         .send({ message: "This device type is not active by button" });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
   }
 };

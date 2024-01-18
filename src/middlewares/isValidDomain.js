@@ -9,9 +9,9 @@ module.exports = isValidDomain = async (req, res, next) => {
     if (domainCount > 0) {
       return next();
     } else {
-      res.status(500).send({ message: "This domain is not in whitelist." });
+      res.status(500).send({ message: "This domain is not in whitelist" });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
   }
 };

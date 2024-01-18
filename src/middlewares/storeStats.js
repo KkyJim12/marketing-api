@@ -1,6 +1,6 @@
+const Sentry = require("@sentry/node");
 const db = require("../models/index");
 const Statistic = db.statistic;
-const moment = require("moment");
 
 module.exports = storeStats = async (req, res, next) => {
   try {
@@ -45,6 +45,7 @@ module.exports = storeStats = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(error);
+    Sentry.captureException(error);
+    res.status(500).send({ message: "Something went wrong" });
   }
 };
