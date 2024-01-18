@@ -1,8 +1,9 @@
 version: '3.8'
 
 services:
+  # DB
   mysqldb:
-    container_name: mysqldb
+    container_name: marketing-db
     image: mysql:5.7
     restart: unless-stopped
     env_file: ./.env
@@ -10,10 +11,31 @@ services:
       - MYSQL_ROOT_PASSWORD=$DB_PASS
       - MYSQL_DATABASE=$DB_DATABASE
     ports:
-      - $MYSQLDB_LOCAL_PORT:$DB_PORT
+      - $DB_PORT:$DB_PORT
     volumes:
-      - db:/var/lib/mysql
-  app:
+      - db:/var/lib/mysqldb
+    networks:
+      - db-net
+
+  # DB GUI
+  phpmyadmin:
+    container_name: marketing-db-gui
+    depends_on:
+      - mysqldb
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    env_file: ./.env
+    environment:
+      PMA_HOST: mysqldb
+      MYSQL_ROOT_PASSWORD: $DB_PASS
+    networks:
+      - db-net
+
+  # Main App
+  nodejs:
+    container_name: marketing-api
     depends_on:
       - mysqldb
     build: .
@@ -22,12 +44,16 @@ services:
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
-      - DB_HOST=$DB_HOST
+      - DB_HOST=mysqldb
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASS
       - DB_NAME=$DB_DATABASE
       - DB_PORT=$DB_PORT
+    networks:
+      - db-net
     stdin_open: true
     tty: true
 volumes:
   db:
+networks:
+  db-net:

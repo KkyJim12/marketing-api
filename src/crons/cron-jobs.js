@@ -1,4 +1,3 @@
-const Sentry = require("@sentry/node");
 const moment = require("moment");
 const { Op } = require("sequelize");
 const cron = require("node-cron");
@@ -21,6 +20,6 @@ cron.schedule(JOB_SCHEDULE, async () => {
       }
     );
   } catch (error) {
-    Sentry.captureException(error);
+    console.log(error);
   }
 });
