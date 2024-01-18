@@ -1,3 +1,4 @@
+const Sentry = require("@sentry/node");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
