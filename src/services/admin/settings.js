@@ -1,3 +1,4 @@
+const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const Setting = db.setting;
 
@@ -6,9 +7,9 @@ exports.getLatestSetting = async () => {
     const setting = await Setting.findOne({
       order: [["createdAt", "DESC"]],
     });
-
     return setting;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when get a latest setting");
   }
 };
@@ -24,6 +25,7 @@ exports.createSetting = async (req) => {
     });
     return setting;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when create a setting");
   }
 };

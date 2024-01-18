@@ -22,9 +22,7 @@ exports.adminLogin = async (req, res) => {
       message: "Admin login success.",
     });
   } catch (error) {
-    res
-      .status(401)
-      .send({ status: "fail", message: "Email or Password is wrong." });
+    res.status(500).send({ message: "Something went wrong" });
   }
 };
 
@@ -48,8 +46,6 @@ exports.login = async (req, res) => {
       message: "User login success.",
     });
   } catch (error) {
-    res
-      .status(401)
-      .send({ status: "fail", message: "Email or Password is wrong." });
+    res.status(500).send({ message: "Something went wrong" });
   }
 };

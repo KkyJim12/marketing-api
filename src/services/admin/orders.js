@@ -1,10 +1,11 @@
+const Sentry = require("@sentry/node");
+const moment = require("moment");
 const db = require("../../models/index");
 const Order = db.order;
 const User = db.user;
 const Product = db.product;
 const UserProduct = db.userProduct;
 const FloatingActionButton = db.floatingActionButton;
-const moment = require("moment");
 
 exports.getOrders = async () => {
   try {
@@ -25,6 +26,7 @@ exports.cancelOrder = async (req) => {
     );
     return order;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when update order status");
   }
 };
@@ -37,6 +39,7 @@ exports.declineOrder = async (req) => {
     );
     return order;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when update order status");
   }
 };
@@ -122,6 +125,7 @@ exports.acceptOrder = async (req) => {
       return { userProduct };
     }
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when update order status");
   }
 };

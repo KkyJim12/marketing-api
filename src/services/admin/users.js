@@ -1,20 +1,25 @@
+const Sentry = require("@sentry/node");
 const bcrypt = require("bcrypt");
+const moment = require("moment");
 const db = require("../../models/index");
 const User = db.user;
 const Product = db.product;
 const UserProduct = db.userProduct;
 const FloatingActionButton = db.floatingActionButton;
-const moment = require("moment");
-
 const saltRounds = 10;
 
 exports.getUsers = async () => {
-  const users = await User.findAll({
-    attributes: {
-      exclude: ["password"],
-    },
-  });
-  return users;
+  try {
+    const users = await User.findAll({
+      attributes: {
+        exclude: ["password"],
+      },
+    });
+    return users;
+  } catch (error) {
+    Sentry.captureException(error);
+    throw new Error(500, "Error when get users");
+  }
 };
 
 exports.createUser = async (req, res) => {
@@ -27,7 +32,8 @@ exports.createUser = async (req, res) => {
     });
     return user;
   } catch (error) {
-    throw new Error(500);
+    Sentry.captureException(error);
+    throw new Error(500, "Error when create a user");
   }
 };
 
@@ -36,7 +42,8 @@ exports.getUser = async (req) => {
     const user = await User.findOne({ where: { id: req.params.id } });
     return user;
   } catch (error) {
-    throw new Error(500);
+    Sentry.captureException(error);
+    throw new Error(500, "Error when get a user");
   }
 };
 
@@ -54,7 +61,8 @@ exports.updateUser = async (req) => {
     const user = await User.update(newData, { where: { id: req.params.id } });
     return user;
   } catch (error) {
-    throw new Error(500);
+    Sentry.captureException(error);
+    throw new Error(500, "Error when update a user");
   }
 };
 
@@ -74,7 +82,8 @@ exports.getUserProducts = async (req, res) => {
     });
     return userProducts;
   } catch (error) {
-    throw new Error(500, "Error when get user products.");
+    Sentry.captureException(error);
+    throw new Error(500, "Error when update user's products");
   }
 };
 
@@ -98,7 +107,8 @@ exports.extendUserProduct = async (req, res) => {
 
     return userProduct;
   } catch (error) {
-    throw new Error(500, "Error when extend user product.");
+    Sentry.captureException(error);
+    throw new Error(500, "Error when extend a user's product");
   }
 };
 
@@ -112,7 +122,8 @@ exports.revokeUserProduct = async (req, res) => {
     );
     return userProduct;
   } catch (error) {
-    throw new Error(500, "Error when revoke user product.");
+    Sentry.captureException(error);
+    throw new Error(500, "Error when revoke a user's product.");
   }
 };
 
@@ -162,6 +173,7 @@ exports.addProductToUser = async (req, res) => {
     return { userProduct };
   } catch (error) {
     console.log(error);
+    Sentry.captureException(error);
     throw new Error(500, "Error when update order status");
   }
 };

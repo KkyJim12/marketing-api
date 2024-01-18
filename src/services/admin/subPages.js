@@ -1,3 +1,4 @@
+const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const Page = db.page;
 const SubPage = db.subPage;
@@ -7,6 +8,7 @@ exports.getSubPages = async () => {
     const subPages = await SubPage.findAll({ include: { model: Page } });
     return subPages;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when get a sub pages");
   }
 };
@@ -24,6 +26,7 @@ exports.createSubPage = async (req) => {
     const subPage = await SubPage.create(newSubPage);
     return subPage;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when creating a sub page");
   }
 };
@@ -33,6 +36,7 @@ exports.getSubPage = async (req) => {
     const subPage = await SubPage.findOne({ where: { id: req.params.id } });
     return subPage;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when get a sub page");
   }
 };
@@ -52,6 +56,7 @@ exports.updateSubPage = async (req) => {
     });
     return subPage;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when update a sub page");
   }
 };

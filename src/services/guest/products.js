@@ -10,6 +10,7 @@ exports.storeEvent = async (req, res) => {
     });
     return event;
   } catch (error) {
-    throw new Error(500, "Error when store event.");
+    Sentry.captureException(error);
+    throw new Error(500, "Error when store an event");
   }
 };

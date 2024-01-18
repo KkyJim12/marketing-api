@@ -1,3 +1,4 @@
+const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const Product = db.product;
 const Order = db.order;
@@ -7,7 +8,8 @@ exports.getProducts = async (req) => {
     const products = await Product.findAll();
     return products;
   } catch (error) {
-    throw new Error(500);
+    Sentry.captureException(error);
+    throw new Error(500, "Error when get products");
   }
 };
 
@@ -31,6 +33,7 @@ exports.storeOrder = async (req) => {
 
     return order;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when store an order");
   }
 };

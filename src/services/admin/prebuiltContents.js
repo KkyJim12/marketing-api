@@ -1,3 +1,4 @@
+const Sentry = require("@sentry/node");
 const db = require("../../models/index");
 const PrebuiltContent = db.prebuiltContent;
 
@@ -8,6 +9,7 @@ exports.getPrebuiltContents = async (req, res) => {
     });
     return prebuiltContents;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when get a pre-built contents");
   }
 };
@@ -28,7 +30,7 @@ exports.createPrebuiltContent = async (req, res) => {
     const prebuiltContent = await PrebuiltContent.create(newPrebuiltContent);
     return prebuiltContent;
   } catch (error) {
-    console.log(error);
+    Sentry.captureException(error);
     throw new Error(500, "Error when creating a pre-built content");
   }
 };
@@ -40,6 +42,7 @@ exports.getPrebuiltContent = async (req, res) => {
     });
     return prebuiltContent;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when get a pre-built contents");
   }
 };
@@ -63,6 +66,7 @@ exports.updatePrebuiltContent = async (req, res) => {
     );
     return prebuiltContent;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when get a pre-built contents");
   }
 };
@@ -74,6 +78,7 @@ exports.deletePrebuiltContent = async (req, res) => {
     });
     return prebuiltContent;
   } catch (error) {
+    Sentry.captureException(error);
     throw new Error(500, "Error when delete a pre-built content");
   }
 };
