@@ -145,7 +145,7 @@ exports.addProductToUser = async (req, res) => {
         backgroundColor: "#3b82f6",
         bodyColor: "#ffffff",
         textColor: "#f5f5f5",
-        textContent: "Minible",
+        textContent: "ติดต่อเรา",
         size: 70,
         top: null,
         right: 20,
