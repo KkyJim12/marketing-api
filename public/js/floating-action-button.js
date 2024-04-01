@@ -1,5 +1,4 @@
-const apiUrl = "https://api.jimmytechnology.com";
-const iconUrl = "https://marketing-cta.netlify.app";
+const apiUrl = "http://localhost:8080";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
@@ -131,7 +130,7 @@ const generateButton = async (id) => {
 
       if (contentSplitIcon[0] === "fas") {
         contentPrefixIcon = "fas";
-      } else if (splitIcon[0] === "far") {
+      } else if (contentSplitIcon[0] === "far") {
         contentPrefixIcon = "far";
       } else {
         contentPrefixIcon = "fab";

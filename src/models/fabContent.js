@@ -44,7 +44,7 @@ module.exports = (sequelize, Sequelize) => {
       references: {
         model: "products",
         key: "id",
-        constraints: true,
+        constraints: false,
       },
     },
     userId: {
@@ -53,7 +53,7 @@ module.exports = (sequelize, Sequelize) => {
       references: {
         model: "users",
         key: "id",
-        constraints: true,
+        constraints: false,
       },
     },
     userProductId: {
@@ -62,7 +62,7 @@ module.exports = (sequelize, Sequelize) => {
       references: {
         model: "user_products",
         key: "id",
-        constraints: true,
+        constraints: false,
       },
     },
     prebuiltContentId: {

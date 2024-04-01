@@ -41,7 +41,11 @@ db.targetStatistic = require("./targetStatistic.js")(sequelize, Sequelize);
 db.targetStatistic.hasOne(db.fabContent, {
   sourceKey: "fabContentId",
   foreignKey: "id",
-  constraints: true,
+});
+
+db.fabContent.belongsTo(db.targetStatistic, {
+  sourceKey: "id",
+  foreignKey: "fabContentId",
 });
 
 db.statistic.hasMany(db.targetStatistic, {

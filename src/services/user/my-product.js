@@ -220,6 +220,7 @@ exports.updateButtonContents = async (req, res) => {
 
     return contents;
   } catch (error) {
+    console.log(error);
     throw new Error(500, "Error when save button contents");
   }
 };

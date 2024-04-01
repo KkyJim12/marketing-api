@@ -21,6 +21,7 @@ module.exports = (sequelize, Sequelize) => {
         model: "fab_contents",
         key: "id",
       },
+      onDelete: "cascade",
     },
   });
 
