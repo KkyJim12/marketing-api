@@ -152,26 +152,24 @@ exports.updateButtonContents = async (req, res) => {
         existContent.destination = req.body.contents[i].destination;
         existContent.icon = req.body.contents[i].icon;
         existContent.class = req.body.contents[i].class;
-        existContent.productId = req.body.contents[i].productId;
-        existContent.userProductId = req.body.contents[i].userProductId;
-        existContent.userId = req.body.contents[i].userId;
-        existContent.prebuiltContentId = req.body.contents[i].userId;
         existContent.sortValue = req.body.contents[i].sortValue;
 
-        const isPrebuiltContent = await PrebuiltContent.count({
+        const isPrebuiltContent = await PrebuiltContent.findOne({
           where: {
             id: req.body.contents[i].id,
           },
         });
 
-        if (isPrebuiltContent > 0) {
-          existContent.prebuiltContentId = req.body.contents[i].id;
+        if (isPrebuiltContent) {
+          existContent.prebuiltContentId =
+            req.body.contents[i].prebuiltContentId;
           existContent.name = req.body.contents[i].name;
         } else {
           existContent.prebuiltContentId = null;
         }
 
         await existContent.save();
+        contents.push(existContent);
       } else {
         const newContent = {
           textColor: req.body.contents[i].textColor,
