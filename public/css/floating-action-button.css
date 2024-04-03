@@ -64,6 +64,7 @@ p {
 }
 
 #fab-button-65150cd97e5e7 {
+  padding: 0px !important;
   border-radius: 50% !important;
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
@@ -73,7 +74,6 @@ p {
   justify-content: center !important;
   align-items: center !important;
 }
-
 
 #fab-inner-div-65150cd97e5e7 {
   position: absolute !important;
@@ -107,6 +107,8 @@ p {
   border: 0px !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
   padding-right: 30px !important;
   padding-left: 30px !important;
   cursor: pointer !important;
@@ -136,7 +138,9 @@ p {
 
 #fab-button-long-2-65150cd97e5e7 {
   width: auto;
-  padding-left: 10px;
+  padding-left: 10px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
   background-color: white !important;
   border-radius: 9999px !important;
   border: 0px !important;
