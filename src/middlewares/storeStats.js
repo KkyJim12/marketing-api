@@ -21,7 +21,7 @@ module.exports = storeStats = async (req, res, next) => {
             parsedUrl.hostname.includes("instagram.com")
               ? "Social Media"
               : parsedUrl.hostname.includes("google.co") &&
-                parsedUrl.hostname.includes("gclid")
+                req.headers.requesturl.includes("gclid")
               ? "Paid Search"
               : parsedUrl.hostname.includes("google.co") ||
                 parsedUrl.hostname.includes("bing.com") ||

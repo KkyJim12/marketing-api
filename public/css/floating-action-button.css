@@ -73,6 +73,7 @@ p {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  outline-style: none !important;
 }
 
 #fab-inner-div-65150cd97e5e7 {
@@ -116,6 +117,7 @@ p {
   align-items: center !important;
   white-space: nowrap !important;
   gap: 1rem !important;
+  outline-style: none !important;
 }
 
 #fab-button-long-1-65150cd97e5e7 p {
@@ -152,6 +154,7 @@ p {
   align-items: center !important;
   white-space: nowrap !important;
   gap: 1rem !important;
+  outline-style: none !important;
 }
 
 #fab-button-long-2-65150cd97e5e7 p {

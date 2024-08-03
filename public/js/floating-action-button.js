@@ -88,6 +88,7 @@ const generateButton = async (id) => {
       `${apiUrl}/api/v1/user/my-products/${id}/public-button`,
       {
         headers: {
+          requesturl: window.location.href,
           requesthost: getDomain(window.location.hostname),
           exactreferer: window.document.referrer,
           sessionref: atob(localStorage.getItem("fab-session-ref")).split(
