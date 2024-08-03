@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:8080";
+const apiUrl = "https://api.pacypilot.com";
 
 const getDomain = (url, subdomain) => {
   subdomain = subdomain || false;
