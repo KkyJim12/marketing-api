@@ -38,6 +38,16 @@ db.whiteListDomain = require("./whiteListDomain.js")(sequelize, Sequelize);
 db.statistic = require("./statistic.js")(sequelize, Sequelize);
 db.targetStatistic = require("./targetStatistic.js")(sequelize, Sequelize);
 
+db.userProduct.hasMany(db.whiteListDomain, {
+  foreignKey: "userProductId", 
+  sourceKey: "id", 
+});
+
+db.whiteListDomain.belongsTo(db.userProduct, {
+  sourceKey: "id", 
+  foreignKey: "userProductId", 
+});
+
 db.targetStatistic.hasOne(db.fabContent, {
   sourceKey: "fabContentId",
   foreignKey: "id",
