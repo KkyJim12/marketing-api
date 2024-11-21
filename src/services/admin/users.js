@@ -72,11 +72,44 @@ exports.deleteUser = async (req) => {
 
 exports.getUserProducts = async (req, res) => {
   try {
-    const userProducts = await UserProduct.findAll({
+    // Fetching the products and whitelist domains from the database
+    let userProducts = await UserProduct.findAll({
       where: { userId: req.params.userId },
+      include: [
+        {
+          model: db.whiteListDomain,
+          attributes: ['url']
+        }
+      ],
+      raw: true,
     });
-    return userProducts;
+
+    // Grouping by product ID
+    const groupedProducts = userProducts.reduce((acc, product) => {
+      // If the product ID is already in the accumulator, add the domain to it
+      if (acc[product.id]) {
+        acc[product.id].whitelistDomains.push(product['whitelist_domains.url']);
+      } else {
+        // Otherwise, create a new entry with the product details
+        acc[product.id] = {
+          ...product,
+          whitelistDomains: [product['whitelist_domains.url']], // Initial domain in an array
+        };
+      }
+
+      return acc;
+    }, {});
+
+    const result = Object.values(groupedProducts);
+
+    result.forEach(product => {
+      product.whitelistDomains = product.whitelistDomains.join(', ');
+    });
+
+    return result;
+
   } catch (error) {
+    console.log('[admin getUserProducts error]', error.message);
     throw new Error(500, "Error when update user's products");
   }
 };
