@@ -50,7 +50,7 @@ exports.getMyProducts = async (req) => {
     return result;
 
   } catch (error) {
-    console.log('[getMyProducts error]', error.message);
+    console.log('[user getMyProducts error]', error.message);
     throw new Error(500, "Error when getting products");
   }
 };
