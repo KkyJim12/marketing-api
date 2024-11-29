@@ -13,45 +13,12 @@ const TargetStatistic = db.targetStatistic;
 
 exports.getMyProducts = async (req) => {
   try {
-    // Fetching the products and whitelist domains from the database
-    let myProducts = await UserProduct.findAll({
+    const myProducts = await UserProduct.findAll({
       where: { userId: req.user.id },
-      include: [
-        {
-          model: db.whiteListDomain,
-          attributes: ['url']
-        }
-      ],
-      raw: true,
     });
-
-    // Grouping by product ID
-    const groupedProducts = myProducts.reduce((acc, product) => {
-      // If the product ID is already in the accumulator, add the domain to it
-      if (acc[product.id]) {
-        acc[product.id].whitelist_domains.push(product['whitelist_domains.url']);
-      } else {
-        // Otherwise, create a new entry with the product details
-        acc[product.id] = {
-          ...product,
-          whitelist_domains: [product['whitelist_domains.url']], // Initial domain in an array
-        };
-      }
-
-      return acc;
-    }, {});
-
-    const result = Object.values(groupedProducts);
-
-    result.forEach(product => {
-      product.whitelist_domains = product.whitelist_domains.join(', ');
-    });
-
-    return result;
-
+    return myProducts;
   } catch (error) {
-    console.log('[user getMyProducts error]', error.message);
-    throw new Error(500, "Error when getting products");
+    throw new Error(500, "Error when get orders");
   }
 };
 
@@ -435,8 +402,8 @@ exports.getStats = async (req, res) => {
 
         // User Count
         let userCount = 0;
+
         for (let j = 0; j < stats.length; j++) {
-          // count ip adrees by not duplicate
           if (
             stats[j].createdAt.toString().includes(date) &&
             !ipAddresses.includes(stats[j].ipAddress)
@@ -489,7 +456,7 @@ exports.getStats = async (req, res) => {
     const conversionCount = stats.reduce((ac, cr) => {
       return ac + cr.target_statistics.length;
     }, 0);
-    const conversionRate = (conversionCount / sessionCount) * 100;
+    const conversionRate = conversionCount / sessionCount;
     const sourceTypes = groupByKey(stats, "sourceType");
 
     // Tables
