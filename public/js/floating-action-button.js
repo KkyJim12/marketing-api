@@ -36,6 +36,23 @@ const storeEvent = async (fabContentId, sessionRef) => {
   }
 };
 
+const generateUniqueUser = () => {
+  const uuidv4 = () => {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+      (
+        c ^
+        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+      ).toString(16)
+    );
+  };
+
+  if (!localStorage.getItem("fab-unique-user-ref")) {
+    const id = uuidv4();
+    const userRef = btoa(id);
+    localStorage.setItem("fab-unique-user-ref", userRef);
+  }
+};
+
 const generateSession = () => {
   const uuidv4 = () => {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -81,6 +98,7 @@ const getTextWidth = (text, font) => {
 
 const generateButton = async (id) => {
   generateSession();
+  generateUniqueUser();
 
   try {
     // Get button details
@@ -94,6 +112,7 @@ const generateButton = async (id) => {
           sessionref: atob(localStorage.getItem("fab-session-ref")).split(
             "."
           )[0],
+          uniqueUserRef: atob(localStorage.getItem("fab-unique-user-ref")),
         },
       }
     );

@@ -12,7 +12,7 @@ module.exports = storeStats = async (req, res, next) => {
       if (req.headers.exactreferer !== "") {
         const parsedUrl = new URL(req.headers.exactreferer);
         await Statistic.create({
-          ipAddress: req.connection.remoteAddress,
+          ipAddress: req.headers.uniqueUserRef,
           sourceUrl: parsedUrl.hostname,
           currentUrl: req.headers.requesthost,
           sourceType:
@@ -33,7 +33,7 @@ module.exports = storeStats = async (req, res, next) => {
         });
       } else {
         await Statistic.create({
-          ipAddress: req.connection.remoteAddress,
+          ipAddress: req.headers.uniqueUserRef,
           sourceType: "Direct",
           currentUrl: req.headers.requesthost,
           userProductId: req.params.id,
