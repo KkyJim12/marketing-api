@@ -29,10 +29,22 @@ db.order = require("./order.js")(sequelize, Sequelize);
 db.userProduct = require("./userProduct.js")(sequelize, Sequelize);
 db.prebuiltButton = require("./prebuiltButton.js")(sequelize, Sequelize);
 db.prebuiltContent = require("./prebuiltContent.js")(sequelize, Sequelize);
+// _______________
 db.floatingActionButton = require("./floatingActionButton.js")(
   sequelize,
   Sequelize
 );
+
+db.product.hasMany(db.floatingActionButton, {
+  foreignKey: "productId", 
+  sourceKey: "id", 
+});
+
+db.floatingActionButton.belongsTo(db.product, {
+  sourceKey: "id", 
+  foreignKey: "productId", 
+});
+// __________________
 db.fabContent = require("./fabContent.js")(sequelize, Sequelize);
 db.whiteListDomain = require("./whiteListDomain.js")(sequelize, Sequelize);
 db.statistic = require("./statistic.js")(sequelize, Sequelize);

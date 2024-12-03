@@ -19,9 +19,11 @@ exports.createProduct = async (req) => {
       duration: req.body.duration,
       price: req.body.price,
       image: req.body.image,
+      footerHtml: req.body.footerHtml
     });
     return product;
   } catch (error) {
+    console.log('admin-createProduct' , error.message);
     throw new Error(500, "Error when create a product");
   }
 };
@@ -37,6 +39,7 @@ exports.getProduct = async (req) => {
 
 exports.updateProduct = async (req) => {
   try {
+    console.log(req.body.footerHtml)
     const product = await Product.update(
       {
         name: req.body.name,
@@ -45,11 +48,13 @@ exports.updateProduct = async (req) => {
         duration: req.body.duration,
         price: req.body.price,
         image: req.body.image,
+        footerHtml: req.body.footerHtml
       },
       { where: { id: req.params.id } }
     );
     return product;
   } catch (error) {
+    console.log('admin-updateProduct' , error.message);
     throw new Error(500, "Error when update a product");
   }
 };

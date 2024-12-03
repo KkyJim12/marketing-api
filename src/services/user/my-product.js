@@ -93,7 +93,16 @@ exports.getButton = async (req, res) => {
   try {
     const button = await FloatingActionButton.findOne({
       where: { userProductId: req.params.id },
+      include: [
+        {
+          model: db.product,
+          attributes: ['footerHtml']
+        }
+      ],
+      raw: true,
     });
+    button['footerHtml'] = button['product.footerHtml']
+    delete button['product.footerHtml']
     return button;
   } catch (error) {
     throw new Error(500, "Error when get button");

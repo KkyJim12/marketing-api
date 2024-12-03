@@ -10,7 +10,7 @@ module.exports = isAdmin = async (req, res, next) => {
         process.env.ACCESS_TOKEN_SIGN_SECRET,
         (err, decoded) => {
           if (err) {
-            res
+          return res
               .status(403)
               .send({ message: "Please login with admin credential first" });
           }
@@ -19,11 +19,11 @@ module.exports = isAdmin = async (req, res, next) => {
         }
       );
     } else {
-      res
+      return res
         .status(403)
         .send({ message: "Please login with admin credential first" });
     }
   } catch (error) {
-    res.status(500).send({ message: "Something went wrong " });
+    return res.status(500).send({ message: "Something went wrong " });
   }
 };

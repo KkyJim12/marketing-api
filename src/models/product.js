@@ -30,6 +30,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    footerHtml: {
+      type: Sequelize.TEXT('long'),
+      allowNull: true,
+    },
   });
 
   return Product;
