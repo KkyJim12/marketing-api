@@ -24,7 +24,7 @@ const storeEvent = async (fabContentId, sessionRef) => {
       `${apiUrl}/api/v1/guest/products/store-event`,
       {
         headers: {
-          requesthost: getDomain(window.location.hostname),
+          requesthost: window.location.hostname,
           fabcontentid: fabContentId,
           sessionref: sessionRef,
         },
@@ -107,7 +107,7 @@ const generateButton = async (id) => {
       {
         headers: {
           requesturl: window.location.href,
-          requesthost: getDomain(window.location.hostname),
+          requesthost: window.location.hostname,
           exactreferer: window.document.referrer,
           sessionref: atob(localStorage.getItem("fab-session-ref")).split(
             "."
