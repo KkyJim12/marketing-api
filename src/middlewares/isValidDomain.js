@@ -12,6 +12,6 @@ module.exports = isValidDomain = async (req, res, next) => {
       res.status(500).send({ message: "This domain is not in whitelist" });
     }
   } catch (error) {
-    res.status(500).send({ message: "Something went wrong" });
+    res.status(500).send({ message: "[pb03] Something went wrong" , reason : error.message });
   }
 };

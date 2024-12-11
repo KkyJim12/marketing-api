@@ -40,6 +40,6 @@ module.exports = isValidDomain = async (req, res, next) => {
         .send({ message: "This device type is not active by button" });
     }
   } catch (error) {
-    res.status(500).send({ message: "Something went wrong" });
+    res.status(500).send({ message: "[pb04] Something went wrong" , reason : error.message });
   }
 };

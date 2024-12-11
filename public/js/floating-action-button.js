@@ -117,11 +117,23 @@ const generateButton = async (id) => {
       }
     );
 
+
+    // console.log('sessionref : ' , atob(localStorage.getItem("fab-session-ref")).split(
+    //   "."
+    // )[0])
+    // console.log('uniqueUserRef ipAddress : ', atob(localStorage.getItem("fab-unique-user-ref")))
+    // console.log('requesthost currentUrl : ', window.location.hostname)
+    
+
     // Convert result to json
     const style = await response.json();
 
+    // console.log(' response floating button style ', style)
+
     // Get contents list
     const contacts = style.data.contents;
+
+    // console.log('contacts  ', contacts)
 
     // Init open content
     let isContentsOpened = false;

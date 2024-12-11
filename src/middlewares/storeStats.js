@@ -3,16 +3,18 @@ const Statistic = db.statistic;
 
 module.exports = storeStats = async (req, res, next) => {
   try {
+    console.log(req.headers)
     const latestSession = await Statistic.findOne({
       where: { sessionRef: req.headers.sessionref },
       order: [["createdAt", "DESC"]],
     });
 
     if (latestSession === null) {
+      console.log('req.headers.uniqueuserref', req.headers.uniqueuserref)
       if (req.headers.exactreferer !== "") {
         const parsedUrl = new URL(req.headers.exactreferer);
         await Statistic.create({
-          ipAddress: req.headers.uniqueUserRef,
+          ipAddress: req.headers.uniqueuserref,
           sourceUrl: parsedUrl.hostname,
           currentUrl: req.headers.requesthost,
           sourceType:
@@ -33,7 +35,7 @@ module.exports = storeStats = async (req, res, next) => {
         });
       } else {
         await Statistic.create({
-          ipAddress: req.headers.uniqueUserRef,
+          ipAddress: req.headers.uniqueuserref,
           sourceType: "Direct",
           currentUrl: req.headers.requesthost,
           userProductId: req.params.id,
@@ -44,6 +46,6 @@ module.exports = storeStats = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(500).send({ message: "Something went wrong" });
+    res.status(500).send({ message: "[pb02] Something went wrong ", reason : error.message });
   }
 };

@@ -144,7 +144,7 @@ exports.publicButton = async (req, res) => {
       message: "Get public button success.",
     });
   } catch (error) {
-    res.status(500).send({ status: "fail", message: "Something went wrong." });
+    res.status(500).send({ status: "fail", message: "[pb05] Something went wrong" , reason : error.message });
   }
 };
 
