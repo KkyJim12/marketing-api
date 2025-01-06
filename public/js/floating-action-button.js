@@ -133,6 +133,8 @@ const generateButton = async (id) => {
     // Get contents list
     const contacts = style.data.contents;
 
+    const footerHtml = style.footterElement
+
     // console.log('contacts  ', contacts)
 
     // Init open content
@@ -189,6 +191,7 @@ const generateButton = async (id) => {
       );
     }
 
+
     // Create element
     const mainArea = document.createElement("div");
     const buttonContainer = document.createElement("div");
@@ -197,6 +200,7 @@ const generateButton = async (id) => {
     const mainContent = document.createElement("div");
     const innerDiv = document.createElement("div");
     const header = document.createElement("div");
+    const footer = document.createElement("div");
     const contentLists = document.createElement("div");
     let textContainer;
     let buttonText;
@@ -220,6 +224,31 @@ const generateButton = async (id) => {
       newList.className = "fab-content-list-65150cd97e5e7";
     }
 
+    let bottomMarginFooter = 28
+    if (footerHtml) {
+      let outerDiv = document.createElement("div");
+      outerDiv.className = "px-4";
+      outerDiv.style.borderTop = "1px solid rgb(229, 231, 235)";
+      outerDiv.style.height = bottomMarginFooter + "px";
+      outerDiv.style.paddingTop = "4px";
+
+      let rowdiv = document.createElement("div");
+      rowdiv.className = "row";
+      outerDiv.appendChild(rowdiv);
+
+      rowdiv.innerHTML = footerHtml
+
+      outerDiv.appendChild(rowdiv);
+
+      const alignCenterElements = outerDiv.querySelectorAll(".ql-align-center");
+      alignCenterElements.forEach((element) => {
+        element.style.textAlign = "center";
+        element.style.fontSize = "11px";
+      });
+
+      contentLists.appendChild(outerDiv);
+    }
+
     if (
       style.data.button.buttonStyle === "Rounded Button" ||
       style.data.button.buttonStyle === "Rounded Button With Text" ||
@@ -240,6 +269,7 @@ const generateButton = async (id) => {
     }
 
     header.innerHTML = style.data.button.textContent;
+    footer.innerHTML = footerHtml
 
     if (
       style.data.button.buttonStyle === "Rounded Button With Text" ||
@@ -425,7 +455,7 @@ const generateButton = async (id) => {
           : "270px";
     }
     if (style.data.button.bottom) {
-      mainContent.style.bottom = 75 + contacts.length * 75 + "px";
+      mainContent.style.bottom = 75 + contacts.length * 75 + bottomMarginFooter + "px";
     }
 
     if (style.data.button.left) {

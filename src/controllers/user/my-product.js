@@ -138,9 +138,11 @@ exports.productDetail = async (req, res) => {
 exports.publicButton = async (req, res) => {
   try {
     const button = await getPublicButton(req, res);
+    const footterElement = await getButton(req, null)
     res.status(200).send({
       status: "success",
       data: button,
+      footterElement: footterElement.footerHtml, 
       message: "Get public button success.",
     });
   } catch (error) {
