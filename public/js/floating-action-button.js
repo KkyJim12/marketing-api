@@ -227,23 +227,27 @@ const generateButton = async (id) => {
     let bottomMarginFooter = 28
     if (footerHtml) {
       let outerDiv = document.createElement("div");
-      outerDiv.className = "px-4";
-      outerDiv.style.borderTop = "1px solid rgb(229, 231, 235)";
-      outerDiv.style.height = bottomMarginFooter + "px";
-      outerDiv.style.paddingTop = "4px";
+      outerDiv.className = "fab-content-footer-65150cd97e5e7";
+      outerDiv.innerHTML = footerHtml
 
-      let rowdiv = document.createElement("div");
-      rowdiv.className = "row";
-      outerDiv.appendChild(rowdiv);
+      // ค้นหา tag <img> ภายใน footerHtml
+      let images = outerDiv.querySelectorAll("img");
+      images.forEach((img) => {
+        img.style.verticalAlign = "middle"; // เพิ่ม vertical-align: middle
+      });
 
-      rowdiv.innerHTML = footerHtml
-
-      outerDiv.appendChild(rowdiv);
-
-      const alignCenterElements = outerDiv.querySelectorAll(".ql-align-center");
-      alignCenterElements.forEach((element) => {
-        element.style.textAlign = "center";
-        element.style.fontSize = "11px";
+      // อะไรที่มาจาก tag Quill react editor ให้ reset top เป็น 0 ให้หมด
+      let quillElements = outerDiv.querySelectorAll("[class^='ql-'], [class*=' ql-']");
+      quillElements.forEach((element) => {
+        // ตั้งค่า margin-top เป็น 4px และ padding-top เป็น 0px
+        element.style.marginTop = "4px"; 
+        element.style.paddingTop = "0px"; 
+    
+        // หรือถ้าต้องการบังคับ !important
+        element.setAttribute(
+          "style",
+          (element.getAttribute("style") || "") + "margin-top: 4px !important; padding-top: 0px !important;"
+        );
       });
 
       contentLists.appendChild(outerDiv);

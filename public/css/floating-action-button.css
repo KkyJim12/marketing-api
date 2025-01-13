@@ -56,6 +56,42 @@ p {
   font-weight: 500 !important;
 }
 
+.fab-content-footer-65150cd97e5e7 {
+  height: 28px !important;
+  padding-top: 4px !important;
+  text-align: center !important;
+  font-size: 11px;
+  border-top: 1px solid rgb(229, 231, 235) !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.ql-editor {
+  display: flex;
+  flex-wrap: wrap; /* รองรับหลายบรรทัด */
+  align-items: center; /* จัดให้อยู่กึ่งกลางในแนวตั้ง */
+}
+
+.ql-editor img {
+  display: inline-block; /* แสดงรูปภาพในแนวนอน */
+  vertical-align: middle; /* จัดรูปภาพให้ตรงกับข้อความ */
+  margin-right: 5px; /* เพิ่มระยะห่างระหว่างรูปภาพกับข้อความ */
+}
+
+.ql-align-center {
+  text-align: center; /* จัดข้อความและรูปภาพกึ่งกลาง */
+}
+
+.ql-align-left {
+  text-align: left; /* จัดข้อความและรูปภาพไปทางซ้าย */
+}
+
+.ql-align-right {
+  text-align: right; /* จัดข้อความและรูปภาพไปทางขวา */
+}
+
 #fab-button-container-65150cd97e5e7 {
   display: flex !important;
   gap: 0.5rem !important;
