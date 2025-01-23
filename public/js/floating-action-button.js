@@ -242,11 +242,13 @@ const generateButton = async (id) => {
         // ตั้งค่า margin-top เป็น 4px และ padding-top เป็น 0px
         element.style.marginTop = "4px"; 
         element.style.paddingTop = "0px"; 
+        element.style.height = "16.500px"; 
+        element.style.display = "inline-flex";
     
         // หรือถ้าต้องการบังคับ !important
         element.setAttribute(
           "style",
-          (element.getAttribute("style") || "") + "margin-top: 4px !important; padding-top: 0px !important;"
+          (element.getAttribute("style") || "") + "margin-top: 4px !important; padding-top: 0px !important; height: 16.500px !important;"
         );
       });
 
