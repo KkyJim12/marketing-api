@@ -351,7 +351,9 @@ exports.renewProduct = async (req, res) => {
 };
 
 exports.getStats = async (req, res) => {
+  console.log('######### Start #########')
   try {
+    console.log('groupByKey')
     const groupByKey = (list, key) =>
       list.reduce(
         (hash, obj) => ({
@@ -411,62 +413,63 @@ exports.getStats = async (req, res) => {
       where.currentUrl = req.query.activeWebsite;
     }
 
+    console.log('search Statistic By userproduct and time interval')
     const stats = await Statistic.findAll({
       where: where,
       include: [{ model: TargetStatistic, include: FabContent }],
     });
-
-    let labelsByPeriod = [];
-    let sessionsByPeriod = [];
-    let usersByPeriod = [];
-    let conversionByPeriod = [];
+    console.log(stats.length)
 
     const getGraphData = (range) => {
-      let ipAddresses = [];
+      let ipAddresses = new Set(); // ใช้ Set จะไวกว่า Array ในการเช็ค dup
+      let groupedStatsByDate = {}; // เตรียม group ข้อมูลก่อน loop
+      const labelsByPeriod = [];
+      const sessionsByPeriod = [];
+      const usersByPeriod = [];
+      const conversionByPeriod = [];
+    
+      // Group stat ข้อมูลตาม "MMM DD YYYY"
+      stats.forEach((stat) => {
+        const statDate = moment(stat.createdAt).format("MMM DD YYYY");
+        if (!groupedStatsByDate[statDate]) {
+          groupedStatsByDate[statDate] = [];
+        }
+        groupedStatsByDate[statDate].push(stat);
+      });
+    
+      // จากนั้นค่อยๆ loop 30 วัน
       for (let i = 0; i < range; i++) {
-        const date = moment(req.query.endDate)
+        const dateKey = moment(req.query.endDate)
           .subtract(range - 1 - i, "days")
           .format("MMM DD YYYY");
-        labelsByPeriod.push(
-          moment(req.query.endDate)
-            .subtract(range - 2 - i, "days")
-            .format("MM/DD")
-        );
-
+    
+        const label = moment(req.query.endDate)
+          .subtract(range - 2 - i, "days")
+          .format("MM/DD");
+        labelsByPeriod.push(label);
+    
         // Session Count
-        let sessionCount = 0;
-        for (let j = 0; j < stats.length; j++) {
-          if (stats[j].createdAt.toString().includes(date)) {
-            sessionCount++;
+        const statsOfDay = groupedStatsByDate[dateKey] || [];
+        sessionsByPeriod.push(statsOfDay.length);
+    
+        // User Count (นับ ip ไม่ซ้ำในแต่ละวัน)
+        const dayIPs = new Set();
+        statsOfDay.forEach((stat) => {
+          if (!ipAddresses.has(stat.ipAddress)) {
+            ipAddresses.add(stat.ipAddress);
+            dayIPs.add(stat.ipAddress);
           }
-        }
-        sessionsByPeriod.push(sessionCount);
-
-        // User Count
-        let userCount = 0;
-        for (let j = 0; j < stats.length; j++) {
-          // count ip adrees by not duplicate
-          if (
-            stats[j].createdAt.toString().includes(date) &&
-            !ipAddresses.includes(stats[j].ipAddress)
-          ) {
-            ipAddresses.push(stats[j].ipAddress);
-            userCount++;
-          }
-        }
-        usersByPeriod.push(userCount);
-
+        });
+        usersByPeriod.push(dayIPs.size);
+    
         // Conversion Count
         let conversionCount = 0;
-
-        for (let k = 0; k < stats.length; k++) {
-          if (stats[k].createdAt.toString().includes(date)) {
-            conversionCount += stats[k].target_statistics.length;
-          }
-        }
+        statsOfDay.forEach((stat) => {
+          conversionCount += stat.target_statistics.length;
+        });
         conversionByPeriod.push(conversionCount);
       }
-
+    
       return {
         labels: labelsByPeriod,
         sessions: sessionsByPeriod,
@@ -494,12 +497,32 @@ exports.getStats = async (req, res) => {
     }
 
     const sessionCount = stats.length;
-    const totalUserCount = Object.keys(groupByKey(stats, "ipAddress")).length;
+    let sql = `
+      SELECT COUNT(DISTINCT ipAddress) AS totalUserCount
+      FROM statistics
+      WHERE userProductId = :userProductId
+        AND createdAt BETWEEN :startDate AND :endDate
+    `;
+    const replacements = {
+      userProductId: req.params.id,
+      startDate: moment(req.query.startDate).format("YYYY-MM-DD 00:00:00"),
+      endDate: moment(req.query.endDate).format("YYYY-MM-DD 23:59:59"),
+    };
+    if (req.query.activeWebsite && req.query.activeWebsite !== 'All') {
+      sql += ` AND currentUrl = :activeWebsite`;
+      replacements.activeWebsite = req.query.activeWebsite;
+    }
+    const result = await db.sequelize.query(sql, {
+      replacements,
+      type: db.sequelize.QueryTypes.SELECT,
+    });
+    const totalUserCount = result[0].totalUserCount
     const conversionCount = stats.reduce((ac, cr) => {
       return ac + cr.target_statistics.length;
     }, 0);
     const conversionRate = (conversionCount / sessionCount) * 100;
     const sourceTypes = groupByKey(stats, "sourceType");
+
 
     // Tables
 
@@ -581,6 +604,7 @@ exports.getStats = async (req, res) => {
       tableHeaders: fabContentIds,
     };
   } catch (error) {
+    console.log(error)
     throw new Error(500, "Error when get stats");
   }
 };
