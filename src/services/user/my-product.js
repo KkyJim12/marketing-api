@@ -352,6 +352,7 @@ exports.renewProduct = async (req, res) => {
 
 exports.getStats = async (req, res) => {
   console.log('######### Start #########')
+  console.log('day period ', req.query.period)
   try {
     console.log('groupByKey')
     const groupByKey = (list, key) =>
@@ -523,17 +524,7 @@ exports.getStats = async (req, res) => {
     const conversionRate = (conversionCount / sessionCount) * 100;
     const sourceTypes = groupByKey(stats, "sourceType");
 
-
     // Tables
-
-    const sources = [
-      "direct",
-      "organic_search",
-      "paid_search",
-      "social_media",
-      "others",
-    ];
-
     const getTableBySources = (source) => {
       const directTableConversion = [];
 
@@ -588,7 +579,13 @@ exports.getStats = async (req, res) => {
     };
 
     const tableContents = [];
-
+    const sources = [
+      "direct",
+      "organic_search",
+      "paid_search",
+      "social_media",
+      "others",
+    ];
     for (let g = 0; g < sources.length; g++) {
       tableContents.push(getTableBySources(sources[g]));
     }
