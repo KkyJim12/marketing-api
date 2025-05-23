@@ -414,12 +414,10 @@ exports.getStats = async (req, res) => {
       where.currentUrl = req.query.activeWebsite;
     }
 
-    console.log('search Statistic By userproduct and time interval')
     const stats = await Statistic.findAll({
       where: where,
       include: [{ model: TargetStatistic, include: FabContent }],
     });
-    console.log(stats.length)
 
     const getGraphData = (range) => {
       let ipAddresses = new Set(); // ใช้ Set จะไวกว่า Array ในการเช็ค dup
@@ -524,10 +522,11 @@ exports.getStats = async (req, res) => {
     const conversionRate = (conversionCount / sessionCount) * 100;
     const sourceTypes = groupByKey(stats, "sourceType");
 
+    // console.log(sourceTypes['organic_search'])
+
     // Tables
     const getTableBySources = (source) => {
       const directTableConversion = [];
-
       if (!sourceTypes[source]) {
         let emptySource = {};
         emptySource = {
@@ -538,7 +537,6 @@ exports.getStats = async (req, res) => {
           sessions: 0,
           conversions: 0,
         };
-
         return emptySource;
       }
 
@@ -582,8 +580,21 @@ exports.getStats = async (req, res) => {
     const sources = [
       "direct",
       "organic_search",
+      "organic_social",
       "paid_search",
+      "paid_social",
       "social_media",
+      "referral",
+      "email",
+      "affiliates",
+      "display",
+      "video",
+      "audio",
+      "sms",
+      "mobile_push_notifications",
+      "cross_network",
+      "other_advertising",
+      "unassigned",
       "others",
     ];
     for (let g = 0; g < sources.length; g++) {

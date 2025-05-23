@@ -1,51 +1,145 @@
 const db = require("../models/index");
 const Statistic = db.statistic;
 
-module.exports = storeStats = async (req, res, next) => {
+// 🔧 ฟังก์ชันแยกเพื่อจัดกลุ่ม channel
+function detectChannelGroup(parsedUrl, requestUrl) {
+  const hostname = parsedUrl.hostname.toLowerCase();
+  const fullUrl = requestUrl.toLowerCase();
+
+  const searchEngines = ["google.", "bing.com", "yahoo.com", "duckduckgo.com", "baidu.com"];
+  const socialSites = ["facebook.com", "instagram.com", "youtube.com", "twitter.com", "linkedin.com", "tiktok.com", "pinterest.com", "reddit.com"];
+
+  const getParam = (name) => {
+    const match = fullUrl.match(new RegExp(`[?&]${name}=([^&#]*)`));
+    return match ? decodeURIComponent(match[1]) : "";
+  };
+
+  const utmMedium = getParam("utm_medium");
+  const utmSource = getParam("utm_source");
+  const utmCampaign = getParam("utm_campaign");
+
+  // 1. Paid Search
+  if (["cpc", "ppc", "paidsearch"].includes(utmMedium)) {
+    return "Paid Search";
+  }
+
+  // 2. Organic Search
+  if (searchEngines.some(domain => hostname.includes(domain)) && !utmMedium) {
+    return "Organic Search";
+  }
+
+  // 3. Paid Social
+  if (
+    ["paidsocial"].includes(utmMedium) ||
+    (socialSites.some(domain => hostname.includes(domain)) && utmMedium === "social" && utmCampaign)
+  ) {
+    return "Paid Social";
+  }
+
+  // 4. Organic Social
+  if (
+    socialSites.some(domain => hostname.includes(domain)) &&
+    (!utmMedium || utmMedium === "social") &&
+    !utmCampaign
+  ) {
+    return "Organic Social";
+  }
+
+  // 5. Email
+  if (utmMedium === "email") {
+    return "Email";
+  }
+
+  // 6. Affiliates
+  if (utmMedium === "affiliate") {
+    return "Affiliates";
+  }
+
+  // 7. Display
+  if (["display", "banner", "cpm"].includes(utmMedium)) {
+    return "Display";
+  }
+
+  // 8. Video
+  if (utmMedium === "video") {
+    return "Video";
+  }
+
+  // 9. Audio
+  if (utmMedium === "audio") {
+    return "Audio";
+  }
+
+  // 10. SMS
+  if (utmMedium === "sms") {
+    return "SMS";
+  }
+
+  // 11. Mobile Push
+  if (["push", "notification", "app"].includes(utmMedium) || utmSource === "push") {
+    return "Mobile Push Notifications";
+  }
+
+  // 12. Cross-network
+  if (utmMedium === "cross-network") {
+    return "Cross-network";
+  }
+
+  // 13. Other Advertising
+  if (["cpv", "cpa", "cpp", "content-text"].includes(utmMedium)) {
+    return "Other Advertising";
+  }
+
+  // 14. Direct
+  if (!hostname || hostname === "") {
+    return "Direct";
+  }
+
+  // 15. Referral
+  if (
+    hostname &&
+    !searchEngines.some(domain => hostname.includes(domain)) &&
+    !socialSites.some(domain => hostname.includes(domain)) &&
+    !utmMedium
+  ) {
+    return "Referral";
+  }
+
+  // 16. Fallback
+  return "Unassigned";
+}
+
+module.exports = async function storeStats(req, res, next) {
   try {
-    console.log(req.headers)
     const latestSession = await Statistic.findOne({
       where: { sessionRef: req.headers.sessionref },
       order: [["createdAt", "DESC"]],
     });
 
     if (latestSession === null) {
-      console.log('req.headers.uniqueuserref', req.headers.uniqueuserref)
-      if (req.headers.exactreferer !== "") {
+      const statData = {
+        ipAddress: req.headers.uniqueuserref,
+        currentUrl: req.headers.requesthost,
+        userProductId: req.params.id,
+        sessionRef: req.headers.sessionref,
+      };
+
+      if (req.headers.exactreferer && req.headers.exactreferer !== "") {
         const parsedUrl = new URL(req.headers.exactreferer);
-        await Statistic.create({
-          ipAddress: req.headers.uniqueuserref,
-          sourceUrl: parsedUrl.hostname,
-          currentUrl: req.headers.requesthost,
-          sourceType:
-            parsedUrl.hostname.includes("facebook.com") ||
-            parsedUrl.hostname.includes("youtube.com") ||
-            parsedUrl.hostname.includes("instagram.com")
-              ? "Social Media"
-              : parsedUrl.hostname.includes("google.co") &&
-                req.headers.requesturl.includes("gclid")
-              ? "Paid Search"
-              : parsedUrl.hostname.includes("google.co") ||
-                parsedUrl.hostname.includes("bing.com") ||
-                parsedUrl.hostname.includes("yahoo.com")
-              ? "Organic Search"
-              : "Others",
-          userProductId: req.params.id,
-          sessionRef: req.headers.sessionref,
-        });
+        statData.sourceUrl = parsedUrl.hostname;
+        statData.sourceType = detectChannelGroup(parsedUrl, req.headers.requesturl || "");
       } else {
-        await Statistic.create({
-          ipAddress: req.headers.uniqueuserref,
-          sourceType: "Direct",
-          currentUrl: req.headers.requesthost,
-          userProductId: req.params.id,
-          sessionRef: req.headers.sessionref,
-        });
+        statData.sourceType = "Direct";
       }
+
+      await Statistic.create(statData);
     }
 
     next();
   } catch (error) {
-    res.status(500).send({ message: "[pb02] Something went wrong ", reason : error.message });
+    res.status(500).send({
+      message: "[pb02] Something went wrong",
+      reason: error.message,
+    });
   }
 };
