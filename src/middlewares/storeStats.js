@@ -19,12 +19,18 @@ function detectChannelGroup(parsedUrl, requestUrl) {
   const utmCampaign = getParam("utm_campaign");
 
   // 1. Paid Search
-  if (["cpc", "ppc", "paidsearch"].includes(utmMedium)) {
+  if (
+    ["cpc", "ppc", "paidsearch"].includes(utmMedium) ||
+    (hostname.includes("google.") && ["cpc", "ppc"].includes(utmMedium))
+  ) {
     return "Paid Search";
   }
 
   // 2. Organic Search
-  if (searchEngines.some(domain => hostname.includes(domain)) && !utmMedium) {
+  if (
+    searchEngines.some(domain => hostname.includes(domain)) &&
+    (!utmMedium || utmMedium === "organic")
+  ) {
     return "Organic Search";
   }
 
@@ -46,54 +52,34 @@ function detectChannelGroup(parsedUrl, requestUrl) {
   }
 
   // 5. Email
-  if (utmMedium === "email") {
-    return "Email";
-  }
+  if (utmMedium === "email") return "Email";
 
   // 6. Affiliates
-  if (utmMedium === "affiliate") {
-    return "Affiliates";
-  }
+  if (utmMedium === "affiliate") return "Affiliates";
 
   // 7. Display
-  if (["display", "banner", "cpm"].includes(utmMedium)) {
-    return "Display";
-  }
+  if (["display", "banner", "cpm"].includes(utmMedium)) return "Display";
 
   // 8. Video
-  if (utmMedium === "video") {
-    return "Video";
-  }
+  if (utmMedium === "video") return "Video";
 
   // 9. Audio
-  if (utmMedium === "audio") {
-    return "Audio";
-  }
+  if (utmMedium === "audio") return "Audio";
 
   // 10. SMS
-  if (utmMedium === "sms") {
-    return "SMS";
-  }
+  if (utmMedium === "sms") return "SMS";
 
   // 11. Mobile Push
-  if (["push", "notification", "app"].includes(utmMedium) || utmSource === "push") {
-    return "Mobile Push Notifications";
-  }
+  if (["push", "notification", "app"].includes(utmMedium) || utmSource === "push") return "Mobile Push Notifications";
 
   // 12. Cross-network
-  if (utmMedium === "cross-network") {
-    return "Cross-network";
-  }
+  if (utmMedium === "cross-network") return "Cross-network";
 
   // 13. Other Advertising
-  if (["cpv", "cpa", "cpp", "content-text"].includes(utmMedium)) {
-    return "Other Advertising";
-  }
+  if (["cpv", "cpa", "cpp", "content-text"].includes(utmMedium)) return "Other Advertising";
 
   // 14. Direct
-  if (!hostname || hostname === "") {
-    return "Direct";
-  }
+  if (!hostname || hostname === "") return "Direct";
 
   // 15. Referral
   if (
@@ -108,6 +94,7 @@ function detectChannelGroup(parsedUrl, requestUrl) {
   // 16. Fallback
   return "Unassigned";
 }
+
 
 module.exports = async function storeStats(req, res, next) {
   try {

@@ -290,7 +290,6 @@ exports.saveWhiteListDomain = async (req, res) => {
     });
 
     // Check avaiable domains
-    console.log(storedDomains, thisProduct.domains);
     if (storedDomains >= thisProduct.domains) {
       throw new Error(422, "No more available domain slots");
     }
@@ -351,8 +350,6 @@ exports.renewProduct = async (req, res) => {
 };
 
 exports.getStats = async (req, res) => {
-  console.log('######### Start #########')
-  console.log('day period ', req.query.period)
   try {
     console.log('groupByKey')
     const groupByKey = (list, key) =>
@@ -521,8 +518,6 @@ exports.getStats = async (req, res) => {
     }, 0);
     const conversionRate = (conversionCount / sessionCount) * 100;
     const sourceTypes = groupByKey(stats, "sourceType");
-
-    // console.log(sourceTypes['organic_search'])
 
     // Tables
     const getTableBySources = (source) => {

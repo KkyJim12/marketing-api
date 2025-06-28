@@ -25,6 +25,7 @@ exports.login = async (req) => {
       throw new Error(401);
     }
   } catch (error) {
+    console.log(error)
     throw new Error(500, "Error when login");
   }
 };
